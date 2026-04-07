@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Clase | The Crown Dance Studio</title>
+    
+    <meta name="robots" content="noindex"> <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=League+Spartan:wght@400;700&family=Poppins:ital,wght@0,300;0,400;0,600;0,700;1,300&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- NUEVA PALETA DE COLORES --- */
+        :root {
+            --rosa-suave: #E06EA1;
+            --rosa-neon: #FF66C4;
+            --amarillo: #EACA80;
+            --dorado: #C19A51;
+            --negro: #050505;
+            --gris-claro: #1a1a1a;
+            --blanco: #ffffff;
+        }
+        
+        body {
+            background-color: var(--negro); color: var(--blanco); 
+            font-family: 'Poppins', sans-serif; /* Texto general */
+            display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; margin: 0;
+            background-image: linear-gradient(rgba(5,5,5,0.9), rgba(5,5,5,0.9)), url('logo_corona.png'); 
+            background-size: cover; background-position: center; position: relative;
+        }
+
+        /* --- BOTÓN IDIOMA --- */
+        .lang-btn-container { position: absolute; top: 20px; right: 20px; z-index: 100; }
+        .lang-btn {
+            background: transparent; border: 1px solid var(--rosa-neon); color: var(--rosa-neon);
+            padding: 8px 15px; cursor: pointer; font-family: 'League Spartan', sans-serif; font-weight: bold;
+            font-size: 0.9rem; border-radius: 5px; transition: 0.3s;
+        }
+        .lang-btn:hover { background: var(--rosa-neon); color: var(--negro); box-shadow: 0 0 10px var(--rosa-neon); }
+
+        .en { display: none; }
+
+        /* --- CONTENEDOR --- */
+        .booking-container {
+            background: #111; padding: 40px; 
+            border: 2px solid var(--dorado); /* Borde dorado */
+            border-radius: 20px; width: 90%; max-width: 500px;
+            box-shadow: 0 0 40px rgba(193, 154, 81, 0.2); text-align: center; animation: fadeIn 1s ease;
+            margin-top: 60px;
+        }
+
+        .form-logo {
+            width: 90px; height: auto; margin-bottom: 20px; display: block;
+            margin-left: auto; margin-right: auto; 
+            filter: drop-shadow(0 0 10px rgba(255, 102, 196, 0.4)); /* Brillo rosa en la corona */
+        }
+
+        h2 { 
+            font-family: 'Anton', sans-serif; color: var(--dorado); 
+            font-size: 2.5rem; margin-bottom: 10px; margin-top: 0; 
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        p { color: #ccc; margin-bottom: 30px; font-size: 0.95rem; }
+
+        .form-group { margin-bottom: 20px; text-align: left; }
+        
+        label { 
+            display: block; margin-bottom: 8px; color: var(--rosa-neon); 
+            font-size: 1rem; font-family: 'League Spartan', sans-serif; font-weight: 700; 
+        }
+
+        input, select {
+            width: 100%; padding: 15px; background: #000; 
+            border: 1px solid #333; color: white;
+            border-radius: 10px; font-family: 'Poppins', sans-serif; box-sizing: border-box;
+            outline: none; transition: 0.3s;
+        }
+
+        input:focus, select:focus { border-color: var(--rosa-neon); box-shadow: 0 0 10px rgba(255, 102, 196, 0.3); }
+        select:disabled { background: #222; color: #555; cursor: not-allowed; border-color: #222; }
+
+        /* --- BOTÓN DE ENVÍO --- */
+        .btn-submit {
+            width: 100%; padding: 15px; 
+            background: linear-gradient(45deg, var(--rosa-neon), var(--rosa-suave));
+            color: white; font-weight: bold; font-family: 'League Spartan', sans-serif;
+            border: none; border-radius: 50px; font-size: 1.2rem; cursor: pointer; transition: 0.3s;
+            margin-top: 15px; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .btn-submit:hover { 
+            transform: scale(1.02); 
+            box-shadow: 0 0 20px var(--rosa-neon); 
+        }
+
+        .btn-back { 
+            display: inline-block; margin-top: 25px; color: #888; text-decoration: none; 
+            font-size: 0.9rem; transition: 0.3s; font-family: 'League Spartan', sans-serif;
+        }
+        .btn-back:hover { color: var(--rosa-neon); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="lang-btn-container">
+        <button class="lang-btn" onclick="toggleLanguage()">ES / EN</button>
+    </div>
+
+    <div class="booking-container">
+        
+        <img src="logo_corona.png" alt="The Crown Logo" class="form-logo">
+        
+        <h2>
+            <span class="es">Reserva tu Clase</span>
+            <span class="en">Book Your Class</span>
+        </h2>
+        <p>
+            <span class="es">Selecciona tu disciplina y verás los horarios disponibles.</span>
+            <span class="en">Select your discipline to see available schedules.</span>
+        </p>
+
+        <form id="agendaForm" onsubmit="enviarWhatsApp(event)">
+            
+            <div class="form-group">
+                <label for="nombre">
+                    <span class="es">Tu Nombre Completo</span>
+                    <span class="en">Full Name</span>
+                </label>
+                <input type="text" id="nombre" placeholder="Ej: Ana Paula Torres" required>
+            </div>
+
+            <div class="form-group">
+                <label for="clase">
+                    <span class="es">Selecciona la Clase</span>
+                    <span class="en">Select Class</span>
+                </label>
+                <select id="clase" required onchange="actualizarHorarios()">
+                    <option value="" disabled selected id="default-clase">-- Selecciona / Select --</option>
+                    
+                    <optgroup label="KIDS (Niños / Children)">
+                        <option value="Baby Ballet">Baby Ballet</option>
+                        <option value="Ballet Kids">Ballet Kids</option>
+                        <option value="Jazz Kids">Jazz Kids</option>
+                        <option value="Circo Kids">Circo Kids</option>
+                        <option value="Hip Hop Kids">Hip Hop Kids</option>
+                        <option value="Danza Aérea Kids">Danza Aérea Kids</option>
+                    </optgroup>
+
+                    <optgroup label="JUVENIL & ADULTS">
+                        <option value="Urbano">Urbano / Hip Hop</option>
+                        <option value="Jazz">Jazz</option>
+                        <option value="Reggaetón">Reggaetón</option>
+                        <option value="K-Pop">K-Pop</option>
+                        <option value="Heels">Heels (Tacones)</option>
+                        <option value="Contemporáneo">Contemporáneo</option>
+                        <option value="Ballet">Ballet (Lvl 1 & 2)</option>
+                        <option value="Danza Aérea">Danza Aérea / Acrobacia</option>
+                    </optgroup>
+
+                    <optgroup label="WELLNESS / FIT">
+                        <option value="Flexibilidad">Flexibilidad / Flexibility</option>
+                        <option value="Fitness Dance">Fitness Dance</option>
+                        <option value="Animal Flow">Animal Flow</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="horario">
+                    <span class="es">Horarios Disponibles</span>
+                    <span class="en">Available Schedules</span>
+                </label>
+                <select id="horario" required disabled>
+                    <option value="" disabled selected id="default-horario">-- Primero elige clase / First choose class --</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-submit">
+                <i class="fab fa-whatsapp"></i> 
+                <span class="es">Agendar Clase</span>
+                <span class="en">Book Class</span>
+            </button>
+
+        </form>
+
+        <a href="index.html" class="btn-back">
+            <span class="es">← Volver al Inicio</span>
+            <span class="en">← Back to Home</span>
+        </a>
+    </div>
+
+    <script>
+        let currentLang = 'es';
+
+        // BASE DE DATOS DE HORARIOS ACTUALIZADA
+        const horariosPorClase = {
+            "Baby Ballet": ["Mar y Jue: 4:00 - 5:00 PM"],
+            "Ballet Kids": ["Mar y Jue: 5:00 - 6:00 PM"],
+            "Jazz Kids": ["Lun y Mié: 4:00 - 5:00 PM"],
+            "Circo Kids": ["Lun y Mié: 4:00 - 5:00 PM"],
+            "Hip Hop Kids": ["Mar y Jue: 5:00 - 6:00 PM"],
+            "Danza Aérea Kids": ["Sábados: 10:00 - 11:00 AM"], // Se eliminó Lun y Mie 5 a 6
+            "Urbano": ["Lun y Mié: 10:15 - 11:15 AM (Matutino)", "Viernes: 11:15 - 12:15 PM (Matutino)", "Lun y Mié: 8:00 - 9:00 PM (Adultos)", "Sábados: 12:00 - 1:00 PM"],
+            "Jazz": ["Lun y Mié: 5:00 - 6:00 PM (Jazz 1)", "Lun y Mié: 6:30 - 8:00 PM (Jazz 2)"], 
+            "K-Pop": ["Lun y Mié: 6:00 - 7:00 PM"],
+            "Reggaetón": ["Mar y Jue: 8:30 - 9:30 PM"],
+            "Heels": ["Viernes: 10:15 - 11:15 AM", "Sábados: 12:00 - 1:00 PM"], // Se eliminó Jueves 7:30 a 8:30
+            "Contemporáneo": ["Mar y Jue: 10:15 - 11:15 AM (Multinivel)", "Lun y Mié: 7:00 - 8:00 PM (Nivel 1)", "Lun y Mié: 8:00 - 9:30 PM (Nivel 2)", "Sábado: 10:00 - 11:00 AM (Piso)"],
+            "Ballet": ["Mar y Jue: 6:00 - 7:30 PM (Nivel 1)", "Mar y Jue: 6:00 - 7:30 PM (Nivel 2)"],
+            "Danza Aérea": ["Sábado: 9:00 - 10:00 AM (Multinivel)", "Viernes: 5:00 - 6:30 PM (Acrobacia)"], // Se eliminó Mar y Jue multinivel
+            "Flexibilidad": ["Lun y Mié: 9:15 - 10:15 AM", "Viernes: 8:15 - 9:15 AM", "Mar y Jue: 8:30 - 9:30 PM", "Sábado: 11:00 - 12:00 PM"],
+            "Fitness Dance": ["Martes: 9:15 - 10:15 AM"],
+            "Animal Flow": ["Viernes: 9:15 - 10:15 AM"]
+        };
+
+        function toggleLanguage() {
+            currentLang = (currentLang === 'es') ? 'en' : 'es';
+            const esElements = document.querySelectorAll('.es');
+            const enElements = document.querySelectorAll('.en');
+
+            if (currentLang === 'es') {
+                esElements.forEach(el => el.style.display = 'inline');
+                enElements.forEach(el => el.style.display = 'none');
+            } else {
+                esElements.forEach(el => el.style.display = 'none');
+                enElements.forEach(el => el.style.display = 'inline');
+            }
+        }
+
+        function actualizarHorarios() {
+            const claseSelect = document.getElementById("clase");
+            const horarioSelect = document.getElementById("horario");
+            const claseSeleccionada = claseSelect.value;
+
+            let defaultText = (currentLang === 'es') ? "-- Elige el horario --" : "-- Choose time --";
+            horarioSelect.innerHTML = `<option value="" disabled selected>${defaultText}</option>`;
+
+            if (horariosPorClase[claseSeleccionada]) {
+                horarioSelect.disabled = false;
+                horariosPorClase[claseSeleccionada].forEach(function(horario) {
+                    let opcion = document.createElement("option");
+                    opcion.value = horario;
+                    opcion.text = horario; 
+                    horarioSelect.add(opcion);
+                });
+            } else {
+                horarioSelect.disabled = true;
+                let noDataText = (currentLang === 'es') ? "Consultar disponibilidad" : "Check availability";
+                let opcion = document.createElement("option");
+                opcion.text = noDataText;
+                horarioSelect.add(opcion);
+            }
+        }
+
+        function enviarWhatsApp(event) {
+            event.preventDefault();
+            let nombre = document.getElementById('nombre').value;
+            let clase = document.getElementById('clase').value;
+            let horario = document.getElementById('horario').value;
+
+            if (!horario) {
+                let msg = (currentLang === 'es') ? "Por favor selecciona un horario." : "Please select a time.";
+                alert(msg);
+                return;
+            }
+
+            // Mensaje Ejecutivo con Emojis Unicode (Corona y Check Verde)
+            let mensaje = `Hola equipo The Crown. Soy ${nombre}. Solicito agendar mi clase muestra para ${clase} a las ${horario}. ¿Me podrían confirmar el registro?`;
+            
+            let numero = "5214422366997"; 
+            let url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Clases | The Crown</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=League+Spartan:wght@400;700&family=Poppins:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- PALETA PINK & GOLD POWER --- */
+        :root {
+            --rosa-suave: #E06EA1;
+            --rosa-neon: #FF66C4;      
+            --amarillo: #EACA80;       
+            --dorado: #C19A51;         
+            --negro: #050505;
+            --gris-claro: #1a1a1a;
+            --blanco: #ffffff;
+        }
+        
+        body { 
+            background-color: var(--negro); color: var(--blanco); 
+            font-family: 'Poppins', sans-serif; 
+            margin: 0; padding-bottom: 50px; 
+        }
+
+        /* --- NAV SIMPLE --- */
+        .simple-nav {
+            padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 2px solid var(--dorado); background: rgba(5,5,5,0.95);
+            position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px);
+        }
+        .nav-logo { height: 40px; width: auto; transition: 0.3s; }
+        .nav-logo:hover { transform: scale(1.1); filter: drop-shadow(0 0 5px var(--rosa-neon)); }
+        
+        .back-btn { 
+            color: var(--dorado); text-decoration: none; font-weight: bold; 
+            text-transform: uppercase; font-size: 0.9rem; font-family: 'League Spartan', sans-serif;
+            letter-spacing: 1px;
+        }
+        .back-btn:hover { color: var(--rosa-neon); }
+
+        .en { display: none; }
+        .lang-btn { 
+            background: transparent; border: 1px solid var(--rosa-neon); color: var(--rosa-neon); 
+            padding: 5px 10px; cursor: pointer; font-size: 0.8rem; border-radius: 5px; margin-left: 10px;
+            font-family: 'League Spartan', sans-serif; font-weight: bold;
+        }
+        .lang-btn:hover { background: var(--rosa-neon); color: var(--negro); }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .gallery-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        
+        .main-title { 
+            text-align: center; color: var(--dorado); font-family: 'Anton', sans-serif; 
+            font-size: 4rem; margin-bottom: 10px; text-transform: uppercase;
+        }
+        .main-subtitle { text-align: center; color: #888; margin-bottom: 50px; font-size: 1.1rem; }
+
+        /* --- SEPARADORES DE SECCIÓN --- */
+        .section-header {
+            margin-top: 60px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title {
+            font-family: 'League Spartan', sans-serif;
+            font-size: 2.5rem;
+            color: var(--rosa-neon);
+            text-transform: uppercase;
+            font-weight: 700;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(255, 102, 196, 0.3);
+        }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        
+        .media-card { 
+            background: #111; border: 1px solid #333; border-radius: 15px; overflow: hidden; 
+            transition: 0.3s; position: relative;
+        }
+        .media-card:hover { 
+            border-color: var(--rosa-neon); transform: translateY(-8px); 
+            box-shadow: 0 0 25px rgba(255, 102, 196, 0.2); 
+        }
+
+        /* --- MEDIA (VIDEO/FOTO) --- */
+        .media-content { width: 100%; height: 400px; object-fit: cover; display: block; }
+        video.media-content { background: #000; }
+        
+        .card-info { padding: 25px; text-align: center; }
+        .card-info h3 { 
+            color: var(--dorado); margin: 0 0 10px 0; 
+            font-family: 'League Spartan', sans-serif; font-weight: 700; font-size: 1.5rem; text-transform: uppercase;
+        }
+        .card-info p { font-size: 0.95rem; color: #ccc; margin-bottom: 20px; }
+
+        .book-btn { 
+            display: inline-block; padding: 10px 25px; 
+            background: transparent; border: 2px solid var(--rosa-neon);
+            color: var(--rosa-neon); text-decoration: none; border-radius: 50px; 
+            font-size: 0.9rem; transition: 0.3s; text-transform: uppercase; font-weight: bold;
+            font-family: 'League Spartan', sans-serif;
+        }
+        .book-btn:hover { background: var(--rosa-neon); color: white; box-shadow: 0 0 15px var(--rosa-neon); }
+
+        /* --- KIDS SECTION SPECIFIC --- */
+        .kids-section .media-card {
+            border-color: var(--amarillo); /* Borde dorado para Kids */
+        }
+        .kids-section .media-card:hover {
+            box-shadow: 0 0 25px rgba(234, 202, 128, 0.3);
+            border-color: var(--dorado);
+        }
+
+        /* --- BARRA SOCIAL --- */
+        .social-sidebar {
+            position: fixed; top: 50%; right: 0; transform: translateY(-50%);
+            z-index: 1000; display: flex; flex-direction: column;
+            background: rgba(0, 0, 0, 0.8); border-radius: 10px 0 0 10px;
+            padding: 15px 10px; border: 1px solid var(--dorado); border-right: none;
+        }
+        .social-sidebar a { color: var(--dorado); font-size: 1.5rem; margin: 10px 0; transition: 0.3s; }
+        .social-sidebar a:hover { color: var(--rosa-neon); transform: scale(1.2); }
+
+        footer { background: #000; padding: 50px; color: #666; border-top: 1px solid #222; text-align: center; margin-top: 50px; }
+        footer i:hover { color: var(--rosa-neon); transform: scale(1.2); transition: 0.3s; }
+
+        @media (max-width: 768px) {
+            .main-title { font-size: 3rem; }
+            .section-title { font-size: 2rem; }
+            .social-sidebar { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="simple-nav">
+        <a href="index.html" class="back-btn"><span class="es">← Volver</span><span class="en">← Back</span></a>
+        <img src="logo_corona.png" alt="The Crown" class="nav-logo">
+        <button class="lang-btn" onclick="toggleLanguage()">ES / EN</button>
+    </nav>
+
+    <div class="gallery-container">
+        <h1 class="main-title"><span class="es">Galería</span><span class="en">Gallery</span></h1>
+        <p class="main-subtitle"><span class="es">Explora la energía de The Crown en acción.</span><span class="en">Explore The Crown's energy in action.</span></p>
+
+        <div class="section-header">
+            <h2 class="section-title"><span class="es">Nuestras Clases</span><span class="en">Our Classes</span></h2>
+        </div>
+
+        <div class="grid">
+            
+            <div class="media-card">
+                <video src="Hip_Hop.mp4" class="media-content" controls muted playsinline></video>
+                <div class="card-info">
+                    <h3>Hip Hop</h3>
+                    <p class="es">Ritmo, actitud y bases urbanas.</p>
+                    <p class="en">Rhythm, attitude and urban bases.</p>
+                    <a href="agenda.html" class="book-btn"><span class="es">Agendar Clase</span><span class="en">Book Class</span></a>
+                </div>
+            </div>
+
+            <div class="media-card">
+                <video src="Heels.mp4" class="media-content" controls muted playsinline></video>
+                <div class="card-info">
+                    <h3>Heels</h3>
+                    <p class="es">Fuerza, sensualidad y técnica.</p>
+                    <p class="en">Strength, sensuality and technique.</p>
+                    <a href="agenda.html" class="book-btn"><span class="es">Agendar Clase</span><span class="en">Book Class</span></a>
+                </div>
+            </div>
+
+            <div class="media-card">
+                <video src="Reggeton.mp4" class="media-content" controls muted playsinline></video>
+                <div class="card-info">
+                    <h3>Reggaetón</h3>
+                    <p class="es">Flow urbano y musicalidad.</p>
+                    <p class="en">Urban flow and musicality.</p>
+                    <a href="agenda.html" class="book-btn"><span class="es">Agendar Clase</span><span class="en">Book Class</span></a>
+                </div>
+            </div>
+
+            <div class="media-card">
+                <img src="jazz.jpg" onerror="this.src='https://via.placeholder.com/300x400/111/E06EA1?text=Jazz'" alt="Jazz" class="media-content">
+                <div class="card-info">
+                    <h3>Jazz</h3>
+                    <p class="es">Técnica, estilo y proyección escénica.</p>
+                    <p class="en">Technique, style and stage projection.</p>
+                    <a href="agenda.html" class="book-btn"><span class="es">Agendar Clase</span><span class="en">Book Class</span></a>
+                </div>
+            </div>
+
+            <div class="media-card">
+                <video src="contemporaneo.mp4" class="media-content" controls muted playsinline></video>
+                <div class="card-info">
+                    <h3><span class="es">Contemporáneo</span><span class="en">Contemporary</span></h3>
+                    <p class="es">Expresión, líneas y fluidez.</p>
+                    <p class="en">Expression, lines and fluidity.</p>
+                    <a href="agenda.html" class="book-btn"><span class="es">Agendar Clase</span><span class="en">Book Class</span></a>
+                </div>
+            </div>
+
+            <div class="media-card">
+                <img src="acro.jpg" alt="Acrobacia" class="media-content">
+                <div class="card-info">
+                    <h3><span class="es">Acrobacia</span><span class="en">Acrobatics</span></h3>
+                    <p class="es">Control corporal y trucos.</p>
+                    <p class="en">Body control and tricks.</p>
+                    <a href="agenda.html" class="book-btn"><span class="es">Agendar Clase</span><span class="en">Book Class</span></a>
+                </div>
+            </div>
+
+            <div class="media-card">
+                <img src="ballet.jpg" alt="Ballet" class="media-content">
+                <div class="card-info">
+                    <h3>Ballet</h3>
+                    <p class="es">Elegancia y disciplina.</p>
+                    <p class="en">Elegance and discipline.</p>
+                    <a href="agenda.html" class="book-btn"><span class="es">Agendar Clase</span><span class="en">Book Class</span></a>
+                </div>
+            </div>
+
+            <div class="media-card">
+                <img src="danzaaerea.jpg" alt="Danza Aérea" class="media-content">
+                <div class="card-info">
+                    <h3><span class="es">Danza Aérea</span><span class="en">Aerial Dance</span></h3>
+                    <p class="es">Fuerza y arte en las alturas.</p>
+                    <p class="en">Strength and art in the heights.</p>
+                    <a href="agenda.html" class="book-btn"><span class="es">Agendar Clase</span><span class="en">Book Class</span></a>
+                </div>
+            </div>
+            
+        </div> <div class="section-header" style="margin-top: 80px;">
+            <h2 class="section-title"><span class="es">Clases Kids</span><span class="en">Kids Classes</span></h2>
+            <i class="fas fa-crown" style="color: var(--amarillo); font-size: 2rem; margin-left: 15px;"></i>
+        </div>
+
+        <div class="grid kids-section">
+            
+            <div class="media-card">
+                <img src="kids.jpg" alt="Baby Ballet" class="media-content">
+                <div class="card-info">
+                    <h3>Baby Ballet</h3>
+                    <p class="es">Magia, postura y diversión.</p>
+                    <p class="en">Magic, posture and fun.</p>
+                    <a href="agenda.html" class="book-btn"><span class="es">Agendar Clase</span><span class="en">Book Class</span></a>
+                </div>
+            </div>
+
+            <div class="media-card">
+                <img src="jazzkids.jpg" alt="Jazz Kids" class="media-content">
+                <div class="card-info">
+                    <h3>Jazz Kids</h3>
+                    <p class="es">Ritmo, energía y bases técnicas.</p>
+                    <p class="en">Rhythm, energy and technical bases.</p>
+                    <a href="agenda.html" class="book-btn"><span class="es">Agendar Clase</span><span class="en">Book Class</span></a>
+                </div>
+            </div>
+
+            <div class="media-card">
+                <img src="hiphopkids.jpg" alt="Hip Hop Kids" class="media-content">
+                <div class="card-info">
+                    <h3>Hip Hop Kids</h3>
+                    <p class="es">Coordinación y mucho flow.</p>
+                    <p class="en">Coordination and lots of flow.</p>
+                    <a href="agenda.html" class="book-btn"><span class="es">Agendar Clase</span><span class="en">Book Class</span></a>
+                </div>
+            </div>
+
+            <div class="media-card">
+                <img src="aereokids.jpg" alt="Aéreo Kids" class="media-content">
+                <div class="card-info">
+                    <h3><span class="es">Aéreo Kids</span><span class="en">Aerial Kids</span></h3>
+                    <p class="es">Volar es divertido y seguro.</p>
+                    <p class="en">Flying is fun and safe.</p>
+                    <a href="agenda.html" class="book-btn"><span class="es">Agendar Clase</span><span class="en">Book Class</span></a>
+                </div>
+            </div>
+
+            <div class="media-card">
+                <img src="kpopkids.jpg" alt="K-Pop Kids" class="media-content">
+                <div class="card-info">
+                    <h3>K-Pop Kids</h3>
+                    <p class="es">Baila como tus idols favoritos.</p>
+                    <p class="en">Dance like your favorite idols.</p>
+                    <a href="agenda.html" class="book-btn"><span class="es">Agendar Clase</span><span class="en">Book Class</span></a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="social-sidebar">
+        <a href="https://www.instagram.com/thecrown.dancestudio?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/share/14Wcv3tKFvP/?mibextid=wwXIfr" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.tiktok.com/@thecrown.dancestudio?_r=1&_t=ZS-93z1Ze2nCnl" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+    </div>
+
+    <footer>
+        <p>© 2026 The Crown Dance Studio - Subdirección General</p>
+        <div style="margin-top: 20px;">
+            <a href="https://www.instagram.com/thecrown.dancestudio?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="margin: 0 15px; color: #666; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/share/14Wcv3tKFvP/?mibextid=wwXIfr" target="_blank" style="margin: 0 15px; color: #666; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.tiktok.com/@thecrown.dancestudio?_r=1&_t=ZS-93z1Ze2nCnl" target="_blank" style="margin: 0 15px; color: #666; font-size: 1.5rem;"><i class="fab fa-tiktok"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        let currentLang = 'es';
+        function toggleLanguage() {
+            currentLang = (currentLang === 'es') ? 'en' : 'es';
+            const esElements = document.querySelectorAll('.es');
+            const enElements = document.querySelectorAll('.en');
+
+            if (currentLang === 'es') {
+                esElements.forEach(el => el.style.display = 'inline');
+                enElements.forEach(el => el.style.display = 'none');
+            } else {
+                esElements.forEach(el => el.style.display = 'none');
+                enElements.forEach(el => el.style.display = 'inline');
+            }
+            
+            // Ajustes para mantener bloques
+            document.querySelectorAll('p.es, span.es').forEach(el => { if(currentLang === 'es') el.style.display = 'block'; });
+            document.querySelectorAll('p.en, span.en').forEach(el => { if(currentLang === 'en') el.style.display = 'block'; });
+            document.querySelectorAll('a > span.es, a > span.en').forEach(el => {
+                 if((currentLang === 'es' && el.classList.contains('es')) || (currentLang === 'en' && el.classList.contains('en'))) {
+                     el.style.display = 'inline';
+                 }
+            });
+        }
+    </script>
+</body>
+</html>

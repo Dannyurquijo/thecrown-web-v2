@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- === OPTIMIZACIÓN SEO === -->
+    <title>The Crown Dance Studio | Clases de Baile en Corregidora, Querétaro</title>
+    <meta name="description" content="Aprende a bailar en The Crown Dance Studio en Plaza Real Santa Lucía, Corregidora, Querétaro. Clases de Hip Hop, Ballet, Jazz, Reggaetón, Heels y Baby Ballet para todas las edades.">
+    <meta name="keywords" content="Academia de baile en Querétaro, Clases de Hip hop Corregidora, Baby ballet Querétaro, Clases de baile, Estudio de danza Plaza Real Santa Lucía">
+    <meta name="robots" content="index, follow">
+    
+    <!-- FUENTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/glacial-indifference-2" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- AJUSTE GLOBAL PARA EVITAR BORDES BLANCOS EN CELULAR --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- PALETA DE COLORES --- */
+        :root {
+            --rosa-suave: #E06EA1;
+            --rosa-neon: #FF66C4;      
+            --amarillo: #EACA80;       
+            --dorado: #C19A51;         
+            --negro: #050505;
+            --gris-fondo: #0e0e0e;
+            --blanco: #ffffff;
+            --transparente: rgba(5, 5, 5, 0.95);
+        }
+        
+        html, body { 
+            scroll-behavior: smooth; 
+            max-width: 100vw; 
+            overflow-x: hidden; /* Blindaje extra para evitar scroll horizontal en móviles */
+        }
+        
+        body {
+            background-color: var(--negro);
+            color: var(--blanco);
+            font-family: 'Glacial Indifference', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* --- CLASES IDIOMA --- */
+        .en { display: none; }
+        .lang-btn {
+            background: transparent; border: 1px solid var(--rosa-neon); color: var(--rosa-neon);
+            padding: 5px 10px; cursor: pointer; font-family: 'League Spartan', sans-serif;
+            font-weight: bold; font-size: 0.8rem; margin-left: 15px; border-radius: 5px; transition: 0.3s;
+        }
+        .lang-btn:hover { background: var(--rosa-neon); color: var(--negro); box-shadow: 0 0 10px var(--rosa-neon); }
+
+        /* --- NAV --- */
+        .navbar {
+            position: fixed; top: 0; width: 100%;
+            background-color: var(--transparente);
+            padding: 15px 0; z-index: 1000;
+            border-bottom: 2px solid var(--dorado);
+            display: flex; justify-content: space-between; align-items: center;
+            backdrop-filter: blur(10px);
+            transition: transform 0.4s ease-in-out;
+        }
+        .nav-hidden { transform: translateY(-100%); }
+
+        .nav-logo { margin-left: 5%; display: flex; align-items: center; }
+        .nav-logo img { height: 50px; width: auto; transition: transform 0.3s ease; }
+        .nav-logo img:hover { transform: scale(1.1); filter: drop-shadow(0 0 5px var(--rosa-neon)); }
+
+        .nav-links { margin-right: 5%; display: flex; align-items: center; }
+        .nav-links a {
+            color: var(--blanco); text-decoration: none; margin-left: 20px;
+            font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;
+            transition: 0.3s; font-weight: 700; font-family: 'League Spartan', sans-serif;
+        }
+        .nav-links a:not(.nav-cta):hover { color: var(--rosa-neon); text-shadow: 0 0 5px var(--rosa-suave); }
+        
+        .nav-cta {
+            background: linear-gradient(45deg, var(--rosa-neon), var(--rosa-suave));
+            color: white !important; padding: 10px 25px; border-radius: 50px; margin-left: 20px;
+            font-weight: 700; border: none; box-shadow: 0 4px 15px rgba(224, 110, 161, 0.3);
+        }
+        .nav-cta:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--rosa-neon); }
+
+        /* --- HEADER --- */
+        header {
+            position: relative; height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; overflow: hidden;
+        }
+        .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+        .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5,5,5,0.7); z-index: -1; }
+        
+        /* --- TÍTULO PRINCIPAL: ORO LUXURY + NEÓN --- */
+        .brand-name {
+            font-family: 'League Spartan', sans-serif; 
+            font-weight: 900;
+            font-size: 6rem;
+            margin: 0; 
+            letter-spacing: 2px; 
+            text-transform: uppercase;
+            background: linear-gradient(to right, #EACA80, #C19A51, #EACA80);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(193, 154, 81, 0.6)) drop-shadow(0 0 30px rgba(193, 154, 81, 0.4));
+        }
+        
+        .tagline { 
+            font-family: 'League Spartan', sans-serif;
+            font-size: 1.8rem; letter-spacing: 10px; text-transform: uppercase; 
+            margin-top: 10px; color: white; font-weight: 300;
+        }
+        
+        .main-btn {
+            margin-top: 40px; padding: 15px 50px; 
+            border: 2px solid var(--rosa-neon);
+            color: var(--rosa-neon); text-decoration: none; font-weight: bold;
+            text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; cursor: pointer; display: inline-block;
+            font-family: 'League Spartan', sans-serif;
+        }
+        .main-btn:hover { background: var(--rosa-neon); color: var(--negro); box-shadow: 0 0 25px var(--rosa-neon); }
+
+        /* --- SECCIONES --- */
+        section { padding: 80px 5%; text-align: center; }
+        
+        .section-title {
+            color: var(--dorado); 
+            font-family: 'League Spartan', sans-serif;
+            font-size: 3.5rem; margin-bottom: 30px; display: inline-block;
+            text-transform: uppercase; letter-spacing: 1px; font-weight: 700;
+        }
+        .section-title::after {
+            content: ''; display: block; width: 80px; height: 5px;
+            background: var(--rosa-neon); margin: 10px auto 0; border-radius: 5px;
+        }
+
+        /* --- MISIÓN Y VISIÓN (CORREGIDO PARA MÓVIL) --- */
+        .mv-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px; /* Reducido un poco para móviles */
+            flex-wrap: wrap;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .mv-container {
+            /* CORRECCIÓN: flex basis reducido de 450px a 300px para que quepa en celular */
+            flex: 1 1 300px; 
+            max-width: 650px;
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .mv-title-neon {
+            font-family: 'League Spartan', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #ff99cc;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px var(--rosa-neon);
+        }
+        .mv-text {
+            font-size: 1.2rem;
+            color: #ddd;
+            margin-bottom: 30px;
+            text-align: justify;
+            text-align-last: center;
+        }
+        .mv-highlight { font-weight: bold; color: #fff; text-shadow: 0 0 5px rgba(255,255,255,0.3); }
+        .mv-underline { text-decoration: underline; text-decoration-color: var(--rosa-neon); text-underline-offset: 4px; }
+
+        .mv-image {
+            width: 100%; /* Asegura que no rebase su contenedor */
+            max-width: 380px;
+            height: auto;
+            border-radius: 15px;
+            margin-top: 20px;
+            opacity: 0.95;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 2px solid transparent;
+            transition: 0.3s ease;
+        }
+        .mv-container:hover .mv-image {
+            border-color: var(--rosa-neon);
+            transform: scale(1.02);
+        }
+
+        /* --- HORARIOS: SECCIÓN SIMPLE --- */
+        .schedule-simple-container {
+            max-width: 800px; margin: 0 auto;
+            background: #111; padding: 40px 20px; /* Ajuste padding celular */
+            border-radius: 20px;
+            border: 1px solid #333; box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        /* --- OTROS --- */
+        .card { transition: 0.4s; position: relative; border-radius: 15px; overflow: hidden; }
+        .card:hover { border-color: var(--rosa-neon) !important; transform: translateY(-10px); box-shadow: 0 0 25px rgba(255, 102, 196, 0.2); }
+        .card h3 { font-family: 'League Spartan', sans-serif; font-weight: 700; letter-spacing: 1px; }
+
+        .social-sidebar {
+            position: fixed; top: 50%; right: 0; transform: translateY(-50%);
+            z-index: 1000; display: flex; flex-direction: column;
+            background: rgba(0, 0, 0, 0.8); border-radius: 10px 0 0 10px;
+            padding: 15px 10px; border: 1px solid var(--dorado); border-right: none;
+        }
+        .social-sidebar a { color: var(--dorado); font-size: 1.5rem; margin: 10px 0; transition: 0.3s; }
+        .social-sidebar a:hover { color: var(--rosa-neon); transform: scale(1.2); }
+
+        footer { background: #000; padding: 50px; color: #666; border-top: 1px solid #222; }
+
+        /* --- MEDIA QUERIES (MÓVILES) --- */
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; justify-content: center; padding: 10px; }
+            .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; margin-top: 15px; }
+            .brand-name { font-size: 3rem; } /* Más pequeño en celular para evitar que se salga */
+            .mv-wrapper { flex-direction: column; gap: 20px; } 
+            .social-sidebar { display: none; }
+            section { padding: 60px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <!-- ALT SEO agregado al logo -->
+        <a href="#inicio" class="nav-logo"><img src="logo.png" alt="Logotipo The Crown Dance Studio - Academia de baile en Querétaro"></a>
+        <div class="nav-links">
+            <a href="#nosotros"><span class="es">Nosotros</span><span class="en">About</span></a>
+            <a href="#disciplinas"><span class="es">Clases</span><span class="en">Classes</span></a>
+            <a href="#festivales"><span class="es">Eventos</span><span class="en">Events</span></a>
+            <a href="#horarios"><span class="es">Horarios</span><span class="en">Schedule</span></a>
+            <a href="#ubicacion"><span class="es">Ubicación</span><span class="en">Location</span></a>
+            <a href="agenda.html" class="nav-cta">AGENDAR</a>
+            <button class="lang-btn" onclick="toggleLanguage()">ES / EN</button>
+        </div>
+    </nav>
+
+    <header id="inicio">
+        <video class="video-bg" autoplay muted loop playsinline>
+            <source src="video-fondo.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+        <div class="header-content">
+            <h1 class="brand-name">The Crown</h1>
+            <p class="tagline">Dance Studio</p>
+            <a href="#horarios" class="main-btn">
+                <span class="es">Ver Horarios</span><span class="en">View Schedule</span>
+            </a>
+        </div>
+    </header>
+
+    <section id="nosotros" style="background: var(--gris-fondo);">
+        <div class="mv-wrapper">
+            <!-- Misión -->
+            <div class="mv-container">
+                <h2 class="mv-title-neon">
+                    <span class="es">Nuestra Misión</span><span class="en">Our Mission</span>
+                </h2>
+                <div class="es">
+                    <p class="mv-text">
+                        En <span class="mv-highlight">The Crown Dance Studio</span> formamos <span class="mv-highlight">bailarines</span> desde una base sólida, consciente y amorosa, donde la técnica, la disciplina y el disfrute del movimiento conviven en equilibrio.
+                    </p>
+                    <p class="mv-text">
+                        <span class="mv-highlight mv-underline">Nuestro objetivo</span> es desarrollar alumnos que sepan bailar, que comprendan los fundamentos de cada disciplina y que crezcan artística y personalmente, sin perder la pasión, la diversión y el respeto por su proceso.
+                    </p>
+                    <p class="mv-text">
+                        Creemos que la edad no define el nivel de exigencia, sino la manera en que enseñamos. Por eso, trabajamos con niños, jóvenes y adultos desde un enfoque <span class="mv-highlight">formativo, creativo y humano</span>, guiándolos a descubrir su potencial dentro y fuera del escenario.
+                    </p>
+                </div>
+                <div class="en">
+                    <p class="mv-text">
+                        At <span class="mv-highlight">The Crown Dance Studio</span>, we train <span class="mv-highlight">dancers</span> from a solid, conscious, and loving foundation, where technique, discipline, and the joy of movement coexist in balance.
+                    </p>
+                </div>
+                <!-- ALT SEO agregado -->
+                <img src="imagenmision.jpg" alt="Alumnos en clases de baile, Hip Hop y Jazz en Querétaro - The Crown" class="mv-image">
+            </div>
+            
+            <!-- Visión -->
+            <div class="mv-container">
+                <h2 class="mv-title-neon">
+                    <span class="es">Nuestra Visión</span><span class="en">Our Vision</span>
+                </h2>
+                <div class="es">
+                    <p class="mv-text">
+                        Ser una academia de danza reconocida por su <span class="mv-highlight mv-underline">calidad artística</span>, <span class="mv-highlight">formación integral y claridad pedagógica</span>, donde cada alumno tenga las herramientas necesarias para crecer como bailarín y como persona.
+                    </p>
+                    <p class="mv-text">
+                        Buscamos consolidar una <span class="mv-highlight">comunidad</span> donde los <span class="mv-highlight mv-underline">maestros</span> enseñen con propósito, estructura y pasión, alineados a una misma visión, y donde los <span class="mv-highlight mv-underline">alumnos</span> encuentren un espacio que los reta, los inspira y los prepara para escenarios profesionales.
+                    </p>
+                    <p class="mv-text">
+                        En The Crown, la danza no es relleno, ni improvisación sin sentido: es formación, expresión, disciplina y disfrute con intención.
+                    </p>
+                </div>
+                <div class="en">
+                    <p class="mv-text">
+                        To be a dance academy recognized for its <span class="mv-highlight">artistic quality</span>, integral training, and pedagogical clarity, where every student has the tools to grow as a dancer and as a person.
+                    </p>
+                </div>
+                <!-- ALT SEO agregado -->
+                <img src="imagenvision.jpg" alt="Presentación y formación de bailarines en Corregidora, Querétaro" class="mv-image">
+            </div>
+        </div>
+    </section>
+
+    <section id="disciplinas">
+        <h2 class="section-title"><span class="es">Clases</span><span class="en">Classes</span></h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+            <a href="galeria.html" class="card" style="background: #111; padding: 40px 20px; border: 1px solid #333; text-decoration: none; display: block;">
+                <i class="fas fa-street-view" style="color: var(--rosa-neon); font-size: 3rem;"></i>
+                <h3 style="color:white; margin-top:20px;">URBANO</h3>
+                <p style="color:#aaa;">Hip Hop, Reggaetón & Heels.</p>
+            </a>
+            <a href="galeria.html" class="card" style="background: #111; padding: 40px 20px; border: 1px solid #333; text-decoration: none; display: block;">
+                <i class="fas fa-star" style="color: var(--rosa-neon); font-size: 3rem;"></i>
+                <h3 style="color:white; margin-top:20px;">TÉCNICA</h3>
+                <p style="color:#aaa;">Ballet, Contemporáneo, Jazz & Acrobacia.</p>
+            </a>
+            <a href="galeria.html" class="card" style="background: #111; padding: 40px 20px; border: 1px solid #333; text-decoration: none; display: block;">
+                <i class="fas fa-child" style="color: var(--rosa-neon); font-size: 3rem;"></i>
+                <h3 style="color:white; margin-top:20px;">KIDS</h3>
+                <p style="color:#aaa;">Baby Ballet, Jazz Kids & Hip Hop Kids.</p>
+            </a>
+            <a href="galeria.html" class="card" style="background: #111; padding: 40px 20px; border: 1px solid #333; text-decoration: none; display: block;">
+                <i class="fas fa-wind" style="color: var(--rosa-neon); font-size: 3rem;"></i>
+                <h3 style="color:white; margin-top:20px;">COMPLEMENTARIOS</h3>
+                <p style="color:#aaa;">Saltos y giros, Flexibilidad, Balances y Danza Aérea.</p>
+            </a>
+        </div>
+    </section>
+
+    <section id="festivales" style="background: linear-gradient(to bottom, #050505, #151515, #050505); padding: 80px 5%;">
+        <h2 class="section-title">
+            <span class="es">Vive el Escenario</span><span class="en">Live the Stage</span>
+        </h2>
+        <p style="max-width: 700px; margin: 0 auto 40px auto; color: #ccc;">
+            <span class="es">Nuestros alumnos brillan en producciones profesionales con iluminación y dirección de primer nivel.</span>
+            <span class="en">Our students shine in professional productions with top-level lighting and direction.</span>
+        </p>
+
+        <div style="max-width: 1000px; margin: 0 auto; border: 2px solid var(--dorado); box-shadow: 0 0 40px rgba(193, 154, 81, 0.2); border-radius: 15px; overflow: hidden; background: #000;">
+            <video width="100%" height="auto" controls controlsList="nodownload" poster="logo_corona.png" style="display: block;">
+                <source src="festivales.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
+    <section id="horarios" style="background: #0f0f0f;">
+        <h2 class="section-title"><span class="es">Horarios 2026</span><span class="en">2026 Schedule</span></h2>
+        
+        <div class="schedule-simple-container">
+            <p style="color: #ccc; margin-bottom: 30px;">
+                <span class="es">Descarga nuestro PDF oficial con todos los horarios detallados y comienza tu inscripción.</span>
+                <span class="en">Download our official PDF with detailed schedules and start your registration.</span>
+            </p>
+            
+            <a href="Horarios 2026.pdf" download="Horarios_TheCrown_2026.pdf" class="main-btn" onclick="redirigirAgenda()">
+                <i class="fas fa-file-pdf" style="margin-right: 10px;"></i>
+                <span class="es">Descargar Horarios</span>
+                <span class="en">Download Schedule</span>
+            </a>
+        </div>
+    </section>
+
+    <section id="ubicacion" style="background: #0f0f0f;">
+        <h2 class="section-title"><span class="es">Visítanos</span><span class="en">Visit Us</span></h2>
+        <p style="color: #ccc;">Cam. a Vanegas 256, Plaza Real Santa Lucía, Corregidora, Qro.</p>
+        <div style="border: 2px solid var(--dorado); padding: 5px; max-width: 1000px; margin: 0 auto;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3735.617931326265!2d-100.43576422502685!3d20.562777680971556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d345a331825851%3A0xc3f8e58604724a2e!2sPlaza%20Real%20Santa%20Luc%C3%ADa!5e0!3m2!1ses!2smx!4v1700000000000!5m2!1ses!2smx" width="100%" height="400" style="border:0; filter: grayscale(100%) invert(92%) contrast(83%);" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <div class="social-sidebar">
+        <a href="https://www.instagram.com/thecrown.dancestudio" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/thecrown.dancestudio" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a>
+    </div>
+
+    <footer>
+        <p>© 2026 The Crown Dance Studio</p>
+    </footer>
+
+    <script>
+        // SMART NAVBAR
+        let lastScrollTop = 0;
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > 100) { navbar.classList.add('nav-hidden'); } 
+            else { navbar.classList.remove('nav-hidden'); }
+            lastScrollTop = scrollTop;
+        });
+
+        // REDIRECCION AUTOMATICA AL DESCARGAR
+        function redirigirAgenda() {
+            setTimeout(() => {
+                window.location.href = 'agenda.html';
+            }, 1500);
+        }
+
+        // LANGUAGE TOGGLE
+        let currentLang = 'es';
+        function toggleLanguage() {
+            currentLang = (currentLang === 'es') ? 'en' : 'es';
+            const esElements = document.querySelectorAll('.es');
+            const enElements = document.querySelectorAll('.en');
+            if (currentLang === 'es') {
+                esElements.forEach(el => el.style.display = 'inline-block');
+                enElements.forEach(el => el.style.display = 'none');
+            } else {
+                esElements.forEach(el => el.style.display = 'none');
+                enElements.forEach(el => el.style.display = 'inline-block');
+            }
+            // For block elements
+            document.querySelectorAll('div > .es, section > .es, p.es, h2 > .es').forEach(el => {
+                if(currentLang === 'es') el.style.display = 'block';
+            });
+            document.querySelectorAll('div > .en, section > .en, p.en, h2 > .en').forEach(el => {
+                if(currentLang === 'en') el.style.display = 'block';
+            });
+        }
+    </script>
+</body>
+</html>
