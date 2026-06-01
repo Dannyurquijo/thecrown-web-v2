@@ -49,6 +49,16 @@
             margin-bottom: 20px;
         }
 
+        .hidden-group {
+            display: none;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 3px solid var(--neon-pink);
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+
         label {
             display: block;
             margin-bottom: 8px;
@@ -56,7 +66,7 @@
             color: #b3b3b3;
         }
 
-        input, select {
+        input, select, textarea {
             width: 100%;
             padding: 12px;
             border-radius: 6px;
@@ -68,7 +78,13 @@
             transition: border 0.3s;
         }
 
-        input:focus, select:focus {
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: var(--neon-pink);
         }
@@ -149,14 +165,21 @@
 
         <div class="form-group">
             <label for="concepto">Concepto de Pago</label>
-            <select id="concepto" required>
+            <select id="concepto" required onchange="verificarConcepto(this.value)">
                 <option value="" disabled selected>Selecciona una opción</option>
+                <option value="Ensayos">Ensayos</option>
                 <option value="Boletos de Festival">Boletos de Festival</option>
+                <option value="Boletos Competencia">Boletos Competencia</option>
                 <option value="Inscripción a Competencia">Inscripción a Competencia</option>
                 <option value="Vestuario / Uniforme">Vestuario / Uniforme</option>
                 <option value="Clase Individual / Extra">Clase Individual / Extra</option>
-                <option value="Otro / Cargo Especial">Otro / Cargo Especial</option>
+                <option value="Otro">Otro (Especificar nuevo concepto...)</option>
             </select>
+        </div>
+
+        <div class="form-group hidden-group" id="grupoNuevoConcepto">
+            <label for="conceptoPersonalizado">Escribe el nuevo concepto de pago</label>
+            <input type="text" id="conceptoPersonalizado" placeholder="Ej. Curso de Verano">
         </div>
 
         <div class="form-group">
@@ -164,20 +187,40 @@
             <input type="number" id="monto" min="1" required placeholder="Ej. 350">
         </div>
 
+        <div class="form-group">
+            <label for="notas">Notas / Detalles especiales (Opcional)</label>
+            <textarea id="notas" placeholder="Ej. Pago en efectivo / Falta liquidar credencial"></textarea>
+        </div>
+
         <button type="submit" class="btn-submit" id="btnSubmit">Registrar Pago</button>
     </form>
 
     <div class="success-box" id="successBox">
-        <p>✅ ¡Datos guardados en Google Sheets con éxito!</p>
+        <p>✅ ¡Datos guardados en tu base de datos con éxito!</p>
         <a href="#" target="_blank" class="btn-whatsapp" id="btnWhatsapp">
-            Enviar Recibo por WhatsApp
+            Enviar Recibo por WhatsApp 📱
         </a>
     </div>
 </div>
 
 <script>
-    // Enlace de la aplicación web de Google Apps Script integrado de forma directa
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwGbmpeYXiJrUpa5i4QeQd2b-xYnHgBXsd56VJeHtcogNxCyzAI6kR5WvuUYgvVTUrA/exec";
+
+    // Función para mostrar u ocultar el campo de concepto personalizado
+    function verificarConcepto(valor) {
+        const grupoNuevo = document.getElementById('grupoNuevoConcepto');
+        const inputNuevo = document.getElementById('conceptoPersonalizado');
+        
+        if (valor === 'Otro') {
+            grupoNuevo.style.display = 'block';
+            inputNuevo.required = true;
+            inputNuevo.focus();
+        } else {
+            grupoNuevo.style.display = 'none';
+            inputNuevo.required = false;
+            inputNuevo.value = '';
+        }
+    }
 
     document.getElementById('paymentForm').addEventListener('submit', function(e) {
         e.preventDefault();
@@ -189,23 +232,38 @@
         const alumno = document.getElementById('alumno').value.trim();
         const telefono = document.getElementById('telefono').value.trim();
         const concepto = document.getElementById('concepto').value;
+        const conceptoPersonalizado = document.getElementById('conceptoPersonalizado').value.trim();
         const monto = document.getElementById('monto').value;
+        const notas = document.getElementById('notas').value.trim();
+
+        // Determinar cuál concepto se va a enviar
+        const conceptoFinal = concepto === 'Otro' ? conceptoPersonalizado : concepto;
 
         const formData = new URLSearchParams();
         formData.append('alumno', alumno);
         formData.append('telefono', telefono);
         formData.append('concepto', concepto);
+        formData.append('conceptoPersonalizado', conceptoPersonalizado);
         formData.append('monto', monto);
+        formData.append('notas', notas);
 
         fetch(WEB_APP_URL, {
             method: 'POST',
             mode: 'no-cors',
             body: formData
         }).then(() => {
-            const mensaje = `Hola *${alumno}*, confirmamos el recibo de tu pago en *The Crown Dance Studio* 👑\n\n` +
-                            `▪️ *Concepto:* ${concepto}\n` +
-                            `▪️ *Monto:* $${monto} MXN\n\n` +
-                            `¡Tu registro ha quedado completado con éxito! Muchas gracias.`;
+            // Construcción del mensaje de WhatsApp con formato y emojis llamativos
+            let mensaje = `¡Hola *${alumno}*! 👋 Confirmamos el recibo de tu pago en *The Crown Dance Studio* 👑💃\n\n` +
+                            `✨ *Detalles de tu comprobante:* \n` +
+                            `▪️ *Concepto:* ${conceptoFinal} 📝\n` +
+                            `▪️ *Monto:* $${monto} MXN 💵\n`;
+            
+            // Si la recepcionista escribió una nota, se añade de forma limpia al WhatsApp
+            if (notas !== "") {
+                mensaje += `▪️ *Notas:* ${notas} 📌\n`;
+            }
+            
+            mensaje += `\n¡Tu registro ha quedado guardado! Muchas gracias por tu pago. 💜✨`;
             
             const whatsappUrl = `https://wa.me/52${telefono}?text=${encodeURIComponent(mensaje)}`;
             
