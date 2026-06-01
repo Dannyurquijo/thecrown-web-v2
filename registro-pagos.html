@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Pagos Extras | The Crown</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #ffffff;
+            --gold: #C19A51;
+            --neon-pink: #FF66C4;
+            --green: #25D366;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 450px;
+            border: 1px solid rgba(193, 154, 81, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--gold);
+            margin-bottom: 25px;
+            font-size: 24px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #b3b3b3;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #333;
+            background-color: #2a2a2a;
+            color: #fff;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--neon-pink);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .btn-submit {
+            background-color: var(--gold);
+            color: #000;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #dfb25e;
+            box-shadow: 0 0 12px rgba(193, 154, 81, 0.4);
+        }
+
+        .success-box {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background-color: rgba(37, 211, 102, 0.1);
+            border: 1px solid var(--green);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .success-box p {
+            margin: 0 0 15px 0;
+            color: #fff;
+            font-size: 15px;
+        }
+
+        .btn-whatsapp {
+            background-color: var(--green);
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #20ba5a;
+            box-shadow: 0 0 12px rgba(37, 211, 102, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Registro de Pagos 👑</h2>
+    <form id="paymentForm">
+        <div class="form-group">
+            <label for="alumno">Nombre del Alumno</label>
+            <input type="text" id="alumno" required placeholder="Ej. María López">
+        </div>
+
+        <div class="form-group">
+            <label for="telefono">Teléfono de WhatsApp (10 dígitos)</label>
+            <input type="tel" id="telefono" pattern="[0-9]{10}" required placeholder="Ej. 4421234567">
+        </div>
+
+        <div class="form-group">
+            <label for="concepto">Concepto de Pago</label>
+            <select id="concepto" required>
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="Boletos de Festival">Boletos de Festival</option>
+                <option value="Inscripción a Competencia">Inscripción a Competencia</option>
+                <option value="Vestuario / Uniforme">Vestuario / Uniforme</option>
+                <option value="Clase Individual / Extra">Clase Individual / Extra</option>
+                <option value="Otro / Cargo Especial">Otro / Cargo Especial</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="monto">Monto cobrado ($)</label>
+            <input type="number" id="monto" min="1" required placeholder="Ej. 350">
+        </div>
+
+        <button type="submit" class="btn-submit" id="btnSubmit">Registrar Pago</button>
+    </form>
+
+    <div class="success-box" id="successBox">
+        <p>✅ ¡Datos guardados en Google Sheets con éxito!</p>
+        <a href="#" target="_blank" class="btn-whatsapp" id="btnWhatsapp">
+            Enviar Recibo por WhatsApp
+        </a>
+    </div>
+</div>
+
+<script>
+    // Enlace de la aplicación web de Google Apps Script integrado de forma directa
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwGbmpeYXiJrUpa5i4QeQd2b-xYnHgBXsd56VJeHtcogNxCyzAI6kR5WvuUYgvVTUrA/exec";
+
+    document.getElementById('paymentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const btnSubmit = document.getElementById('btnSubmit');
+        btnSubmit.innerText = "Guardando...";
+        btnSubmit.disabled = true;
+
+        const alumno = document.getElementById('alumno').value.trim();
+        const telefono = document.getElementById('telefono').value.trim();
+        const concepto = document.getElementById('concepto').value;
+        const monto = document.getElementById('monto').value;
+
+        const formData = new URLSearchParams();
+        formData.append('alumno', alumno);
+        formData.append('telefono', telefono);
+        formData.append('concepto', concepto);
+        formData.append('monto', monto);
+
+        fetch(WEB_APP_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: formData
+        }).then(() => {
+            const mensaje = `Hola *${alumno}*, confirmamos el recibo de tu pago en *The Crown Dance Studio* 👑\n\n` +
+                            `▪️ *Concepto:* ${concepto}\n` +
+                            `▪️ *Monto:* $${monto} MXN\n\n` +
+                            `¡Tu registro ha quedado completado con éxito! Muchas gracias.`;
+            
+            const whatsappUrl = `https://wa.me/52${telefono}?text=${encodeURIComponent(mensaje)}`;
+            
+            document.getElementById('btnWhatsapp').href = whatsappUrl;
+            document.getElementById('successBox').style.display = 'block';
+            btnSubmit.innerText = "Registrado";
+        }).catch(err => {
+            alert("Hubo un error al conectar con el servidor. Revisa la configuración.");
+            btnSubmit.innerText = "Registrar Pago";
+            btnSubmit.disabled = false;
+        });
+    });
+</script>
+
+</body>
+</html>
