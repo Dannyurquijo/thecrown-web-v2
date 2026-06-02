@@ -153,11 +153,14 @@
         formData.set("concepto", conceptoFinal); 
       }
 
+      // Codificamos los datos para que acentos y emojis pasen limpios a Sheets
+      const datosCodificados = new URLSearchParams(formData);
+
       // Enviar datos a Google Sheets
       fetch(SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
-        body: formData
+        body: datosCodificados
       }).then(() => {
         console.log("Enviado a la base de datos");
       }).catch(error => {
@@ -176,7 +179,7 @@
       const whatsappUrl = `https://wa.me/52${telefono}?text=${encodeURIComponent(mensaje)}`;
       window.open(whatsappUrl, "_blank");
 
-      // Limpiar formulario y generar un nuevo ticket para el siguiente cobro
+      // Limpiar formulario y generar un nuevo ticket
       this.reset();
       document.getElementById("divPersonalizado").style.display = "none";
       generarFolio();
