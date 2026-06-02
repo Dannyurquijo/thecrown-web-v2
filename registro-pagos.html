@@ -101,10 +101,13 @@
 
       <label for="concepto">Concepto de Pago:</label>
       <select id="concepto" name="concepto" onchange="mostrarPersonalizado()" required>
-        <option value="Mensualidad">Mensualidad</option>
-        <option value="Inscripción">Inscripción</option>
-        <option value="Ensayo Extra">Ensayo Extra</option>
-        <option value="Competencia">Competencia</option>
+        <option value="" disabled selected>Selecciona un concepto...</option>
+        <option value="Ensayos">Ensayos</option>
+        <option value="Festival/boletos">Festival/boletos</option>
+        <option value="Vestuarios/Escenografia">Vestuarios/Escenografia</option>
+        <option value="Competencia/Boletos">Competencia/Boletos</option>
+        <option value="Playeras">Playeras</option>
+        <option value="Sudadera">Sudadera</option>
         <option value="Otro">Otro</option>
       </select>
 
@@ -124,16 +127,13 @@
   </div>
 
   <script>
-    // Tu URL oficial de Google Apps Script ya integrada
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwGbmpeYXiJrUpa5i4QeQd2b-xYnHgBXsd56VJeHtcogNxCyzAI6kR5WvuUYgvVTUrA/exec";
 
-    // Función para generar un ticket automático (Ej. T-94521)
     function generarFolio() {
       const numeroAleatorio = Math.floor(10000 + Math.random() * 90000);
       document.getElementById("ticket").value = "T-" + numeroAleatorio;
     }
 
-    // Generar el folio cuando cargue la página
     window.onload = generarFolio;
 
     function mostrarPersonalizado() {
@@ -153,10 +153,8 @@
         formData.set("concepto", conceptoFinal); 
       }
 
-      // Codificamos los datos para que acentos y emojis pasen limpios a Sheets
       const datosCodificados = new URLSearchParams(formData);
 
-      // Enviar datos a Google Sheets
       fetch(SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
@@ -167,19 +165,17 @@
         console.error("Error al enviar:", error);
       });
 
-      // Crear el mensaje de WhatsApp
       const telefono = formData.get("telefono");
       const alumno = formData.get("alumno");
       const ticket = formData.get("ticket");
       const monto = formData.get("monto");
       const cobrador = formData.get("cobrador");
 
-      const mensaje = `¡Hola, ${alumno}! 👑\n\nConfirmamos la recepción de tu pago.\n\n🎟️ *Ticket:* ${ticket}\n💰 *Monto:* $${monto}\n📝 *Concepto:* ${conceptoFinal}\n👤 *Atendido por:* ${cobrador}\n\n¡Gracias por ser parte de The Crown Dance Studio! ✨`;
+      const mensaje = `¡Hola, ${alumno}! 👑\n\nConfirmamos la recepción de tu pago.\n\n🎟️ *Ticket:* ${ticket}\n💰 *Monto:* $${monto}\n📝 *Concepto:* ${conceptoFinal}\n👤 *Atendido por:* ${cobrador}\n\n¡Gracias por tu pago! ✨`;
 
       const whatsappUrl = `https://wa.me/52${telefono}?text=${encodeURIComponent(mensaje)}`;
       window.open(whatsappUrl, "_blank");
 
-      // Limpiar formulario y generar un nuevo ticket
       this.reset();
       document.getElementById("divPersonalizado").style.display = "none";
       generarFolio();
