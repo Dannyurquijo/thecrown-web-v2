@@ -5,108 +5,181 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sistema de Pagos - The Crown</title>
   <style>
-    body { font-family: Arial, sans-serif; max-width: 500px; margin: 20px auto; padding: 20px; }
-    label { display: block; margin-top: 10px; font-weight: bold; }
-    input, select, textarea { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; }
-    button { margin-top: 20px; padding: 10px 15px; background-color: #25D366; color: white; border: none; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold; }
-    button:hover { background-color: #1DA851; }
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      background-color: #f4f7f6; 
+      display: flex; 
+      justify-content: center; 
+      padding: 20px; 
+    }
+    .form-container { 
+      background-color: #ffffff; 
+      max-width: 450px; 
+      width: 100%; 
+      padding: 30px; 
+      border-radius: 12px; 
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1); 
+    }
+    h2 { 
+      text-align: center; 
+      color: #333; 
+      margin-bottom: 25px; 
+      font-size: 24px;
+    }
+    label { 
+      display: block; 
+      margin-top: 15px; 
+      font-weight: 600; 
+      color: #555; 
+      font-size: 14px;
+    }
+    input, select, textarea { 
+      width: 100%; 
+      padding: 12px; 
+      margin-top: 6px; 
+      box-sizing: border-box; 
+      border: 1px solid #ddd; 
+      border-radius: 8px; 
+      font-size: 15px;
+      transition: border-color 0.3s ease;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #000000;
+      outline: none;
+    }
+    input[readonly] {
+      background-color: #e9ecef;
+      color: #6c757d;
+      font-weight: bold;
+      cursor: not-allowed;
+    }
+    button { 
+      margin-top: 25px; 
+      padding: 14px 15px; 
+      background-color: #25D366; 
+      color: white; 
+      border: none; 
+      border-radius: 8px; 
+      cursor: pointer; 
+      width: 100%; 
+      font-size: 16px; 
+      font-weight: bold; 
+      transition: background-color 0.3s ease, transform 0.1s ease;
+    }
+    button:hover { 
+      background-color: #1DA851; 
+    }
+    button:active {
+      transform: scale(0.98);
+    }
   </style>
 </head>
 <body>
 
-  <h2>Registro de Pagos 📋</h2>
-  
-  <form id="formularioPago">
-    <label for="ticket">Número de Ticket:</label>
-    <input type="text" id="ticket" name="ticket" placeholder="Ej. T-001" required>
+  <div class="form-container">
+    <h2>Registro de Pagos 👑</h2>
+    
+    <form id="formularioPago">
+      <label for="ticket">Folio de Ticket (Automático):</label>
+      <input type="text" id="ticket" name="ticket" readonly required>
 
-    <label for="cobrador">¿Quién está cobrando?</label>
-    <select id="cobrador" name="cobrador" required>
-      <option value="" disabled selected>Selecciona tu nombre...</option>
-      <option value="Paula Alarcón">Paula Alarcón</option>
-      <option value="Dulce">Dulce</option>
-      <option value="David">David</option>
-      <option value="Paulina Hernández">Paulina Hernández</option>
-      <option value="Daniel Urquijo">Daniel Urquijo</option>
-    </select>
+      <label for="cobrador">¿Quién está cobrando?</label>
+      <select id="cobrador" name="cobrador" required>
+        <option value="" disabled selected>Selecciona tu nombre...</option>
+        <option value="Paula Alarcón">Paula Alarcón</option>
+        <option value="Dulce">Dulce</option>
+        <option value="David">David</option>
+        <option value="Paulina Hernández">Paulina Hernández</option>
+        <option value="Daniel Urquijo">Daniel Urquijo</option>
+      </select>
 
-    <label for="alumno">Nombre del Alumno:</label>
-    <input type="text" id="alumno" name="alumno" required>
+      <label for="alumno">Nombre del Alumno:</label>
+      <input type="text" id="alumno" name="alumno" required>
 
-    <label for="telefono">Teléfono del Alumno (10 dígitos):</label>
-    <input type="tel" id="telefono" name="telefono" placeholder="Ej. 4421234567" required>
+      <label for="telefono">Teléfono del Alumno (10 dígitos):</label>
+      <input type="tel" id="telefono" name="telefono" placeholder="Ej. 4421234567" pattern="[0-9]{10}" required>
 
-    <label for="concepto">Concepto de Pago:</label>
-    <select id="concepto" name="concepto" onchange="mostrarPersonalizado()" required>
-      <option value="Mensualidad">Mensualidad</option>
-      <option value="Inscripción">Inscripción</option>
-      <option value="Ensayo Extra">Ensayo Extra</option>
-      <option value="Competencia">Competencia</option>
-      <option value="Otro">Otro</option>
-    </select>
+      <label for="concepto">Concepto de Pago:</label>
+      <select id="concepto" name="concepto" onchange="mostrarPersonalizado()" required>
+        <option value="Mensualidad">Mensualidad</option>
+        <option value="Inscripción">Inscripción</option>
+        <option value="Ensayo Extra">Ensayo Extra</option>
+        <option value="Competencia">Competencia</option>
+        <option value="Otro">Otro</option>
+      </select>
 
-    <div id="divPersonalizado" style="display:none;">
-      <label for="conceptoPersonalizado">Especificar Concepto:</label>
-      <input type="text" id="conceptoPersonalizado" name="conceptoPersonalizado">
-    </div>
+      <div id="divPersonalizado" style="display:none;">
+        <label for="conceptoPersonalizado">Especificar Concepto:</label>
+        <input type="text" id="conceptoPersonalizado" name="conceptoPersonalizado">
+      </div>
 
-    <label for="monto">Monto ($):</label>
-    <input type="number" id="monto" name="monto" required>
+      <label for="monto">Monto ($):</label>
+      <input type="number" id="monto" name="monto" min="1" required>
 
-    <label for="notas">Notas (Opcional):</label>
-    <textarea id="notas" name="notas" rows="3"></textarea>
+      <label for="notas">Notas (Opcional):</label>
+      <textarea id="notas" name="notas" rows="3"></textarea>
 
-    <button type="submit">Registrar y Enviar WhatsApp 📲</button>
-  </form>
+      <button type="submit">Registrar y Enviar WhatsApp 📲</button>
+    </form>
+  </div>
 
   <script>
-    // URL de tu Google Apps Script (¡Cámbiala por la tuya!)
-    const SCRIPT_URL = "TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI";
+    // Tu URL oficial de Google Apps Script ya integrada
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwGbmpeYXiJrUpa5i4QeQd2b-xYnHgBXsd56VJeHtcogNxCyzAI6kR5WvuUYgvVTUrA/exec";
+
+    // Función para generar un ticket automático (Ej. T-94521)
+    function generarFolio() {
+      const numeroAleatorio = Math.floor(10000 + Math.random() * 90000);
+      document.getElementById("ticket").value = "T-" + numeroAleatorio;
+    }
+
+    // Generar el folio cuando cargue la página
+    window.onload = generarFolio;
 
     function mostrarPersonalizado() {
       const concepto = document.getElementById("concepto").value;
       const divPer = document.getElementById("divPersonalizado");
       divPer.style.display = (concepto === "Otro") ? "block" : "none";
+      document.getElementById("conceptoPersonalizado").required = (concepto === "Otro");
     }
 
     document.getElementById("formularioPago").addEventListener("submit", function(e) {
-      e.preventDefault(); // Evita que la página se recargue
+      e.preventDefault(); 
 
-      // 1. Recopilar los datos del formulario
       const formData = new FormData(this);
       let conceptoFinal = formData.get("concepto");
       if (conceptoFinal === "Otro") {
         conceptoFinal = formData.get("conceptoPersonalizado");
-        formData.set("concepto", conceptoFinal); // Sobrescribir para mandar al script
+        formData.set("concepto", conceptoFinal); 
       }
 
-      // 2. Enviar datos a Google Sheets (en segundo plano)
+      // Enviar datos a Google Sheets
       fetch(SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
         body: formData
       }).then(() => {
-        console.log("Datos enviados a Google Sheets");
+        console.log("Enviado a la base de datos");
       }).catch(error => {
-        console.error("Error al enviar a Sheets:", error);
+        console.error("Error al enviar:", error);
       });
 
-      // 3. Crear el mensaje de WhatsApp
+      // Crear el mensaje de WhatsApp
       const telefono = formData.get("telefono");
       const alumno = formData.get("alumno");
       const ticket = formData.get("ticket");
       const monto = formData.get("monto");
       const cobrador = formData.get("cobrador");
 
-      const mensaje = `¡Hola, ${alumno}! 👑\n\nConfirmamos la recepción de tu pago.\n\n🎟️ *Ticket:* ${ticket}\n💰 *Monto:* $${monto}\n📝 *Concepto:* ${conceptoFinal}\n👤 *Atendido por:* ${cobrador}\n\n¡Gracias por ser parte de la academia!`;
+      const mensaje = `¡Hola, ${alumno}! 👑\n\nConfirmamos la recepción de tu pago.\n\n🎟️ *Ticket:* ${ticket}\n💰 *Monto:* $${monto}\n📝 *Concepto:* ${conceptoFinal}\n👤 *Atendido por:* ${cobrador}\n\n¡Gracias por ser parte de The Crown Dance Studio! ✨`;
 
-      // 4. Abrir WhatsApp para enviar el mensaje
       const whatsappUrl = `https://wa.me/52${telefono}?text=${encodeURIComponent(mensaje)}`;
       window.open(whatsappUrl, "_blank");
 
-      // Opcional: Limpiar el formulario después de enviar
+      // Limpiar formulario y generar un nuevo ticket para el siguiente cobro
       this.reset();
       document.getElementById("divPersonalizado").style.display = "none";
+      generarFolio();
     });
   </script>
 
