@@ -1,282 +1,114 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Pagos Extras | The Crown</title>
-    <style>
-        :root {
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
-            --text-color: #ffffff;
-            --gold: #C19A51;
-            --neon-pink: #FF66C4;
-            --green: #25D366;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .container {
-            background-color: var(--card-bg);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-            width: 100%;
-            max-width: 450px;
-            border: 1px solid rgba(193, 154, 81, 0.2);
-        }
-
-        h2 {
-            text-align: center;
-            color: var(--gold);
-            margin-bottom: 25px;
-            font-size: 24px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .hidden-group {
-            display: none;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 15px;
-            border-radius: 6px;
-            border-left: 3px solid var(--neon-pink);
-            margin-top: -10px;
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #b3b3b3;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid #333;
-            background-color: #2a2a2a;
-            color: #fff;
-            font-size: 16px;
-            box-sizing: border-box;
-            transition: border 0.3s;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 80px;
-            font-family: 'Arial', sans-serif;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--neon-pink);
-        }
-
-        button {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-        }
-
-        .btn-submit {
-            background-color: var(--gold);
-            color: #000;
-            margin-top: 10px;
-        }
-
-        .btn-submit:hover {
-            background-color: #dfb25e;
-            box-shadow: 0 0 12px rgba(193, 154, 81, 0.4);
-        }
-
-        .success-box {
-            display: none;
-            margin-top: 25px;
-            padding: 20px;
-            background-color: rgba(37, 211, 102, 0.1);
-            border: 1px solid var(--green);
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .success-box p {
-            margin: 0 0 15px 0;
-            color: #fff;
-            font-size: 15px;
-        }
-
-        .btn-whatsapp {
-            background-color: var(--green);
-            color: #fff;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            padding: 12px;
-            border-radius: 6px;
-            font-weight: bold;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .btn-whatsapp:hover {
-            background-color: #20ba5a;
-            box-shadow: 0 0 12px rgba(37, 211, 102, 0.4);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Pagos - The Crown</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 500px; margin: 20px auto; padding: 20px; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, select, textarea { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; }
+    button { margin-top: 20px; padding: 10px 15px; background-color: #25D366; color: white; border: none; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold; }
+    button:hover { background-color: #1DA851; }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Registro de Pagos 👑</h2>
-    <form id="paymentForm">
-        <div class="form-group">
-            <label for="alumno">Nombre del Alumno</label>
-            <input type="text" id="alumno" required placeholder="Ej. María López">
-        </div>
+  <h2>Registro de Pagos 📋</h2>
+  
+  <form id="formularioPago">
+    <label for="ticket">Número de Ticket:</label>
+    <input type="text" id="ticket" name="ticket" placeholder="Ej. T-001" required>
 
-        <div class="form-group">
-            <label for="telefono">Teléfono de WhatsApp (10 dígitos)</label>
-            <input type="tel" id="telefono" pattern="[0-9]{10}" required placeholder="Ej. 4421234567">
-        </div>
+    <label for="cobrador">¿Quién está cobrando?</label>
+    <select id="cobrador" name="cobrador" required>
+      <option value="" disabled selected>Selecciona tu nombre...</option>
+      <option value="Paula Alarcón">Paula Alarcón</option>
+      <option value="Dulce">Dulce</option>
+      <option value="David">David</option>
+      <option value="Paulina Hernández">Paulina Hernández</option>
+      <option value="Daniel Urquijo">Daniel Urquijo</option>
+    </select>
 
-        <div class="form-group">
-            <label for="concepto">Concepto de Pago</label>
-            <select id="concepto" required onchange="verificarConcepto(this.value)">
-                <option value="" disabled selected>Selecciona una opción</option>
-                <option value="Ensayos">Ensayos</option>
-                <option value="Boletos de Festival">Boletos de Festival</option>
-                <option value="Boletos Competencia">Boletos Competencia</option>
-                <option value="Inscripción a Competencia">Inscripción a Competencia</option>
-                <option value="Vestuario / Uniforme">Vestuario / Uniforme</option>
-                <option value="Clase Individual / Extra">Clase Individual / Extra</option>
-                <option value="Otro">Otro (Especificar nuevo concepto...)</option>
-            </select>
-        </div>
+    <label for="alumno">Nombre del Alumno:</label>
+    <input type="text" id="alumno" name="alumno" required>
 
-        <div class="form-group hidden-group" id="grupoNuevoConcepto">
-            <label for="conceptoPersonalizado">Escribe el nuevo concepto de pago</label>
-            <input type="text" id="conceptoPersonalizado" placeholder="Ej. Curso de Verano">
-        </div>
+    <label for="telefono">Teléfono del Alumno (10 dígitos):</label>
+    <input type="tel" id="telefono" name="telefono" placeholder="Ej. 4421234567" required>
 
-        <div class="form-group">
-            <label for="monto">Monto cobrado ($)</label>
-            <input type="number" id="monto" min="1" required placeholder="Ej. 350">
-        </div>
+    <label for="concepto">Concepto de Pago:</label>
+    <select id="concepto" name="concepto" onchange="mostrarPersonalizado()" required>
+      <option value="Mensualidad">Mensualidad</option>
+      <option value="Inscripción">Inscripción</option>
+      <option value="Ensayo Extra">Ensayo Extra</option>
+      <option value="Competencia">Competencia</option>
+      <option value="Otro">Otro</option>
+    </select>
 
-        <div class="form-group">
-            <label for="notas">Notas / Detalles especiales (Opcional)</label>
-            <textarea id="notas" placeholder="Ej. Pago en efectivo / Falta liquidar credencial"></textarea>
-        </div>
-
-        <button type="submit" class="btn-submit" id="btnSubmit">Registrar Pago</button>
-    </form>
-
-    <div class="success-box" id="successBox">
-        <p>✅ ¡Datos guardados en tu base de datos con éxito!</p>
-        <a href="#" target="_blank" class="btn-whatsapp" id="btnWhatsapp">
-            Enviar Recibo por WhatsApp 📱
-        </a>
+    <div id="divPersonalizado" style="display:none;">
+      <label for="conceptoPersonalizado">Especificar Concepto:</label>
+      <input type="text" id="conceptoPersonalizado" name="conceptoPersonalizado">
     </div>
-</div>
 
-<script>
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwGbmpeYXiJrUpa5i4QeQd2b-xYnHgBXsd56VJeHtcogNxCyzAI6kR5WvuUYgvVTUrA/exec";
+    <label for="monto">Monto ($):</label>
+    <input type="number" id="monto" name="monto" required>
 
-    // Función para mostrar u ocultar el campo de concepto personalizado
-    function verificarConcepto(valor) {
-        const grupoNuevo = document.getElementById('grupoNuevoConcepto');
-        const inputNuevo = document.getElementById('conceptoPersonalizado');
-        
-        if (valor === 'Otro') {
-            grupoNuevo.style.display = 'block';
-            inputNuevo.required = true;
-            inputNuevo.focus();
-        } else {
-            grupoNuevo.style.display = 'none';
-            inputNuevo.required = false;
-            inputNuevo.value = '';
-        }
+    <label for="notas">Notas (Opcional):</label>
+    <textarea id="notas" name="notas" rows="3"></textarea>
+
+    <button type="submit">Registrar y Enviar WhatsApp 📲</button>
+  </form>
+
+  <script>
+    // URL de tu Google Apps Script (¡Cámbiala por la tuya!)
+    const SCRIPT_URL = "TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI";
+
+    function mostrarPersonalizado() {
+      const concepto = document.getElementById("concepto").value;
+      const divPer = document.getElementById("divPersonalizado");
+      divPer.style.display = (concepto === "Otro") ? "block" : "none";
     }
 
-    document.getElementById('paymentForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const btnSubmit = document.getElementById('btnSubmit');
-        btnSubmit.innerText = "Guardando...";
-        btnSubmit.disabled = true;
+    document.getElementById("formularioPago").addEventListener("submit", function(e) {
+      e.preventDefault(); // Evita que la página se recargue
 
-        const alumno = document.getElementById('alumno').value.trim();
-        const telefono = document.getElementById('telefono').value.trim();
-        const concepto = document.getElementById('concepto').value;
-        const conceptoPersonalizado = document.getElementById('conceptoPersonalizado').value.trim();
-        const monto = document.getElementById('monto').value;
-        const notas = document.getElementById('notas').value.trim();
+      // 1. Recopilar los datos del formulario
+      const formData = new FormData(this);
+      let conceptoFinal = formData.get("concepto");
+      if (conceptoFinal === "Otro") {
+        conceptoFinal = formData.get("conceptoPersonalizado");
+        formData.set("concepto", conceptoFinal); // Sobrescribir para mandar al script
+      }
 
-        // Determinar cuál concepto se va a enviar
-        const conceptoFinal = concepto === 'Otro' ? conceptoPersonalizado : concepto;
+      // 2. Enviar datos a Google Sheets (en segundo plano)
+      fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: formData
+      }).then(() => {
+        console.log("Datos enviados a Google Sheets");
+      }).catch(error => {
+        console.error("Error al enviar a Sheets:", error);
+      });
 
-        const formData = new URLSearchParams();
-        formData.append('alumno', alumno);
-        formData.append('telefono', telefono);
-        formData.append('concepto', concepto);
-        formData.append('conceptoPersonalizado', conceptoPersonalizado);
-        formData.append('monto', monto);
-        formData.append('notas', notas);
+      // 3. Crear el mensaje de WhatsApp
+      const telefono = formData.get("telefono");
+      const alumno = formData.get("alumno");
+      const ticket = formData.get("ticket");
+      const monto = formData.get("monto");
+      const cobrador = formData.get("cobrador");
 
-        fetch(WEB_APP_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            body: formData
-        }).then(() => {
-            // Construcción del mensaje de WhatsApp con formato y emojis llamativos
-            let mensaje = `¡Hola *${alumno}*! 👋 Confirmamos el recibo de tu pago en *The Crown Dance Studio* 👑💃\n\n` +
-                            `✨ *Detalles de tu comprobante:* \n` +
-                            `▪️ *Concepto:* ${conceptoFinal} 📝\n` +
-                            `▪️ *Monto:* $${monto} MXN 💵\n`;
-            
-            // Si la recepcionista escribió una nota, se añade de forma limpia al WhatsApp
-            if (notas !== "") {
-                mensaje += `▪️ *Notas:* ${notas} 📌\n`;
-            }
-            
-            mensaje += `\n¡Tu registro ha quedado guardado! Muchas gracias por tu pago. 💜✨`;
-            
-            const whatsappUrl = `https://wa.me/52${telefono}?text=${encodeURIComponent(mensaje)}`;
-            
-            document.getElementById('btnWhatsapp').href = whatsappUrl;
-            document.getElementById('successBox').style.display = 'block';
-            btnSubmit.innerText = "Registrado";
-        }).catch(err => {
-            alert("Hubo un error al conectar con el servidor. Revisa la configuración.");
-            btnSubmit.innerText = "Registrar Pago";
-            btnSubmit.disabled = false;
-        });
+      const mensaje = `¡Hola, ${alumno}! 👑\n\nConfirmamos la recepción de tu pago.\n\n🎟️ *Ticket:* ${ticket}\n💰 *Monto:* $${monto}\n📝 *Concepto:* ${conceptoFinal}\n👤 *Atendido por:* ${cobrador}\n\n¡Gracias por ser parte de la academia!`;
+
+      // 4. Abrir WhatsApp para enviar el mensaje
+      const whatsappUrl = `https://wa.me/52${telefono}?text=${encodeURIComponent(mensaje)}`;
+      window.open(whatsappUrl, "_blank");
+
+      // Opcional: Limpiar el formulario después de enviar
+      this.reset();
+      document.getElementById("divPersonalizado").style.display = "none";
     });
-</script>
+  </script>
 
 </body>
 </html>
