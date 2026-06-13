@@ -110,18 +110,19 @@
         input:focus, select:focus { outline: none; border-color: var(--rosa-neon); background: rgba(255,255,255,0.1); box-shadow: 0 0 15px var(--rosa-glow); }
         option { background: var(--apple-dark); color: #fff; }
 
-        /* --- LA BAILARINA QUE TE MIRA 👀 --- */
+        /* --- LA BAILARINA QUE TE MIRA 👀 (CORREGIDA) --- */
         .dancer-watcher {
             position: relative;
-            width: 180px; /* Tamaño del personaje */
-            margin: 10px auto -20px auto; /* Lo metemos un poco encima del botón */
+            width: 160px; /* Ajustado para mejor proporción */
+            margin: 10px auto 25px auto; /* SE ELIMINÓ EL MARGEN NEGATIVO para no tapar el botón */
             z-index: 10;
         }
 
         .dancer-face {
             width: 100%;
             display: block;
-            pointer-events: none; /* Para que el click traspase la imagen */
+            pointer-events: none;
+            /* La imagen ahora es sólida y no causará transparencias oscuras */
         }
 
         /* Contenedores de los ojos invisibles para ubicar las pupilas */
@@ -129,21 +130,22 @@
             position: absolute;
             width: 22%;
             height: 18%;
+            z-index: 11;
         }
-        /* Ajusta estos valores de 'top' y 'left' si las pupilas no quedan exactamente en el centro del espacio blanco */
-        .eye-left { top: 58%; left: 30%; }
-        .eye-right { top: 58%; left: 59%; }
+        /* Coordenadas recalibradas para centrar perfectamente en la nueva imagen */
+        .eye-left { top: 57%; left: 30%; }
+        .eye-right { top: 57%; left: 59%; }
 
         .pupil {
             width: 14px;
             height: 14px;
-            background-color: #4A2511; /* Marrón oscuro */
+            background-color: #3b1d0d; /* Marrón oscuro más natural y sólido */
             border-radius: 50%;
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            transition: transform 0.05s linear; /* Movimiento fluido pero responsivo */
-            box-shadow: inset -2px -2px 4px rgba(0,0,0,0.5); /* Sombra para darle volumen */
+            transition: transform 0.05s linear;
+            box-shadow: inset -2px -2px 4px rgba(0,0,0,0.6); 
         }
         /* Brillo de la pupila para más vida */
         .pupil::after {
@@ -151,7 +153,7 @@
             position: absolute;
             top: 2px; left: 2px;
             width: 4px; height: 4px;
-            background: rgba(255,255,255,0.8);
+            background: rgba(255,255,255,0.9);
             border-radius: 50%;
         }
 
@@ -269,7 +271,6 @@
             const angulo = Math.atan2(mouseY - eyeCenterY, mouseX - eyeCenterX);
             
             // Limitamos cuánto puede moverse la pupila para que no se salga del globo ocular
-            // Si sientes que se sale de la parte blanca, reduce este número (ej. a 5 o 4)
             const radioMaximoMovimiento = 6; 
             
             const distanciaMouse = Math.hypot(mouseX - eyeCenterX, mouseY - eyeCenterY);
