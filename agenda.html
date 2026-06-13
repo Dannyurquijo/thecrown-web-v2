@@ -110,36 +110,52 @@
         input:focus, select:focus { outline: none; border-color: var(--rosa-neon); background: rgba(255,255,255,0.1); box-shadow: 0 0 15px var(--rosa-glow); }
         option { background: var(--apple-dark); color: #fff; }
 
-        /* --- LA BAILARINA QUE TE MIRA 👀 (CORREGIDA) --- */
+        /* --- LA BAILARINA QUE TE MIRA 👀 --- */
         .dancer-watcher {
             position: relative;
-            width: 160px; /* Ajustado para mejor proporción */
-            margin: 10px auto 25px auto; /* SE ELIMINÓ EL MARGEN NEGATIVO para no tapar el botón */
+            width: 160px;
+            margin: 10px auto 25px auto;
             z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 🌟 EL HALO DE LUZ (SPOTLIGHT) 🌟 */
+        .dancer-watcher::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150px; 
+            height: 150px;
+            transform: translate(-50%, -50%);
+            /* Un degradado radial suave para simular la luz de fondo */
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(193, 154, 81, 0.15) 30%, transparent 70%);
+            filter: blur(15px);
+            z-index: -1; /* Asegura que la luz quede detrás de la imagen de la bailarina */
+            border-radius: 50%;
         }
 
         .dancer-face {
             width: 100%;
             display: block;
             pointer-events: none;
-            /* La imagen ahora es sólida y no causará transparencias oscuras */
         }
 
-        /* Contenedores de los ojos invisibles para ubicar las pupilas */
         .eye-container {
             position: absolute;
             width: 22%;
             height: 18%;
             z-index: 11;
         }
-        /* Coordenadas recalibradas para centrar perfectamente en la nueva imagen */
         .eye-left { top: 57%; left: 30%; }
         .eye-right { top: 57%; left: 59%; }
 
         .pupil {
             width: 14px;
             height: 14px;
-            background-color: #3b1d0d; /* Marrón oscuro más natural y sólido */
+            background-color: #3b1d0d;
             border-radius: 50%;
             position: absolute;
             top: 50%; left: 50%;
@@ -147,7 +163,6 @@
             transition: transform 0.05s linear;
             box-shadow: inset -2px -2px 4px rgba(0,0,0,0.6); 
         }
-        /* Brillo de la pupila para más vida */
         .pupil::after {
             content: '';
             position: absolute;
@@ -262,26 +277,21 @@
         });
 
         function moverPupila(pupil, mouseX, mouseY) {
-            // Obtenemos el contenedor del ojo para saber dónde está su centro en la pantalla
             const rect = pupil.parentElement.getBoundingClientRect();
             const eyeCenterX = rect.left + rect.width / 2;
             const eyeCenterY = rect.top + rect.height / 2;
 
-            // Calculamos el ángulo hacia el ratón
             const angulo = Math.atan2(mouseY - eyeCenterY, mouseX - eyeCenterX);
             
-            // Limitamos cuánto puede moverse la pupila para que no se salga del globo ocular
             const radioMaximoMovimiento = 6; 
             
             const distanciaMouse = Math.hypot(mouseX - eyeCenterX, mouseY - eyeCenterY);
             
-            // Suavizamos el movimiento cuando el mouse está cerca de la cara
             const distanciaFinal = Math.min(radioMaximoMovimiento, distanciaMouse / 15);
 
             const moveX = Math.cos(angulo) * distanciaFinal;
             const moveY = Math.sin(angulo) * distanciaFinal;
 
-            // Aplicamos el movimiento respetando el centrado original
             pupil.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
         }
 
