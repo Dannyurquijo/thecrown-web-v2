@@ -110,72 +110,8 @@
         input:focus, select:focus { outline: none; border-color: var(--rosa-neon); background: rgba(255,255,255,0.1); box-shadow: 0 0 15px var(--rosa-glow); }
         option { background: var(--apple-dark); color: #fff; }
 
-        /* --- LA BAILARINA QUE TE MIRA 👀 --- */
-        .dancer-watcher {
-            position: relative;
-            width: 160px;
-            margin: 10px auto 25px auto;
-            z-index: 10;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* 🌟 EL HALO DE LUZ (SPOTLIGHT) 🌟 */
-        .dancer-watcher::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 150px; 
-            height: 150px;
-            transform: translate(-50%, -50%);
-            /* Un degradado radial suave para simular la luz de fondo */
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(193, 154, 81, 0.15) 30%, transparent 70%);
-            filter: blur(15px);
-            z-index: -1; /* Asegura que la luz quede detrás de la imagen de la bailarina */
-            border-radius: 50%;
-        }
-
-        .dancer-face {
-            width: 100%;
-            display: block;
-            pointer-events: none;
-        }
-
-        .eye-container {
-            position: absolute;
-            width: 22%;
-            height: 18%;
-            z-index: 11;
-        }
-        .eye-left { top: 57%; left: 30%; }
-        .eye-right { top: 57%; left: 59%; }
-
-        .pupil {
-            width: 14px;
-            height: 14px;
-            background-color: #3b1d0d;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            transition: transform 0.05s linear;
-            box-shadow: inset -2px -2px 4px rgba(0,0,0,0.6); 
-        }
-        .pupil::after {
-            content: '';
-            position: absolute;
-            top: 2px; left: 2px;
-            width: 4px; height: 4px;
-            background: rgba(255,255,255,0.9);
-            border-radius: 50%;
-        }
-
         /* --- BOTÓN DE ENVÍO --- */
         .submit-btn {
-            position: relative;
-            z-index: 5;
             width: 100%; padding: 18px;
             background: linear-gradient(135deg, var(--rosa-neon), #ff3399);
             color: white; border: none; border-radius: 20px;
@@ -183,12 +119,12 @@
             text-transform: uppercase; cursor: pointer;
             box-shadow: 0 10px 25px var(--rosa-glow);
             transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            margin-top: 10px;
         }
         .submit-btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 35px var(--rosa-glow); }
 
         footer { padding: 30px; text-align: center; color: var(--text-secondary); font-size: 0.9rem; border-top: 1px solid var(--apple-border); }
 
-        /* --- MÓVILES --- */
         @media (max-width: 600px) {
             .glass-card { padding: 40px 20px; border-radius: 30px; }
             .navbar { padding: 10px 15px; border-radius: 25px; width: 90%; top: 10px;}
@@ -241,18 +177,6 @@
                     </select>
                 </div>
 
-                <div class="dancer-watcher">
-                    <img src="bailarina_thecrowndancestudio.svg" class="dancer-face" alt="Bailarina The Crown">
-                    
-                    <div class="eye-container eye-left">
-                        <div class="pupil" id="pupil-left"></div>
-                    </div>
-                    
-                    <div class="eye-container eye-right">
-                        <div class="pupil" id="pupil-right"></div>
-                    </div>
-                </div>
-
                 <button type="submit" class="submit-btn">Agendar Clase</button>
             </form>
         </div>
@@ -263,39 +187,6 @@
     </footer>
 
     <script>
-        // --- LÓGICA DE LA MIRADA SEGUIDORA ---
-        const pupilLeft = document.getElementById('pupil-left');
-        const pupilRight = document.getElementById('pupil-right');
-
-        // Escuchamos el movimiento del ratón en toda la pantalla
-        document.addEventListener('mousemove', (e) => {
-            const mouseX = e.clientX;
-            const mouseY = e.clientY;
-            
-            moverPupila(pupilLeft, mouseX, mouseY);
-            moverPupila(pupilRight, mouseX, mouseY);
-        });
-
-        function moverPupila(pupil, mouseX, mouseY) {
-            const rect = pupil.parentElement.getBoundingClientRect();
-            const eyeCenterX = rect.left + rect.width / 2;
-            const eyeCenterY = rect.top + rect.height / 2;
-
-            const angulo = Math.atan2(mouseY - eyeCenterY, mouseX - eyeCenterX);
-            
-            const radioMaximoMovimiento = 6; 
-            
-            const distanciaMouse = Math.hypot(mouseX - eyeCenterX, mouseY - eyeCenterY);
-            
-            const distanciaFinal = Math.min(radioMaximoMovimiento, distanciaMouse / 15);
-
-            const moveX = Math.cos(angulo) * distanciaFinal;
-            const moveY = Math.sin(angulo) * distanciaFinal;
-
-            pupil.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
-        }
-
-        // Simulación de envío
         document.getElementById('agendaForm').addEventListener('submit', function(e) {
             e.preventDefault();
             alert('¡Solicitud recibida con éxito! Te contactaremos por WhatsApp. 👑');
