@@ -120,7 +120,7 @@
         }
         .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 25px var(--rosa-glow); }
 
-        /* --- GALLERY HERO HERO --- */
+        /* --- GALLERY HERO --- */
         .gallery-hero {
             padding-top: 160px;
             padding-bottom: 40px;
@@ -140,7 +140,7 @@
             margin-top: 5px; color: var(--dorado); font-weight: 700;
         }
 
-        /* --- FILTROS DE CATEGORÍAS (Glass Pills) --- */
+        /* --- FILTROS DE CATEGORÍAS --- */
         .filter-container {
             display: flex;
             justify-content: center;
@@ -173,22 +173,23 @@
             box-shadow: 0 5px 15px var(--rosa-glow);
         }
 
-        /* --- CUADRÍCULA DE MEDIOS (Protección total de visualización) --- */
+        /* --- SECCIÓN GALERÍA --- */
         .gallery-section {
             padding: 0 5% 100px 5%;
             max-width: 1300px;
             margin: 0 auto;
             position: relative;
-            z-index: 1; /* Asegura estar sobre las capas de fondo del body */
+            z-index: 1;
         }
         
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
+            position: relative;
+            z-index: 2;
         }
 
-        /* Tarjeta contenedora de cristal */
         .gallery-item {
             background: var(--apple-surface);
             backdrop-filter: blur(20px);
@@ -200,24 +201,28 @@
             transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             display: flex;
             flex-direction: column;
+            position: relative;
+            z-index: 3;
         }
         
-        /* Blindaje extra para que la foto/video nunca se opaque ni tape */
+        /* CORRECCIÓN CRÍTICA DE CAPAS PARA CONTENEDOR MULTIMEDIA */
         .media-wrapper {
             position: relative;
             width: 100%;
             border-radius: 16px;
             overflow: hidden;
-            background: #000;
-            /* Forzar relación de aspecto limpia para fotos y videos */
+            background: #050505;
             aspect-ratio: 4 / 3; 
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 2; /* Siempre por encima del fondo de la tarjeta */
+            z-index: 4; /* Obliga al contenedor a estar al frente */
         }
 
+        /* Forzamos que las fotos y videos ignoren capas de cristal oscuras */
         .media-wrapper img, .media-wrapper video {
+            position: relative;
+            z-index: 5; /* Máxima prioridad visual dentro de su tarjeta */
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -225,10 +230,11 @@
             transition: transform 0.5s ease;
         }
 
-        /* Detalles informativos al pie del cristal */
         .item-info {
             padding: 15px 8px 5px 8px;
             text-align: left;
+            position: relative;
+            z-index: 4;
         }
         .item-info h3 {
             font-family: 'League Spartan', sans-serif;
@@ -242,7 +248,6 @@
             color: var(--text-secondary);
         }
 
-        /* Animación Hover Premium */
         .gallery-item:hover {
             border-color: rgba(255, 102, 196, 0.5);
             transform: translateY(-8px);
@@ -265,7 +270,6 @@
 
         footer { background: transparent; padding: 40px; color: var(--text-secondary); font-size: 0.9rem; text-align: center; border-top: 1px solid var(--apple-border); }
 
-        /* --- ANIMACIÓN FILTROS (JavaScript Clases) --- */
         .gallery-item.hidden {
             display: none;
         }
@@ -314,29 +318,95 @@
             
             <div class="gallery-item urbano">
                 <div class="media-wrapper">
-                    <video controls playsinline poster="poster_urbano.jpg" preload="metadata">
-                        <source src="video_urbano.mp4" type="video/mp4">
+                    <video controls playsinline preload="metadata">
+                        <source src="Hip_Hop.mp4" type="video/mp4">
                     </video>
                 </div>
                 <div class="item-info">
-                    <h3>Clase de Hip Hop</h3>
+                    <h3>Hip Hop Session</h3>
                     <p>Categoría: Urbano</p>
                 </div>
             </div>
 
             <div class="gallery-item tecnica">
                 <div class="media-wrapper">
-                    <img src="imagen_ballet.jpg" alt="Clase de Ballet en Querétaro - The Crown">
+                    <img src="Ballet.jpg" alt="Clase de Ballet - The Crown">
                 </div>
                 <div class="item-info">
-                    <h3>Línea y Técnica</h3>
-                    <p>Categoría: Ballet / Contemporáneo</p>
+                    <h3>Clase de Ballet</h3>
+                    <p>Categoría: Técnica</p>
                 </div>
             </div>
 
             <div class="gallery-item kids">
                 <div class="media-wrapper">
-                    <img src="imagen_kids.jpg" alt="Alumnos infantiles de Jazz Kids en Corregidora">
+                    <img src="kids.jpg" alt="Alumnos infantiles en The Crown">
+                </div>
+                <div class="item-info">
+                    <h3>Crown Kids Team</h3>
+                    <p>Categoría: Kids</p>
+                </div>
+            </div>
+
+            <div class="gallery-item eventos">
+                <div class="media-wrapper">
+                    <video controls playsinline poster="logo_corona.png" preload="metadata">
+                        <source src="festivales.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="item-info">
+                    <h3>Gran Festival Anual</h3>
+                    <p>Categoría: Eventos / Escenario</p>
+                </div>
+            </div>
+
+            <div class="gallery-item urbano">
+                <div class="media-wrapper">
+                    <video controls playsinline preload="metadata">
+                        <source src="Heels.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="item-info">
+                    <h3>Heels Choreography</h3>
+                    <p>Categoría: Urbano</p>
+                </div>
+            </div>
+
+            <div class="gallery-item tecnica">
+                <div class="media-wrapper">
+                    <video controls playsinline preload="metadata">
+                        <source src="Contemporaneo.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="item-info">
+                    <h3>Danza Contemporánea</h3>
+                    <p>Categoría: Técnica</p>
+                </div>
+            </div>
+
+            <div class="gallery-item kids">
+                <div class="media-wrapper">
+                    <img src="hiphopkids.jpg" alt="Clase de Hip Hop Infantil">
+                </div>
+                <div class="item-info">
+                    <h3>Hip Hop Kids</h3>
+                    <p>Categoría: Kids</p>
+                </div>
+            </div>
+
+            <div class="gallery-item tecnica">
+                <div class="media-wrapper">
+                    <img src="jazz.jpg" alt="Clase de Jazz Dance">
+                </div>
+                <div class="item-info">
+                    <h3>Jazz Técnico</h3>
+                    <p>Categoría: Técnica</p>
+                </div>
+            </div>
+
+            <div class="gallery-item kids">
+                <div class="media-wrapper">
+                    <img src="jazzkids.jpg" alt="Alumnos de Jazz Kids">
                 </div>
                 <div class="item-info">
                     <h3>Jazz Kids Rehearsal</h3>
@@ -344,35 +414,55 @@
                 </div>
             </div>
 
-            <div class="gallery-item eventos">
+            <div class="gallery-item urbano">
                 <div class="media-wrapper">
-                    <video controls playsinline poster="poster_festival.jpg" preload="metadata">
-                        <source src="video_festival.mp4" type="video/mp4">
+                    <video controls playsinline preload="metadata">
+                        <source src="Reggeton.mp4" type="video/mp4">
                     </video>
                 </div>
                 <div class="item-info">
-                    <h3>Producción Festival 2025</h3>
-                    <p>Categoría: Eventos / Escenario</p>
-                </div>
-            </div>
-
-            <div class="gallery-item urbano">
-                <div class="media-wrapper">
-                    <img src="imagen_heels.jpg" alt="Clase de Heels en The Crown Dance Studio">
-                </div>
-                <div class="item-info">
-                    <h3>Heels Class</h3>
+                    <h3>Reggaetón Class</h3>
                     <p>Categoría: Urbano</p>
                 </div>
             </div>
 
             <div class="gallery-item tecnica">
                 <div class="media-wrapper">
-                    <img src="imagen_aerea.jpg" alt="Clase de Danza Aérea en Telas - Corregidora">
+                    <img src="Acro.jpg" alt="Clase de Acrobacia y balances">
                 </div>
                 <div class="item-info">
-                    <h3>Danza Aérea en Telas</h3>
-                    <p>Categoría: Técnica / Complementarios</p>
+                    <h3>Acrobacia & Balances</h3>
+                    <p>Categoría: Técnica</p>
+                </div>
+            </div>
+
+            <div class="gallery-item kids">
+                <div class="media-wrapper">
+                    <img src="aereokids.jpg" alt="Danza aérea para niños">
+                </div>
+                <div class="item-info">
+                    <h3>Aéreo Kids</h3>
+                    <p>Categoría: Kids</p>
+                </div>
+            </div>
+
+            <div class="gallery-item tecnica">
+                <div class="media-wrapper">
+                    <img src="danzaaerea.jpg" alt="Clase de danza aérea en telas">
+                </div>
+                <div class="item-info">
+                    <h3>Danza Aérea (Telas)</h3>
+                    <p>Categoría: Técnica</p>
+                </div>
+            </div>
+
+            <div class="gallery-item kids">
+                <div class="media-wrapper">
+                    <img src="kpopkids.jpg" alt="Clase de Kpop infantil">
+                </div>
+                <div class="item-info">
+                    <h3>Kpop Kids Team</h3>
+                    <p>Categoría: Kids</p>
                 </div>
             </div>
 
@@ -392,12 +482,13 @@
     <script>
         // LÓGICA INTERACTIVA DE FILTROS
         function filterGallery(category) {
-            // Actualizar estado del botón activo
             const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
 
-            // Filtrar las tarjetas
             const items = document.querySelectorAll('.gallery-item');
             items.forEach(item => {
                 if (category === 'all' || item.classList.contains(category)) {
