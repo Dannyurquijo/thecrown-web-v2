@@ -7,6 +7,8 @@
     <title>Agendar Clase | The Crown Dance Studio</title>
     <meta name="description" content="Agenda tu clase de prueba en The Crown Dance Studio. Únete a nuestra comunidad de baile en Corregidora, Querétaro.">
     
+    <link rel="icon" type="image/png" href="logo_corona.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700;900&display=swap" rel="stylesheet">
@@ -62,6 +64,20 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .nav-logo img { height: 40px; width: auto; transition: 0.3s; }
+        
+        /* --- BOTÓN HAMBURGUESA --- */
+        .hamburger {
+            display: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .hamburger:hover {
+            color: var(--rosa-neon);
+        }
+
+        .nav-links { display: flex; align-items: center; }
         .nav-links a {
             color: var(--text-primary); text-decoration: none; margin-left: 20px;
             font-size: 0.85rem; text-transform: uppercase; font-weight: 700; font-family: 'League Spartan';
@@ -125,10 +141,43 @@
 
         footer { padding: 30px; text-align: center; color: var(--text-secondary); font-size: 0.9rem; border-top: 1px solid var(--apple-border); }
 
+        /* --- MÓVILES --- */
         @media (max-width: 600px) {
             .glass-card { padding: 40px 20px; border-radius: 30px; }
-            .navbar { padding: 10px 15px; border-radius: 25px; width: 90%; top: 10px;}
-            .nav-links { display: none; }
+            .navbar { flex-wrap: wrap; justify-content: space-between; align-items: center; padding: 10px 15px; border-radius: 25px; width: 90%; top: 10px;}
+            
+            .hamburger { display: block; }
+
+            .nav-links {
+                display: flex;
+                position: absolute;
+                top: 65px;
+                right: 0;
+                width: 100%;
+                background: rgba(15, 15, 15, 0.95);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid var(--apple-border);
+                border-radius: 20px;
+                flex-direction: column;
+                align-items: center;
+                padding: 25px 0;
+                gap: 25px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+                opacity: 0;
+                transform: translateY(-15px);
+                pointer-events: none;
+                transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            }
+
+            .nav-links.active {
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: all;
+            }
+
+            .nav-links a { margin-left: 0; font-size: 1.1rem; }
+            
             h1 { font-size: 2.5rem; }
         }
     </style>
@@ -137,6 +186,11 @@
 
     <nav class="navbar">
         <a href="index.html" class="nav-logo"><img src="logo.png" alt="The Crown Logo"></a>
+        
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+
         <div class="nav-links">
             <a href="index.html">Inicio</a>
             <a href="galeria.html">Galería</a>
@@ -187,6 +241,37 @@
     </footer>
 
     <script>
+        // --- LÓGICA DEL MENÚ HAMBURGUESA ---
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                
+                const icon = hamburger.querySelector('i');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            // Cierra el menú al dar clic en un enlace
+            const links = navLinks.querySelectorAll('a, button');
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    const icon = hamburger.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+        }
+
+        // --- SIMULACIÓN FORMULARIO ---
         document.getElementById('agendaForm').addEventListener('submit', function(e) {
             e.preventDefault();
             alert('¡Solicitud recibida con éxito! Te contactaremos por WhatsApp. 👑');
