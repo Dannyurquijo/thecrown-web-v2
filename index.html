@@ -8,6 +8,8 @@
     <meta name="description" content="Aprende a bailar en The Crown Dance Studio en Plaza Real Santa Lucía, Corregidora, Querétaro. Clases de Hip Hop, Ballet, Jazz, Reggaetón, Heels y Baby Ballet.">
     <meta name="robots" content="index, follow">
     
+    <link rel="icon" type="image/png" href="logo_corona.png">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700;900&display=swap" rel="stylesheet">
@@ -96,7 +98,7 @@
             border-radius: 40px;
             padding: 10px 25px; 
             z-index: 1000;
-            display: flex; justify-content: space-between; align-items: center;
+            display: flex; justify-between; align-items: center;
             transition: top 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
@@ -106,7 +108,7 @@
         .nav-logo img { height: 40px; width: auto; transition: 0.3s; }
         .nav-logo img:hover { transform: scale(1.05); }
 
-        /* --- ESTILO DEL BOTÓN HAMBURGUESA (Oculto en PC) --- */
+        /* --- BOTÓN HAMBURGUESA --- */
         .hamburger {
             display: none;
             color: var(--text-primary);
@@ -138,23 +140,20 @@
             position: relative; height: 100vh;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; overflow: hidden;
-            z-index: 1; /* Elevamos el header completo por encima del fondo */
+            z-index: 1;
         }
         
-        /* Capa 1: El Video */
         .video-bg { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
             object-fit: cover; z-index: 1; opacity: 0.7;
         }
         
-        /* Capa 2: El filtro oscuro sobre el video */
         .video-overlay { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
             background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 80%, #000 100%); 
             z-index: 2; 
         }
 
-        /* Capa 3: El texto y los botones */
         .header-content {
             position: relative;
             z-index: 3;
@@ -273,14 +272,12 @@
 
         footer { background: transparent; padding: 40px; color: var(--text-secondary); font-size: 0.9rem; text-align: center; border-top: 1px solid var(--apple-border); }
 
-        /* --- MÓVILES --- */
+        /* --- MÓVILES Y TABLETS --- */
         @media (max-width: 768px) {
             .navbar { flex-wrap: wrap; justify-content: space-between; align-items: center; padding: 15px 20px; border-radius: 25px; width: 90%; top: 10px; }
             
-            /* Mostrar botón hamburguesa */
             .hamburger { display: block; }
             
-            /* Panel desplegable de cristal */
             .nav-links {
                 position: absolute;
                 top: 70px;
@@ -382,22 +379,22 @@
     <section id="disciplinas">
         <h2 class="section-title"><span class="es">Clases</span><span class="en">Classes</span></h2>
         <div class="classes-grid">
-            <a href="galeria.html" class="card">
+            <a href="galeria.html#urbano" class="card">
                 <i class="fas fa-street-view"></i>
                 <h3>URBANO</h3>
                 <p>Hip Hop, Reggaetón & Heels.</p>
             </a>
-            <a href="galeria.html" class="card">
+            <a href="galeria.html#tecnica" class="card">
                 <i class="fas fa-star"></i>
                 <h3>TÉCNICA</h3>
                 <p>Ballet, Contemporáneo, Jazz & Acrobacia.</p>
             </a>
-            <a href="galeria.html" class="card">
+            <a href="galeria.html#kids" class="card">
                 <i class="fas fa-child"></i>
                 <h3>KIDS</h3>
                 <p>Baby Ballet, Jazz Kids & Hip Hop Kids.</p>
             </a>
-            <a href="galeria.html" class="card">
+            <a href="galeria.html#tecnica" class="card">
                 <i class="fas fa-wind"></i>
                 <h3>EXTRA</h3>
                 <p>Saltos, Flexibilidad y Danza Aérea.</p>
@@ -491,7 +488,6 @@
         const navLinks = document.querySelector('.nav-links');
 
         if (hamburger) {
-            // Abrir y cerrar con el botón
             hamburger.addEventListener('click', () => {
                 navLinks.classList.toggle('active');
                 
@@ -505,7 +501,6 @@
                 }
             });
 
-            // Cerrar menú automáticamente al hacer clic en un enlace o botón
             const links = navLinks.querySelectorAll('a, button');
             links.forEach(link => {
                 link.addEventListener('click', () => {
