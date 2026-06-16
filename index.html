@@ -48,34 +48,22 @@
             line-height: 1.6;
         }
 
-        /* LUZ AMBIENTAL DE FONDO (Ambient Glow) */
+        /* LUZ AMBIENTAL DE FONDO */
         body::before {
-            content: '';
-            position: fixed;
-            top: -10%; left: -10%;
-            width: 50vw; height: 50vw;
-            background: radial-gradient(circle, var(--rosa-glow) 0%, transparent 70%);
-            z-index: -3;
-            pointer-events: none;
-            filter: blur(80px);
+            content: ''; position: fixed; top: -10%; left: -10%;
+            width: 50vw; height: 50vw; background: radial-gradient(circle, var(--rosa-glow) 0%, transparent 70%);
+            z-index: -3; pointer-events: none; filter: blur(80px);
         }
         body::after {
-            content: '';
-            position: fixed;
-            bottom: -20%; right: -10%;
-            width: 60vw; height: 60vw;
-            background: radial-gradient(circle, rgba(193, 154, 81, 0.15) 0%, transparent 70%);
-            z-index: -3;
-            pointer-events: none;
-            filter: blur(100px);
+            content: ''; position: fixed; bottom: -20%; right: -10%;
+            width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(193, 154, 81, 0.15) 0%, transparent 70%);
+            z-index: -3; pointer-events: none; filter: blur(100px);
         }
 
         /* --- CLASES IDIOMA --- */
         .en { display: none; }
         .lang-btn {
-            background: rgba(255,255,255,0.05); 
-            border: 1px solid var(--apple-border); 
-            color: var(--text-primary);
+            background: rgba(255,255,255,0.05); border: 1px solid var(--apple-border); color: var(--text-primary);
             padding: 8px 15px; cursor: pointer; font-family: 'League Spartan', sans-serif;
             font-weight: bold; font-size: 0.8rem; margin-left: 15px; 
             border-radius: 20px; transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -83,22 +71,15 @@
         }
         .lang-btn:hover { background: var(--rosa-neon); color: #000; border-color: var(--rosa-neon); }
 
-        /* --- NAV FLOTANTE (Pill Style) --- */
+        /* --- NAV FLOTANTE (CORREGIDO justify-content) --- */
         .navbar {
-            position: fixed; 
-            top: 20px; 
-            left: 50%; 
-            transform: translateX(-50%);
-            width: 95%; 
-            max-width: 1200px;
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            width: 95%; max-width: 1200px;
             background: rgba(15, 15, 15, 0.6);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border: 1px solid var(--apple-border);
-            border-radius: 40px;
-            padding: 10px 25px; 
+            backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border: 1px solid var(--apple-border); border-radius: 40px; padding: 10px 25px; 
             z-index: 1000;
-            display: flex; justify-between; align-items: center;
+            display: flex; justify-content: space-between; align-items: center; /* <-- Corregido aquí */
             transition: top 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
@@ -110,15 +91,10 @@
 
         /* --- BOTÓN HAMBURGUESA --- */
         .hamburger {
-            display: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: 0.3s;
+            display: none; color: var(--text-primary); font-size: 1.5rem;
+            cursor: pointer; transition: 0.3s;
         }
-        .hamburger:hover {
-            color: var(--rosa-neon);
-        }
+        .hamburger:hover { color: var(--rosa-neon); }
 
         .nav-links { display: flex; align-items: center; }
         .nav-links a {
@@ -139,48 +115,22 @@
         header {
             position: relative; height: 100vh;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; overflow: hidden;
-            z-index: 1;
+            text-align: center; overflow: hidden; z-index: 1;
         }
-        
-        .video-bg { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            object-fit: cover; z-index: 1; opacity: 0.7;
-        }
-        
-        .video-overlay { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 80%, #000 100%); 
-            z-index: 2; 
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 3;
-        }
+        .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; opacity: 0.7; }
+        .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 80%, #000 100%); z-index: 2; }
+        .header-content { position: relative; z-index: 3; }
         
         .brand-name {
-            font-family: 'League Spartan', sans-serif; 
-            font-weight: 900; font-size: 6.5rem; margin: 0; 
+            font-family: 'League Spartan', sans-serif; font-weight: 900; font-size: 6.5rem; margin: 0; 
             letter-spacing: -1px; text-transform: uppercase;
             background: linear-gradient(to bottom right, #fff, #a8a8a8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 4px 20px rgba(255,255,255,0.1));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 20px rgba(255,255,255,0.1));
         }
-        
-        .tagline { 
-            font-family: 'League Spartan', sans-serif;
-            font-size: 1.5rem; letter-spacing: 8px; text-transform: uppercase; 
-            margin-top: 5px; color: var(--dorado); font-weight: 700;
-        }
-        
+        .tagline { font-family: 'League Spartan', sans-serif; font-size: 1.5rem; letter-spacing: 8px; text-transform: uppercase; margin-top: 5px; color: var(--dorado); font-weight: 700; }
         .main-btn {
-            margin-top: 40px; padding: 15px 40px; 
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,102,196,0.5);
-            color: var(--text-primary); text-decoration: none; font-weight: bold;
+            margin-top: 40px; padding: 15px 40px; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,102,196,0.5); color: var(--text-primary); text-decoration: none; font-weight: bold;
             border-radius: 30px; letter-spacing: 1px; transition: 0.4s; cursor: pointer; display: inline-block;
             font-family: 'League Spartan', sans-serif;
         }
@@ -188,62 +138,22 @@
 
         /* --- SECCIONES --- */
         section { padding: 100px 5%; text-align: center; position: relative; z-index: 1;}
-        
-        .section-title {
-            color: #fff; 
-            font-family: 'League Spartan', sans-serif;
-            font-size: 3rem; margin-bottom: 50px; display: inline-block;
-            text-transform: uppercase; letter-spacing: -1px; font-weight: 900;
-        }
-        .section-title::after {
-            content: ''; display: block; width: 60px; height: 4px;
-            background: linear-gradient(90deg, var(--rosa-neon), transparent); margin: 15px auto 0; border-radius: 5px;
-        }
+        .section-title { color: #fff; font-family: 'League Spartan', sans-serif; font-size: 3rem; margin-bottom: 50px; display: inline-block; text-transform: uppercase; letter-spacing: -1px; font-weight: 900; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: linear-gradient(90deg, var(--rosa-neon), transparent); margin: 15px auto 0; border-radius: 5px; }
 
         /* --- GLASS CARDS (Misión/Visión) --- */
-        .mv-wrapper {
-            display: flex; justify-content: center; align-items: stretch; gap: 30px; flex-wrap: wrap;
-            max-width: 1200px; margin: 0 auto;
-        }
-
-        .mv-container {
-            flex: 1 1 320px; 
-            background: var(--apple-surface);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border: 1px solid var(--apple-border);
-            border-radius: 30px;
-            padding: 40px; text-align: left;
-            transition: 0.4s;
-        }
+        .mv-wrapper { display: flex; justify-content: center; align-items: stretch; gap: 30px; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; }
+        .mv-container { flex: 1 1 320px; background: var(--apple-surface); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border: 1px solid var(--apple-border); border-radius: 30px; padding: 40px; text-align: left; transition: 0.4s; }
         .mv-container:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-5px); }
-
-        .mv-title-neon {
-            font-family: 'League Spartan', sans-serif; font-size: 2.2rem; font-weight: 700;
-            background: linear-gradient(90deg, #fff, var(--rosa-neon));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin-bottom: 25px;
-        }
-        
+        .mv-title-neon { font-family: 'League Spartan', sans-serif; font-size: 2.2rem; font-weight: 700; background: linear-gradient(90deg, #fff, var(--rosa-neon)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 25px; }
         .mv-text { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7; }
         .mv-highlight { font-weight: bold; color: var(--text-primary); }
-
-        .mv-image {
-            width: 100%; border-radius: 20px; margin-top: 20px;
-            object-fit: cover; opacity: 0.85; transition: 0.4s ease;
-        }
+        .mv-image { width: 100%; border-radius: 20px; margin-top: 20px; object-fit: cover; opacity: 0.85; transition: 0.4s ease; }
         .mv-container:hover .mv-image { opacity: 1; transform: scale(1.02); }
 
-        /* --- CLASES (Tarjetas iOS) --- */
-        .classes-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;
-            max-width: 1200px; margin: 0 auto;
-        }
-        .card { 
-            background: var(--apple-surface); backdrop-filter: blur(20px);
-            border: 1px solid var(--apple-border); border-radius: 30px; 
-            padding: 40px 20px; transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); text-decoration: none; display: block;
-        }
+        /* --- CLASES --- */
+        .classes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
+        .card { background: var(--apple-surface); backdrop-filter: blur(20px); border: 1px solid var(--apple-border); border-radius: 30px; padding: 40px 20px; transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); text-decoration: none; display: block; }
         .card:hover { border-color: var(--rosa-neon); transform: translateY(-10px); background: rgba(28,28,30,0.8); box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
         .card i { color: var(--rosa-neon); font-size: 2.5rem; margin-bottom: 20px; transition: 0.3s; }
         .card:hover i { transform: scale(1.1); filter: drop-shadow(0 0 10px var(--rosa-glow)); }
@@ -251,22 +161,11 @@
         .card p { color: var(--text-secondary); font-size: 1rem; }
 
         /* --- VIDEO FESTIVAL --- */
-        .video-container-glass {
-            max-width: 1000px; margin: 0 auto;
-            border-radius: 30px; overflow: hidden;
-            border: 1px solid var(--apple-border);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-            background: #000; padding: 10px;
-        }
+        .video-container-glass { max-width: 1000px; margin: 0 auto; border-radius: 30px; overflow: hidden; border: 1px solid var(--apple-border); box-shadow: 0 20px 50px rgba(0,0,0,0.6); background: #000; padding: 10px; }
         .video-container-glass video { border-radius: 20px; display: block; }
 
         /* --- SIDEBAR --- */
-        .social-sidebar {
-            position: fixed; top: 50%; right: 20px; transform: translateY(-50%); z-index: 1000;
-            display: flex; flex-direction: column; gap: 15px;
-            background: var(--apple-surface); backdrop-filter: blur(15px); border-radius: 30px;
-            padding: 20px 15px; border: 1px solid var(--apple-border);
-        }
+        .social-sidebar { position: fixed; top: 50%; right: 20px; transform: translateY(-50%); z-index: 1000; display: flex; flex-direction: column; gap: 15px; background: var(--apple-surface); backdrop-filter: blur(15px); border-radius: 30px; padding: 20px 15px; border: 1px solid var(--apple-border); }
         .social-sidebar a { color: var(--text-secondary); font-size: 1.3rem; transition: 0.3s; text-align: center; }
         .social-sidebar a:hover { color: var(--rosa-neon); transform: scale(1.2); }
 
@@ -275,39 +174,10 @@
         /* --- MÓVILES Y TABLETS --- */
         @media (max-width: 768px) {
             .navbar { flex-wrap: wrap; justify-content: space-between; align-items: center; padding: 15px 20px; border-radius: 25px; width: 90%; top: 10px; }
-            
             .hamburger { display: block; }
-            
-            .nav-links {
-                position: absolute;
-                top: 70px;
-                right: 0;
-                width: 100%;
-                background: rgba(15, 15, 15, 0.95);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-                border: 1px solid var(--apple-border);
-                border-radius: 20px;
-                flex-direction: column;
-                align-items: center;
-                padding: 25px 0;
-                gap: 25px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-                opacity: 0;
-                transform: translateY(-15px);
-                pointer-events: none;
-                transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-                margin-top: 0;
-            }
-
-            .nav-links.active {
-                opacity: 1;
-                transform: translateY(0);
-                pointer-events: all;
-            }
-
+            .nav-links { position: absolute; top: 70px; right: 0; width: 100%; background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--apple-border); border-radius: 20px; flex-direction: column; align-items: center; padding: 25px 0; gap: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); opacity: 0; transform: translateY(-15px); pointer-events: none; transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); margin-top: 0; }
+            .nav-links.active { opacity: 1; transform: translateY(0); pointer-events: all; }
             .nav-links a { margin-left: 0; font-size: 1.1rem; }
-            
             .brand-name { font-size: 4rem; }
             .social-sidebar { display: none; }
             section { padding: 80px 5%; }
@@ -457,7 +327,7 @@
             lastScrollTop = scrollTop;
         });
 
-        // REDIRECCION AUTOMATICA AL DESCARGAR
+        // REDIRECCION AUTOMATICA
         function redirigirAgenda() {
             setTimeout(() => { window.location.href = 'agenda.html'; }, 1500);
         }
