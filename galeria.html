@@ -8,6 +8,8 @@
     <meta name="description" content="Explora la galería multimedia de The Crown Dance Studio. Fotos y videos de nuestras clases de Hip Hop, Ballet, Jazz, Reggaetón y presentaciones en vivo.">
     <meta name="robots" content="index, follow">
     
+    <link rel="icon" type="image/png" href="logo_corona.png">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700;900&display=swap" rel="stylesheet">
@@ -16,12 +18,7 @@
     
     <style>
         /* --- AJUSTE GLOBAL --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-font-smoothing: antialiased;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
 
         /* --- PALETA DE COLORES iOS 27 / NOON STYLE --- */
         :root {
@@ -35,250 +32,76 @@
             --text-secondary: #86868b;
         }
         
-        html, body { 
-            scroll-behavior: smooth; 
-            max-width: 100vw; 
-            overflow-x: hidden; 
-            background-color: var(--apple-dark);
-            color: var(--text-primary);
-            font-family: 'Glacial Indifference', sans-serif;
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
+        html, body { scroll-behavior: smooth; max-width: 100vw; overflow-x: hidden; background-color: var(--apple-dark); color: var(--text-primary); font-family: 'Glacial Indifference', sans-serif; font-size: 1.1rem; line-height: 1.6; }
 
-        /* LUZ AMBIENTAL DE FONDO (Ambient Glow) */
-        body::before {
-            content: '';
-            position: fixed;
-            top: -10%; left: -10%;
-            width: 50vw; height: 50vw;
-            background: radial-gradient(circle, var(--rosa-glow) 0%, transparent 70%);
-            z-index: -3;
-            pointer-events: none;
-            filter: blur(80px);
-        }
-        body::after {
-            content: '';
-            position: fixed;
-            bottom: -20%; right: -10%;
-            width: 60vw; height: 60vw;
-            background: radial-gradient(circle, rgba(193, 154, 81, 0.15) 0%, transparent 70%);
-            z-index: -3;
-            pointer-events: none;
-            filter: blur(100px);
-        }
+        /* LUZ AMBIENTAL DE FONDO */
+        body::before { content: ''; position: fixed; top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, var(--rosa-glow) 0%, transparent 70%); z-index: -3; pointer-events: none; filter: blur(80px); }
+        body::after { content: ''; position: fixed; bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(193, 154, 81, 0.15) 0%, transparent 70%); z-index: -3; pointer-events: none; filter: blur(100px); }
 
         /* --- CLASES IDIOMA --- */
         .en { display: none; }
-        .lang-btn {
-            background: rgba(255,255,255,0.05); 
-            border: 1px solid var(--apple-border); 
-            color: var(--text-primary);
-            padding: 8px 15px; cursor: pointer; font-family: 'League Spartan', sans-serif;
-            font-weight: bold; font-size: 0.8rem; margin-left: 15px; 
-            border-radius: 20px; transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            backdrop-filter: blur(10px);
-        }
+        .lang-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--apple-border); color: var(--text-primary); padding: 8px 15px; cursor: pointer; font-family: 'League Spartan', sans-serif; font-weight: bold; font-size: 0.8rem; margin-left: 15px; border-radius: 20px; transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); backdrop-filter: blur(10px); }
         .lang-btn:hover { background: var(--rosa-neon); color: #000; border-color: var(--rosa-neon); }
 
         /* --- NAV FLOTANTE (Pill Style) --- */
         .navbar {
-            position: fixed; 
-            top: 20px; 
-            left: 50%; 
-            transform: translateX(-50%);
-            width: 95%; 
-            max-width: 1200px;
-            background: rgba(15, 15, 15, 0.6);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border: 1px solid var(--apple-border);
-            border-radius: 40px;
-            padding: 10px 25px; 
-            z-index: 1000;
-            display: flex; justify-content: space-between; align-items: center;
-            transition: top 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 1200px;
+            background: rgba(15, 15, 15, 0.6); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border: 1px solid var(--apple-border); border-radius: 40px; padding: 10px 25px; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center; /* <-- Corregido alineación */
+            transition: top 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .nav-hidden { top: -100px; opacity: 0; }
-
         .nav-logo { display: flex; align-items: center; }
         .nav-logo img { height: 40px; width: auto; transition: 0.3s; }
 
+        /* --- BOTÓN HAMBURGUESA --- */
+        .hamburger { display: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; transition: 0.3s; }
+        .hamburger:hover { color: var(--rosa-neon); }
+
         .nav-links { display: flex; align-items: center; }
-        .nav-links a {
-            color: var(--text-primary); text-decoration: none; margin-left: 20px;
-            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;
-            transition: 0.3s; font-weight: 700; font-family: 'League Spartan', sans-serif;
-        }
-        .nav-links a:hover { color: var(--rosa-neon); }
-        
-        .nav-cta {
-            background: linear-gradient(135deg, var(--rosa-neon), #ff3399);
-            color: #fff !important; padding: 10px 25px; border-radius: 30px; margin-left: 20px;
-            font-weight: 700; border: none; box-shadow: 0 4px 15px var(--rosa-glow);
-        }
+        .nav-links a { color: var(--text-primary); text-decoration: none; margin-left: 20px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; font-weight: 700; font-family: 'League Spartan', sans-serif; }
+        .nav-links a:not(.nav-cta):hover { color: var(--rosa-neon); }
+        .nav-cta { background: linear-gradient(135deg, var(--rosa-neon), #ff3399); color: #fff !important; padding: 10px 25px; border-radius: 30px; margin-left: 20px; font-weight: 700; border: none; box-shadow: 0 4px 15px var(--rosa-glow); }
         .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 25px var(--rosa-glow); }
 
         /* --- GALLERY HERO --- */
-        .gallery-hero {
-            padding-top: 160px;
-            padding-bottom: 40px;
-            text-align: center;
-        }
-        .gallery-title {
-            font-family: 'League Spartan', sans-serif; 
-            font-weight: 900; font-size: 4rem; margin: 0; 
-            letter-spacing: -1px; text-transform: uppercase;
-            background: linear-gradient(to bottom right, #fff, #a8a8a8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .gallery-subtitle {
-            font-family: 'League Spartan', sans-serif;
-            font-size: 1.1rem; letter-spacing: 4px; text-transform: uppercase; 
-            margin-top: 5px; color: var(--dorado); font-weight: 700;
-        }
+        .gallery-hero { padding-top: 160px; padding-bottom: 40px; text-align: center; }
+        .gallery-title { font-family: 'League Spartan', sans-serif; font-weight: 900; font-size: 4rem; margin: 0; letter-spacing: -1px; text-transform: uppercase; background: linear-gradient(to bottom right, #fff, #a8a8a8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gallery-subtitle { font-family: 'League Spartan', sans-serif; font-size: 1.1rem; letter-spacing: 4px; text-transform: uppercase; margin-top: 5px; color: var(--dorado); font-weight: 700; }
 
         /* --- FILTROS DE CATEGORÍAS --- */
-        .filter-container {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin: 30px auto 50px auto;
-            max-width: 800px;
-            padding: 0 5%;
-        }
-        .filter-btn {
-            background: var(--apple-surface);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--apple-border);
-            color: var(--text-primary);
-            padding: 10px 22px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-family: 'League Spartan', sans-serif;
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--rosa-neon);
-            border-color: var(--rosa-neon);
-            color: #000;
-            box-shadow: 0 5px 15px var(--rosa-glow);
-        }
+        .filter-container { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin: 30px auto 50px auto; max-width: 800px; padding: 0 5%; }
+        .filter-btn { background: var(--apple-surface); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--apple-border); color: var(--text-primary); padding: 10px 22px; border-radius: 25px; cursor: pointer; font-family: 'League Spartan', sans-serif; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .filter-btn:hover, .filter-btn.active { background: var(--rosa-neon); border-color: var(--rosa-neon); color: #000; box-shadow: 0 5px 15px var(--rosa-glow); }
 
         /* --- SECCIÓN GALERÍA --- */
-        .gallery-section {
-            padding: 0 5% 100px 5%;
-            max-width: 1300px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .gallery-item {
-            background: var(--apple-surface);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--apple-border);
-            border-radius: 24px;
-            padding: 12px;
-            overflow: hidden;
-            transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            z-index: 3;
-        }
-        
-        /* CORRECCIÓN CRÍTICA DE CAPAS PARA CONTENEDOR MULTIMEDIA */
-        .media-wrapper {
-            position: relative;
-            width: 100%;
-            border-radius: 16px;
-            overflow: hidden;
-            background: #050505;
-            aspect-ratio: 4 / 3; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 4; /* Obliga al contenedor a estar al frente */
-        }
-
-        /* Forzamos que las fotos y videos ignoren capas de cristal oscuras */
-        .media-wrapper img, .media-wrapper video {
-            position: relative;
-            z-index: 5; /* Máxima prioridad visual dentro de su tarjeta */
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .item-info {
-            padding: 15px 8px 5px 8px;
-            text-align: left;
-            position: relative;
-            z-index: 4;
-        }
-        .item-info h3 {
-            font-family: 'League Spartan', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 4px;
-        }
-        .item-info p {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-        }
-
-        .gallery-item:hover {
-            border-color: rgba(255, 102, 196, 0.5);
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            background: rgba(28,28,30,0.7);
-        }
-        .gallery-item:hover .media-wrapper img {
-            transform: scale(1.04);
-        }
+        .gallery-section { padding: 0 5% 100px 5%; max-width: 1300px; margin: 0 auto; position: relative; z-index: 1; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; position: relative; z-index: 2; }
+        .gallery-item { background: var(--apple-surface); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--apple-border); border-radius: 24px; padding: 12px; overflow: hidden; transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); display: flex; flex-direction: column; position: relative; z-index: 3; }
+        .media-wrapper { position: relative; width: 100%; border-radius: 16px; overflow: hidden; background: #050505; aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center; z-index: 4; }
+        .media-wrapper img, .media-wrapper video { position: relative; z-index: 5; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+        .item-info { padding: 15px 8px 5px 8px; text-align: left; position: relative; z-index: 4; }
+        .item-info h3 { font-family: 'League Spartan', sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+        .item-info p { font-size: 0.95rem; color: var(--text-secondary); }
+        .gallery-item:hover { border-color: rgba(255, 102, 196, 0.5); transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.6); background: rgba(28,28,30,0.7); }
+        .gallery-item:hover .media-wrapper img { transform: scale(1.04); }
+        .gallery-item.hidden { display: none; }
 
         /* --- SIDEBAR --- */
-        .social-sidebar {
-            position: fixed; top: 50%; right: 20px; transform: translateY(-50%); z-index: 1000;
-            display: flex; flex-direction: column; gap: 15px;
-            background: var(--apple-surface); backdrop-filter: blur(15px); border-radius: 30px;
-            padding: 20px 15px; border: 1px solid var(--apple-border);
-        }
+        .social-sidebar { position: fixed; top: 50%; right: 20px; transform: translateY(-50%); z-index: 1000; display: flex; flex-direction: column; gap: 15px; background: var(--apple-surface); backdrop-filter: blur(15px); border-radius: 30px; padding: 20px 15px; border: 1px solid var(--apple-border); }
         .social-sidebar a { color: var(--text-secondary); font-size: 1.3rem; transition: 0.3s; text-align: center; }
         .social-sidebar a:hover { color: var(--rosa-neon); transform: scale(1.2); }
 
         footer { background: transparent; padding: 40px; color: var(--text-secondary); font-size: 0.9rem; text-align: center; border-top: 1px solid var(--apple-border); }
 
-        .gallery-item.hidden {
-            display: none;
-        }
-
         /* --- MÓVILES --- */
         @media (max-width: 768px) {
-            .navbar { flex-wrap: wrap; justify-content: center; padding: 15px; border-radius: 25px; width: 90%; top: 10px; }
-            .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; margin-top: 15px; gap: 10px;}
-            .nav-links a { margin-left: 0; }
+            .navbar { flex-wrap: wrap; justify-content: space-between; align-items: center; padding: 15px 20px; border-radius: 25px; width: 90%; top: 10px; }
+            .hamburger { display: block; }
+            .nav-links { position: absolute; top: 70px; right: 0; width: 100%; background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--apple-border); border-radius: 20px; flex-direction: column; align-items: center; padding: 25px 0; gap: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); opacity: 0; transform: translateY(-15px); pointer-events: none; transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); margin-top: 0; }
+            .nav-links.active { opacity: 1; transform: translateY(0); pointer-events: all; }
+            .nav-links a { margin-left: 0; font-size: 1.1rem; }
             .gallery-title { font-size: 2.8rem; }
             .social-sidebar { display: none; }
             .gallery-section { padding-bottom: 60px; }
@@ -290,6 +113,11 @@
 
     <nav class="navbar">
         <a href="index.html" class="nav-logo"><img src="logo.png" alt="Logotipo The Crown Dance Studio"></a>
+        
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+
         <div class="nav-links">
             <a href="index.html#inicio"><span class="es">Inicio</span><span class="en">Home</span></a>
             <a href="index.html#nosotros"><span class="es">Nosotros</span><span class="en">About</span></a>
@@ -480,15 +308,19 @@
     </footer>
 
     <script>
-        // LÓGICA INTERACTIVA DE FILTROS
+        // --- LÓGICA INTERACTIVA DE FILTROS ---
         function filterGallery(category) {
+            // 1. Quitar clase active de todos los botones
             const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             
-            if (event && event.target) {
-                event.target.classList.add('active');
+            // 2. Activar botón clickeado o el que viene de la URL
+            const targetBtn = Array.from(buttons).find(btn => btn.getAttribute('onclick').includes(category));
+            if (targetBtn) {
+                targetBtn.classList.add('active');
             }
 
+            // 3. Filtrar los items visuales
             const items = document.querySelectorAll('.gallery-item');
             items.forEach(item => {
                 if (category === 'all' || item.classList.contains(category)) {
@@ -499,7 +331,17 @@
             });
         }
 
-        // SMART NAVBAR FLOTANTE
+        // --- LECTURA AUTOMÁTICA DE URL (HASHTAG) ---
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.substring(1); 
+            const categoriasValidas = ['all', 'urbano', 'tecnica', 'kids', 'eventos'];
+            
+            if (hash && categoriasValidas.includes(hash)) {
+                filterGallery(hash);
+            }
+        });
+
+        // --- SMART NAVBAR FLOTANTE ---
         let lastScrollTop = 0;
         const navbar = document.querySelector('.navbar');
         window.addEventListener('scroll', function() {
@@ -512,7 +354,7 @@
             lastScrollTop = scrollTop;
         });
 
-        // LANGUAGE TOGGLE
+        // --- LANGUAGE TOGGLE ---
         let currentLang = 'es';
         function toggleLanguage() {
             currentLang = (currentLang === 'es') ? 'en' : 'es';
@@ -525,6 +367,35 @@
                 esElements.forEach(el => el.style.display = 'none');
                 enElements.forEach(el => el.style.display = 'inline-block');
             }
+        }
+
+        // --- LÓGICA DEL MENÚ HAMBURGUESA ---
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                
+                const icon = hamburger.querySelector('i');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            const links = navLinks.querySelectorAll('a, button');
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    const icon = hamburger.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
         }
     </script>
 </body>
