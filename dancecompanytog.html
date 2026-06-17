@@ -23,7 +23,6 @@
             --tog-red: #8B0000;
             --tog-red-light: #FF2E2E;
             --dorado: #C19A51;
-            --dorado-bright: #F5D18A;
             --apple-surface: rgba(10, 10, 10, 0.6);
             --apple-border: rgba(193, 154, 81, 0.3);
             --text-primary: #f5f5f7;
@@ -54,27 +53,23 @@
             overflow: hidden;
         }
 
+        /* CORRECCIÓN DEL VIDEO PARA QUE SE VEA */
         .video-bg {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: -2;
-            transform: translate(-50%, -50%);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             object-fit: cover;
+            z-index: -2; /* La capa más profunda */
         }
 
         .video-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
-            z-index: -1;
+            z-index: -1; /* Encima del video, debajo del texto */
         }
 
-        /* --- SLOGAN ÉPICO (ESTILO LOGO) --- */
+        /* --- SLOGAN ÉPICO CON COLORES INDEPENDIENTES --- */
         .slogan-epic {
             font-family: 'Cinzel Decorative', serif;
             font-size: clamp(2rem, 6vw, 4.5rem);
@@ -82,11 +77,19 @@
             line-height: 1.1;
             text-transform: uppercase;
             padding: 0 5%;
+            color: #fff; /* Color base blanco */
+            text-shadow: 0 4px 15px rgba(0,0,0,0.9);
             animation: cinematicEntry 2.5s ease-out forwards;
-            background: linear-gradient(to bottom, #fff 20%, var(--tog-red) 50%, var(--dorado) 85%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px rgba(139, 0, 0, 0.6));
+        }
+
+        /* Colores institucionales inyectados en las palabras clave */
+        .color-crown { 
+            color: var(--dorado); 
+            text-shadow: 0 0 20px rgba(193, 154, 81, 0.6); 
+        }
+        .color-tog { 
+            color: var(--tog-red); 
+            text-shadow: 0 0 20px rgba(139, 0, 0, 0.8); 
         }
 
         @keyframes cinematicEntry {
@@ -114,12 +117,42 @@
             font-size: 0.85rem; text-transform: uppercase; font-weight: 700; font-family: 'League Spartan';
             transition: 0.3s;
         }
-        .nav-links a:hover { color: var(--tog-red-light); }
+        .nav-links a:hover:not(.nav-cta) { color: var(--tog-red-light); }
         
+        /* --- BOTÓN DE CONTACTO (CTA) Y LA CORONITA FLOTANTE --- */
         .nav-cta {
+            position: relative; /* Necesario para ubicar la coronita */
             background: linear-gradient(135deg, var(--tog-red), #500000);
-            color: #fff !important; padding: 10px 25px; border-radius: 30px;
+            color: #fff !important; padding: 10px 25px; border-radius: 30px; margin-left: 20px;
             border: 1px solid var(--dorado); box-shadow: 0 0 15px rgba(139, 0, 0, 0.4);
+            transition: 0.4s;
+        }
+        
+        /* La Coronita Flotante */
+        .nav-cta::after {
+            content: '';
+            position: absolute;
+            top: 5px; /* Empieza un poco abajo y oculta */
+            left: 50%;
+            transform: translateX(-50%) scale(0.5);
+            width: 25px;
+            height: 25px;
+            background-image: url('logo_corona.png'); /* Ruta de tu corona */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto de rebote al subir */
+            pointer-events: none;
+        }
+
+        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(139, 0, 0, 0.6); }
+        
+        /* Animación al pasar el mouse (hover) */
+        .nav-cta:hover::after {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+            top: -22px; /* Se eleva por encima del botón */
         }
 
         /* --- SECCIONES CON REVELACIÓN --- */
@@ -151,6 +184,7 @@
         .mv-tile h3 { font-family: 'Cinzel Decorative'; font-size: 2rem; color: var(--dorado); margin-bottom: 20px; }
 
         /* --- BOTÓN WHATSAPP DINÁMICO (MODO BESTIA) --- */
+        .whatsapp-section { padding-bottom: 120px; }
         .wa-btn-tog {
             position: relative;
             display: inline-flex; align-items: center; gap: 20px;
@@ -194,6 +228,7 @@
             .nav-links a { margin-left: 0; font-size: 1.2rem; }
             h2 { font-size: 2.5rem; }
             .slogan-epic { font-size: 2.2rem; }
+            .nav-cta::after { display: none; /* Quitamos la corona en celulares para mejor experiencia táctil */ }
         }
     </style>
 </head>
@@ -210,7 +245,7 @@
             <a href="index.html">Academia</a>
             <a href="galeria.html">Galería</a>
             <a href="#quienes-somos">Compañía</a>
-            <a href="agenda.html" class="nav-cta">AGENDAR</a>
+            <a href="landing_contacto_tog.html" class="nav-cta">CONTACTO</a>
         </div>
     </nav>
 
@@ -219,7 +254,11 @@
             <source src="Thecrowndancestudio_TOG_Fondo.mp4" type="video/mp4">
         </video>
         <div class="video-overlay"></div>
-        <h1 class="slogan-epic">En The Crown Entrenamos,<br>En TOG Ejecutamos</h1>
+        
+        <h1 class="slogan-epic">
+            En <span class="color-crown">The Crown</span> Entrenamos,<br>
+            En <span class="color-tog">TOG</span> Ejecutamos
+        </h1>
     </div>
 
     <section id="quienes-somos" class="reveal">
