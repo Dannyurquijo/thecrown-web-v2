@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>TOG Dance Company | Ejecución de Élite</title>
-    <meta name="description" content="Compañía de danza TOG. La culminación del entrenamiento en The Crown. En The Crown Entrenamos, En TOG Ejecutamos.">
+    <title>TOG Dance Company | Espectáculos para Eventos Corporativos</title>
+    <meta name="description" content="Compañía de danza TOG. Espectáculos de alto impacto para marcas, lanzamientos y eventos corporativos.">
     
     <link rel="icon" type="image/png" href="logo_corona.png">
 
@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* --- AJUSTE GLOBAL --- */
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
 
         :root {
@@ -33,16 +32,13 @@
             scroll-behavior: smooth; 
             max-width: 100vw; 
             overflow-x: hidden; 
-            background-color: #000; /* Fondo de seguridad */
+            background-color: #000; 
             color: var(--text-primary);
             font-family: 'Glacial Indifference', sans-serif;
             font-size: 1.1rem;
             line-height: 1.6;
         }
 
-        /* --- SOLUCIÓN CRÍTICA: VIDEO BACKGROUND FIXED --- */
-        
-        /* 1. Contenedor Hero transparente para dejar ver el video */
         .hero-container {
             position: relative;
             height: 100vh;
@@ -53,11 +49,10 @@
             align-items: center;
             text-align: center;
             overflow: hidden;
-            background: transparent; /* Importante: Sin fondo */
-            z-index: 1; /* Establece el contexto para los textos */
+            background: transparent; 
+            z-index: 1; 
         }
 
-        /* 2. Video Fijo (Fixed) detrás de TODO */
         .video-bg {
             position: fixed;
             top: 0;
@@ -65,20 +60,18 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: -10; /* La capa más profunda posible */
+            z-index: -10; 
             pointer-events: none;
         }
 
-        /* 3. Overlay dramático también Fijo */
         .video-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.9) 100%);
-            z-index: -9; /* Justo encima del video */
+            background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.9) 100%);
+            z-index: -9; 
             pointer-events: none;
         }
 
-        /* --- SLOGAN ÉPICO CON COLORES INDEPENDIENTES --- */
         .slogan-epic {
             font-family: 'Cinzel Decorative', serif;
             font-size: clamp(2rem, 6vw, 4.5rem);
@@ -93,21 +86,14 @@
             z-index: 2;
         }
 
-        .color-crown { 
-            color: var(--dorado); 
-            text-shadow: 0 0 20px rgba(193, 154, 81, 0.6); 
-        }
-        .color-tog { 
-            color: var(--tog-red); 
-            text-shadow: 0 0 20px rgba(139, 0, 0, 0.8); 
-        }
+        .color-crown { color: var(--dorado); text-shadow: 0 0 20px rgba(193, 154, 81, 0.6); }
+        .color-tog { color: var(--tog-red); text-shadow: 0 0 20px rgba(139, 0, 0, 0.8); }
 
         @keyframes cinematicEntry {
             0% { opacity: 0; transform: scale(1.1) translateY(20px); filter: blur(10px); }
             100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
         }
 
-        /* --- NAV FLOTANTE --- */
         .navbar {
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
             width: 95%; max-width: 1200px;
@@ -129,7 +115,6 @@
         }
         .nav-links a:hover:not(.nav-cta) { color: var(--tog-red-light); }
         
-        /* --- BOTÓN DE CONTACTO (CTA) Y LA CORONITA FLOTANTE --- */
         .nav-cta {
             position: relative;
             background: linear-gradient(135deg, var(--tog-red), #500000);
@@ -139,31 +124,18 @@
         }
         
         .nav-cta::after {
-            content: '';
-            position: absolute;
-            top: 5px;
-            left: 50%;
-            transform: translateX(-50%) scale(0.5);
-            width: 25px;
-            height: 25px;
-            background-image: url('logo_corona.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            opacity: 0;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            pointer-events: none;
+            content: ''; position: absolute; top: 5px; left: 50%; transform: translateX(-50%) scale(0.5);
+            width: 25px; height: 25px; background-image: url('logo_corona.png'); background-size: contain;
+            background-repeat: no-repeat; background-position: center; opacity: 0;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: none;
         }
 
         .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(139, 0, 0, 0.6); }
         .nav-cta:hover::after { opacity: 1; transform: translateX(-50%) scale(1); top: -22px; }
 
-        /* --- SECCIONES POST-HERO --- */
-        
-        /* Aplicamos la textura de cuero solo a las secciones de contenido para no tapar el video en el Hero */
         .content-section-tog {
             position: relative;
-            z-index: 2; /* Encima del video fixed */
+            z-index: 2; 
             padding: 120px 5%;
             max-width: 1200px;
             margin: 0 auto;
@@ -195,26 +167,20 @@
         .mv-tile:hover { border-color: var(--dorado); transform: scale(1.02); background: rgba(30, 30, 30, 0.8); }
         .mv-tile h3 { font-family: 'Cinzel Decorative'; font-size: 2rem; color: var(--dorado); margin-bottom: 20px; }
 
-        /* --- BOTÓN WHATSAPP DINÁMICO (MODO BESTIA) --- */
         .whatsapp-section { padding-bottom: 120px; }
         .wa-btn-tog {
-            position: relative;
-            display: inline-flex; align-items: center; gap: 20px;
+            position: relative; display: inline-flex; align-items: center; gap: 20px;
             background: linear-gradient(135deg, var(--tog-red) 0%, #500000 50%, var(--dorado) 100%);
-            background-size: 200% auto;
-            color: #fff; text-decoration: none; padding: 25px 60px;
+            background-size: 200% auto; color: #fff; text-decoration: none; padding: 25px 60px;
             border-radius: 60px; font-family: 'League Spartan'; font-weight: 900;
             font-size: 1.5rem; text-transform: uppercase; transition: 0.5s;
-            box-shadow: 0 15px 40px rgba(139, 0, 0, 0.5);
-            border: 2px solid var(--dorado);
+            box-shadow: 0 15px 40px rgba(139, 0, 0, 0.5); border: 2px solid var(--dorado);
             animation: pulse-red 2s infinite;
         }
 
         .wa-btn-tog:hover {
-            background-position: right center;
-            transform: scale(1.05) translateY(-5px);
-            box-shadow: 0 20px 50px rgba(255, 46, 46, 0.6);
-            border-color: #fff;
+            background-position: right center; transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 20px 50px rgba(255, 46, 46, 0.6); border-color: #fff;
         }
 
         @keyframes pulse-red {
@@ -229,7 +195,6 @@
             background: #050505; background-image: url('https://www.transparenttextures.com/patterns/black-leather.png');
         }
 
-        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .navbar { width: 92%; }
             .hamburger { display: block; }
@@ -280,43 +245,41 @@
     <div class="content-section-tog">
         <section id="quienes-somos" class="reveal">
             <div class="glass-card-tog">
-                <h2>Quiénes Somos</h2>
-                <p style="font-size: 1.4rem; color: var(--text-secondary); max-width: 900px; margin: 0 auto;">
-                    <span class="highlight-red">TOG</span> es la fuerza de élite de nuestro estudio. Una compañía diseñada para bailarines que han decidido trascender el salón de clases. Aquí, la <span class="highlight-red">precisión técnica</span> se encuentra con la potencia escénica para crear ejecuciones que no solo se ven, se sienten.
+                <h2>El Espectáculo Perfecto</h2>
+                <p style="font-size: 1.3rem; color: var(--text-secondary); max-width: 900px; margin: 0 auto;">
+                    <span class="highlight-red">TOG</span> es el aliado estratégico para llevar tu evento corporativo al siguiente nivel. Diseñamos y ejecutamos espectáculos de alto impacto para marcas y agencias que buscan dejar una huella imborrable en su audiencia.
                     <br><br>
-                    Somos la culminación del esfuerzo. La prueba real del talento.
+                    Desde lanzamientos de productos hasta cenas de gala, nuestra <span class="highlight-red">precisión técnica</span> y potencia visual transforman cualquier escenario en una experiencia premium.
                 </p>
             </div>
 
             <div class="mv-grid">
                 <div class="mv-tile reveal">
-                    <h3>Misión</h3>
-                    <p style="color: var(--text-secondary);">Proyectar el talento de nuestros integrantes a través de producciones de alta gama, elevando los estándares de la danza profesional en cada escenario que pisamos.</p>
+                    <h3>Profesionalismo</h3>
+                    <p style="color: var(--text-secondary);">Elevamos el valor de las marcas a través de producciones coreográficas de nivel internacional, garantizando puntualidad, adaptabilidad corporativa y una ejecución escénica impecable.</p>
                 </div>
                 <div class="mv-tile reveal">
-                    <h3>Visión</h3>
-                    <p style="color: var(--text-secondary);">Ser el referente nacional de ejecución artística, donde la disciplina inquebrantable y la maestría técnica definan el futuro de la danza en México.</p>
+                    <h3>Impacto Visual</h3>
+                    <p style="color: var(--text-secondary);">Nuestra visión es consolidarnos como la opción #1 en entretenimiento corporativo y espectáculos a la medida, donde la disciplina y el arte logren comunicar el mensaje de tu empresa.</p>
                 </div>
             </div>
         </section>
 
         <section class="whatsapp-section reveal">
-            <h2 style="margin-bottom: 20px;">¿Tienes lo que se necesita?</h2>
-            <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 50px;">Contrataciones, audiciones y proyectos especiales.</p>
+            <h2 style="margin-bottom: 20px;">Lleva tu evento al siguiente nivel</h2>
+            <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 50px;">Solicita nuestro press kit y agenda una cotización para tu próximo evento corporativo.</p>
             
-            <a href="https://wa.me/524423479755?text=%C2%A1Hola%20TOG!%20Me%20interesa%20saber%20m%C3%A1s%20sobre%20la%20compa%C3%B1%C3%ADa.%20En%20The%20Crown%20Entrenamos%2C%20En%20TOG%20Ejecutamos." target="_blank" class="wa-btn-tog">
-                <i class="fab fa-whatsapp"></i>
-                Ejecuta con nosotros
+            <a href="landing_contacto_tog.html" class="wa-btn-tog">
+                Cotiza tu Espectáculo
             </a>
         </section>
     </div>
 
     <footer>
-        <p>© 2026 TOG Dance Company | The Crown Ecosystem</p>
+        <p>© 2026 TOG Dance Company | Producción y Entretenimiento Corporativo</p>
     </footer>
 
     <script>
-        // LÓGICA DEL MENÚ HAMBURGUESA
         const navToggle = document.getElementById('nav-toggle');
         const navMenu = document.getElementById('nav-menu');
 
@@ -327,9 +290,7 @@
             icon.classList.toggle('fa-times');
         });
 
-        // ANIMACIÓN DE REVELACIÓN AL HACER SCROLL
         const reveals = document.querySelectorAll('.reveal');
-        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
