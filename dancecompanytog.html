@@ -33,14 +33,16 @@
             scroll-behavior: smooth; 
             max-width: 100vw; 
             overflow-x: hidden; 
-            background-color: #000;
+            background-color: #000; /* Fondo de seguridad */
             color: var(--text-primary);
             font-family: 'Glacial Indifference', sans-serif;
             font-size: 1.1rem;
             line-height: 1.6;
         }
 
-        /* --- VIDEO BACKGROUND HERO --- */
+        /* --- SOLUCIÓN CRÍTICA: VIDEO BACKGROUND FIXED --- */
+        
+        /* 1. Contenedor Hero transparente para dejar ver el video */
         .hero-container {
             position: relative;
             height: 100vh;
@@ -51,22 +53,29 @@
             align-items: center;
             text-align: center;
             overflow: hidden;
+            background: transparent; /* Importante: Sin fondo */
+            z-index: 1; /* Establece el contexto para los textos */
         }
 
-        /* CORRECCIÓN DEL VIDEO PARA QUE SE VEA */
+        /* 2. Video Fijo (Fixed) detrás de TODO */
         .video-bg {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            z-index: -2; /* La capa más profunda */
+            z-index: -10; /* La capa más profunda posible */
+            pointer-events: none;
         }
 
+        /* 3. Overlay dramático también Fijo */
         .video-overlay {
-            position: absolute;
+            position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
-            z-index: -1; /* Encima del video, debajo del texto */
+            background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.9) 100%);
+            z-index: -9; /* Justo encima del video */
+            pointer-events: none;
         }
 
         /* --- SLOGAN ÉPICO CON COLORES INDEPENDIENTES --- */
@@ -77,12 +86,13 @@
             line-height: 1.1;
             text-transform: uppercase;
             padding: 0 5%;
-            color: #fff; /* Color base blanco */
+            color: #fff;
             text-shadow: 0 4px 15px rgba(0,0,0,0.9);
             animation: cinematicEntry 2.5s ease-out forwards;
+            position: relative;
+            z-index: 2;
         }
 
-        /* Colores institucionales inyectados en las palabras clave */
         .color-crown { 
             color: var(--dorado); 
             text-shadow: 0 0 20px rgba(193, 154, 81, 0.6); 
@@ -121,43 +131,46 @@
         
         /* --- BOTÓN DE CONTACTO (CTA) Y LA CORONITA FLOTANTE --- */
         .nav-cta {
-            position: relative; /* Necesario para ubicar la coronita */
+            position: relative;
             background: linear-gradient(135deg, var(--tog-red), #500000);
             color: #fff !important; padding: 10px 25px; border-radius: 30px; margin-left: 20px;
             border: 1px solid var(--dorado); box-shadow: 0 0 15px rgba(139, 0, 0, 0.4);
             transition: 0.4s;
         }
         
-        /* La Coronita Flotante */
         .nav-cta::after {
             content: '';
             position: absolute;
-            top: 5px; /* Empieza un poco abajo y oculta */
+            top: 5px;
             left: 50%;
             transform: translateX(-50%) scale(0.5);
             width: 25px;
             height: 25px;
-            background-image: url('logo_corona.png'); /* Ruta de tu corona */
+            background-image: url('logo_corona.png');
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
             opacity: 0;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto de rebote al subir */
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             pointer-events: none;
         }
 
         .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(139, 0, 0, 0.6); }
+        .nav-cta:hover::after { opacity: 1; transform: translateX(-50%) scale(1); top: -22px; }
+
+        /* --- SECCIONES POST-HERO --- */
         
-        /* Animación al pasar el mouse (hover) */
-        .nav-cta:hover::after {
-            opacity: 1;
-            transform: translateX(-50%) scale(1);
-            top: -22px; /* Se eleva por encima del botón */
+        /* Aplicamos la textura de cuero solo a las secciones de contenido para no tapar el video en el Hero */
+        .content-section-tog {
+            position: relative;
+            z-index: 2; /* Encima del video fixed */
+            padding: 120px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            background-image: url('https://www.transparenttextures.com/patterns/black-leather.png');
         }
 
-        /* --- SECCIONES CON REVELACIÓN --- */
-        section { padding: 120px 5%; max-width: 1200px; margin: 0 auto; text-align: center; }
-        
         .reveal { opacity: 0; transform: translateY(40px); transition: 1s all ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
@@ -165,7 +178,6 @@
             background: rgba(15, 15, 15, 0.7);
             backdrop-filter: blur(30px); border: 1px solid var(--apple-border); border-radius: 40px;
             padding: 70px 40px; box-shadow: 0 30px 60px rgba(0,0,0,0.7);
-            background-image: url('https://www.transparenttextures.com/patterns/black-leather.png');
         }
 
         h2 {
@@ -211,7 +223,11 @@
             100% { box-shadow: 0 0 0 0 rgba(139, 0, 0, 0); }
         }
 
-        footer { padding: 60px; color: var(--text-secondary); font-size: 0.9rem; text-align: center; border-top: 1px solid var(--apple-border); background: #050505; }
+        footer { 
+            position: relative; z-index: 2; padding: 60px; color: var(--text-secondary); 
+            font-size: 0.9rem; text-align: center; border-top: 1px solid var(--apple-border); 
+            background: #050505; background-image: url('https://www.transparenttextures.com/patterns/black-leather.png');
+        }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
@@ -228,11 +244,16 @@
             .nav-links a { margin-left: 0; font-size: 1.2rem; }
             h2 { font-size: 2.5rem; }
             .slogan-epic { font-size: 2.2rem; }
-            .nav-cta::after { display: none; /* Quitamos la corona en celulares para mejor experiencia táctil */ }
+            .nav-cta::after { display: none; }
         }
     </style>
 </head>
 <body>
+
+    <video class="video-bg" autoplay muted loop playsinline>
+        <source src="Thecrowndancestudio_TOG_Fondo.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
 
     <nav class="navbar">
         <a href="index.html" class="nav-logo"><img src="logotog.png" alt="TOG Logo" onerror="this.src='https://placehold.co/200x80/000/red?text=TOG'"></a>
@@ -250,48 +271,45 @@
     </nav>
 
     <div class="hero-container">
-        <video class="video-bg" autoplay muted loop playsinline>
-            <source src="Thecrowndancestudio_TOG_Fondo.mp4" type="video/mp4">
-        </video>
-        <div class="video-overlay"></div>
-        
         <h1 class="slogan-epic">
             En <span class="color-crown">The Crown</span> Entrenamos,<br>
             En <span class="color-tog">TOG</span> Ejecutamos
         </h1>
     </div>
 
-    <section id="quienes-somos" class="reveal">
-        <div class="glass-card-tog">
-            <h2>Quiénes Somos</h2>
-            <p style="font-size: 1.4rem; color: var(--text-secondary); max-width: 900px; margin: 0 auto;">
-                <span class="highlight-red">TOG</span> es la fuerza de élite de nuestro estudio. Una compañía diseñada para bailarines que han decidido trascender el salón de clases. Aquí, la <span class="highlight-red">precisión técnica</span> se encuentra con la potencia escénica para crear ejecuciones que no solo se ven, se sienten.
-                <br><br>
-                Somos la culminación del esfuerzo. La prueba real del talento.
-            </p>
-        </div>
-
-        <div class="mv-grid">
-            <div class="mv-tile reveal">
-                <h3>Misión</h3>
-                <p style="color: var(--text-secondary);">Proyectar el talento de nuestros integrantes a través de producciones de alta gama, elevando los estándares de la danza profesional en cada escenario que pisamos.</p>
+    <div class="content-section-tog">
+        <section id="quienes-somos" class="reveal">
+            <div class="glass-card-tog">
+                <h2>Quiénes Somos</h2>
+                <p style="font-size: 1.4rem; color: var(--text-secondary); max-width: 900px; margin: 0 auto;">
+                    <span class="highlight-red">TOG</span> es la fuerza de élite de nuestro estudio. Una compañía diseñada para bailarines que han decidido trascender el salón de clases. Aquí, la <span class="highlight-red">precisión técnica</span> se encuentra con la potencia escénica para crear ejecuciones que no solo se ven, se sienten.
+                    <br><br>
+                    Somos la culminación del esfuerzo. La prueba real del talento.
+                </p>
             </div>
-            <div class="mv-tile reveal">
-                <h3>Visión</h3>
-                <p style="color: var(--text-secondary);">Ser el referente nacional de ejecución artística, donde la disciplina inquebrantable y la maestría técnica definan el futuro de la danza en México.</p>
-            </div>
-        </div>
-    </section>
 
-    <section class="whatsapp-section reveal">
-        <h2 style="margin-bottom: 20px;">¿Tienes lo que se necesita?</h2>
-        <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 50px;">Contrataciones, audiciones y proyectos especiales.</p>
-        
-        <a href="https://wa.me/524423479755?text=%C2%A1Hola%20TOG!%20Me%20interesa%20saber%20m%C3%A1s%20sobre%20la%20compa%C3%B1%C3%ADa.%20En%20The%20Crown%20Entrenamos%2C%20En%20TOG%20Ejecutamos." target="_blank" class="wa-btn-tog">
-            <i class="fab fa-whatsapp"></i>
-            Ejecuta con nosotros
-        </a>
-    </section>
+            <div class="mv-grid">
+                <div class="mv-tile reveal">
+                    <h3>Misión</h3>
+                    <p style="color: var(--text-secondary);">Proyectar el talento de nuestros integrantes a través de producciones de alta gama, elevando los estándares de la danza profesional en cada escenario que pisamos.</p>
+                </div>
+                <div class="mv-tile reveal">
+                    <h3>Visión</h3>
+                    <p style="color: var(--text-secondary);">Ser el referente nacional de ejecución artística, donde la disciplina inquebrantable y la maestría técnica definan el futuro de la danza en México.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="whatsapp-section reveal">
+            <h2 style="margin-bottom: 20px;">¿Tienes lo que se necesita?</h2>
+            <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 50px;">Contrataciones, audiciones y proyectos especiales.</p>
+            
+            <a href="https://wa.me/524423479755?text=%C2%A1Hola%20TOG!%20Me%20interesa%20saber%20m%C3%A1s%20sobre%20la%20compa%C3%B1%C3%ADa.%20En%20The%20Crown%20Entrenamos%2C%20En%20TOG%20Ejecutamos." target="_blank" class="wa-btn-tog">
+                <i class="fab fa-whatsapp"></i>
+                Ejecuta con nosotros
+            </a>
+        </section>
+    </div>
 
     <footer>
         <p>© 2026 TOG Dance Company | The Crown Ecosystem</p>
