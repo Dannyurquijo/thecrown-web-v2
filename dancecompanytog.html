@@ -11,7 +11,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=League+Spartan:wght@400;700;900&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/glacial-indifference-2" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -20,14 +20,14 @@
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
 
         :root {
-            --tog-red-dark: #660000;
-            --tog-red-bright: #FF0000;
-            --apple-surface: rgba(15, 15, 15, 0.5);
-            --apple-border: rgba(193, 154, 81, 0.2);
+            --tog-red: #8B0000;
+            --tog-red-light: #FF2E2E;
             --dorado: #C19A51;
+            --dorado-bright: #F5D18A;
+            --apple-surface: rgba(10, 10, 10, 0.6);
+            --apple-border: rgba(193, 154, 81, 0.3);
             --text-primary: #f5f5f7;
             --text-secondary: #a1a1a6;
-            --red-glow: rgba(139, 0, 0, 0.4);
         }
         
         html, body { 
@@ -35,133 +35,165 @@
             max-width: 100vw; 
             overflow-x: hidden; 
             background-color: #000;
-            /* Sutil textura de cuero */
-            background-image: url('https://www.transparenttextures.com/patterns/black-leather.png');
             color: var(--text-primary);
             font-family: 'Glacial Indifference', sans-serif;
             font-size: 1.1rem;
             line-height: 1.6;
         }
 
-        /* LUZ AMBIENTAL TOG (Rojo y Oro) */
-        body::before {
-            content: ''; position: fixed; top: -10%; left: -10%;
-            width: 50vw; height: 50vw; background: radial-gradient(circle, var(--red-glow) 0%, transparent 70%);
-            z-index: -3; pointer-events: none; filter: blur(80px);
-        }
-        body::after {
-            content: ''; position: fixed; bottom: -20%; right: -10%;
-            width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(193, 154, 81, 0.1) 0%, transparent 70%);
-            z-index: -3; pointer-events: none; filter: blur(100px);
+        /* --- VIDEO BACKGROUND HERO --- */
+        .hero-container {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
         }
 
-        /* --- NAV FLOTANTE (Estructura idéntica) --- */
+        .video-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -2;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
+            z-index: -1;
+        }
+
+        /* --- SLOGAN ÉPICO (ESTILO LOGO) --- */
+        .slogan-epic {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: clamp(2rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            text-transform: uppercase;
+            padding: 0 5%;
+            animation: cinematicEntry 2.5s ease-out forwards;
+            background: linear-gradient(to bottom, #fff 20%, var(--tog-red) 50%, var(--dorado) 85%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(139, 0, 0, 0.6));
+        }
+
+        @keyframes cinematicEntry {
+            0% { opacity: 0; transform: scale(1.1) translateY(20px); filter: blur(10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        }
+
+        /* --- NAV FLOTANTE --- */
         .navbar {
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
             width: 95%; max-width: 1200px;
-            background: rgba(10, 10, 10, 0.7);
-            backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
+            background: rgba(10, 10, 10, 0.5);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--apple-border); border-radius: 40px; padding: 10px 25px; 
             z-index: 1000; display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
         }
 
         .nav-logo img { height: 45px; width: auto; transition: 0.3s; }
-
-        .hamburger { display: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; transition: 0.3s; }
+        .hamburger { display: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
 
         .nav-links { display: flex; align-items: center; }
         .nav-links a {
             color: var(--text-primary); text-decoration: none; margin-left: 20px;
-            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;
-            transition: 0.3s; font-weight: 700; font-family: 'League Spartan', sans-serif;
+            font-size: 0.85rem; text-transform: uppercase; font-weight: 700; font-family: 'League Spartan';
+            transition: 0.3s;
         }
-        .nav-links a:hover { color: var(--tog-red-bright); }
+        .nav-links a:hover { color: var(--tog-red-light); }
         
         .nav-cta {
-            background: linear-gradient(135deg, var(--tog-red-dark), var(--tog-red-bright));
-            color: #fff !important; padding: 10px 25px; border-radius: 30px; margin-left: 20px;
-            font-weight: 700; border: 1px solid var(--dorado); box-shadow: 0 4px 15px var(--red-glow);
+            background: linear-gradient(135deg, var(--tog-red), #500000);
+            color: #fff !important; padding: 10px 25px; border-radius: 30px;
+            border: 1px solid var(--dorado); box-shadow: 0 0 15px rgba(139, 0, 0, 0.4);
         }
 
-        /* --- HERO SECTION --- */
-        .hero-tog {
-            height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; padding: 0 5%;
-        }
-        .hero-tog img {
-            width: 100%; max-width: 500px; filter: drop-shadow(0 0 30px var(--red-glow));
-            margin-bottom: 20px;
-        }
-        .slogan {
-            font-family: 'League Spartan', sans-serif; font-weight: 900; font-size: 2.5rem;
-            text-transform: uppercase; letter-spacing: 2px; color: var(--dorado);
-            background: linear-gradient(to bottom, #C19A51, #785a28);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-
-        /* --- SECCIONES --- */
-        section { padding: 100px 5%; max-width: 1200px; margin: 0 auto; text-align: center; }
+        /* --- SECCIONES CON REVELACIÓN --- */
+        section { padding: 120px 5%; max-width: 1200px; margin: 0 auto; text-align: center; }
+        
+        .reveal { opacity: 0; transform: translateY(40px); transition: 1s all ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         .glass-card-tog {
-            background: var(--apple-surface);
-            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--apple-border); border-radius: 40px;
-            padding: 60px 40px; margin-bottom: 50px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            background: rgba(15, 15, 15, 0.7);
+            backdrop-filter: blur(30px); border: 1px solid var(--apple-border); border-radius: 40px;
+            padding: 70px 40px; box-shadow: 0 30px 60px rgba(0,0,0,0.7);
+            background-image: url('https://www.transparenttextures.com/patterns/black-leather.png');
         }
 
         h2 {
-            font-family: 'League Spartan', sans-serif; font-size: 3.5rem; font-weight: 900;
-            text-transform: uppercase; margin-bottom: 30px; color: #fff;
+            font-family: 'Cinzel Decorative'; font-size: 3.5rem; font-weight: 900;
+            margin-bottom: 30px; color: #fff; text-shadow: 0 0 20px rgba(193, 154, 81, 0.3);
         }
 
-        .tog-text { font-size: 1.25rem; color: var(--text-secondary); max-width: 800px; margin: 0 auto; }
-        .highlight-red { color: var(--tog-red-bright); font-weight: bold; }
+        .highlight-red { color: var(--tog-red-light); font-weight: bold; text-shadow: 0 0 10px rgba(255, 46, 46, 0.3); }
 
-        /* --- MISIÓN / VISIÓN TILES --- */
-        .mv-grid { display: flex; gap: 30px; margin-top: 50px; flex-wrap: wrap; }
+        .mv-grid { display: flex; gap: 30px; margin-top: 60px; flex-wrap: wrap; }
         .mv-tile {
-            flex: 1 1 350px; background: rgba(20, 20, 20, 0.4); border: 1px solid var(--apple-border);
-            border-radius: 30px; padding: 40px; text-align: left; transition: 0.4s;
+            flex: 1 1 350px; background: rgba(20, 20, 20, 0.6); border: 1px solid var(--apple-border);
+            border-radius: 30px; padding: 50px 40px; text-align: left; transition: 0.5s;
         }
-        .mv-tile:hover { border-color: var(--tog-red-bright); transform: translateY(-5px); }
-        .mv-tile h3 {
-            font-family: 'League Spartan'; font-size: 2rem; color: var(--dorado);
-            margin-bottom: 20px; text-transform: uppercase;
-        }
+        .mv-tile:hover { border-color: var(--dorado); transform: scale(1.02); background: rgba(30, 30, 30, 0.8); }
+        .mv-tile h3 { font-family: 'Cinzel Decorative'; font-size: 2rem; color: var(--dorado); margin-bottom: 20px; }
 
-        /* --- WHATSAPP CTA --- */
-        .whatsapp-section { padding-bottom: 120px; }
+        /* --- BOTÓN WHATSAPP DINÁMICO (MODO BESTIA) --- */
         .wa-btn-tog {
-            display: inline-flex; align-items: center; gap: 15px;
-            background: linear-gradient(135deg, #25d366, #128c7e);
-            color: #fff; text-decoration: none; padding: 20px 50px;
-            border-radius: 50px; font-family: 'League Spartan'; font-weight: 900;
-            font-size: 1.3rem; text-transform: uppercase; transition: 0.4s;
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
-            border: 2px solid rgba(255,255,255,0.1);
+            position: relative;
+            display: inline-flex; align-items: center; gap: 20px;
+            background: linear-gradient(135deg, var(--tog-red) 0%, #500000 50%, var(--dorado) 100%);
+            background-size: 200% auto;
+            color: #fff; text-decoration: none; padding: 25px 60px;
+            border-radius: 60px; font-family: 'League Spartan'; font-weight: 900;
+            font-size: 1.5rem; text-transform: uppercase; transition: 0.5s;
+            box-shadow: 0 15px 40px rgba(139, 0, 0, 0.5);
+            border: 2px solid var(--dorado);
+            animation: pulse-red 2s infinite;
         }
-        .wa-btn-tog:hover { transform: scale(1.05); box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5); }
-        .wa-btn-tog i { font-size: 2rem; }
 
-        footer { padding: 40px; color: var(--text-secondary); font-size: 0.9rem; text-align: center; border-top: 1px solid var(--apple-border); }
+        .wa-btn-tog:hover {
+            background-position: right center;
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 20px 50px rgba(255, 46, 46, 0.6);
+            border-color: #fff;
+        }
+
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(139, 0, 0, 0.7); }
+            70% { box-shadow: 0 0 0 25px rgba(139, 0, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(139, 0, 0, 0); }
+        }
+
+        footer { padding: 60px; color: var(--text-secondary); font-size: 0.9rem; text-align: center; border-top: 1px solid var(--apple-border); background: #050505; }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .navbar { width: 90%; top: 10px; }
+            .navbar { width: 92%; }
             .hamburger { display: block; }
             .nav-links {
                 position: absolute; top: 70px; right: 0; width: 100%;
-                background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(20px);
+                background: rgba(0, 0, 0, 0.98); backdrop-filter: blur(25px);
                 border: 1px solid var(--apple-border); border-radius: 20px;
-                flex-direction: column; padding: 25px 0; gap: 20px;
-                opacity: 0; transform: translateY(-15px); pointer-events: none; transition: 0.4s;
+                flex-direction: column; padding: 30px 0; gap: 25px;
+                opacity: 0; transform: translateY(-20px); pointer-events: none; transition: 0.4s;
             }
             .nav-links.active { opacity: 1; transform: translateY(0); pointer-events: all; }
-            .nav-links a { margin-left: 0; font-size: 1.1rem; }
+            .nav-links a { margin-left: 0; font-size: 1.2rem; }
             h2 { font-size: 2.5rem; }
-            .slogan { font-size: 1.5rem; }
+            .slogan-epic { font-size: 2.2rem; }
         }
     </style>
 </head>
@@ -170,52 +202,55 @@
     <nav class="navbar">
         <a href="index.html" class="nav-logo"><img src="logotog.png" alt="TOG Logo" onerror="this.src='https://placehold.co/200x80/000/red?text=TOG'"></a>
         
-        <div class="hamburger">
+        <div class="hamburger" id="nav-toggle">
             <i class="fas fa-bars"></i>
         </div>
 
-        <div class="nav-links">
+        <div class="nav-links" id="nav-menu">
             <a href="index.html">Academia</a>
             <a href="galeria.html">Galería</a>
             <a href="#quienes-somos">Compañía</a>
-            <a href="agenda.html" class="nav-cta">CONTACTO</a>
+            <a href="agenda.html" class="nav-cta">AGENDAR</a>
         </div>
     </nav>
 
-    <div class="hero-tog">
-        <img src="logotog.png" alt="TOG Dance Company Logo" onerror="this.style.display='none'">
-        <p class="slogan">En The Crown Entrenamos,<br>En TOG Ejecutamos</p>
+    <div class="hero-container">
+        <video class="video-bg" autoplay muted loop playsinline>
+            <source src="Thecrowndancestudio_TOG_Fondo.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+        <h1 class="slogan-epic">En The Crown Entrenamos,<br>En TOG Ejecutamos</h1>
     </div>
 
-    <section id="quienes-somos">
+    <section id="quienes-somos" class="reveal">
         <div class="glass-card-tog">
             <h2>Quiénes Somos</h2>
-            <p class="tog-text">
-                <span class="highlight-red">TOG</span> no es solo una compañía; es la culminación artística de la formación de alto rendimiento. Somos el brazo ejecutor de <span class="mv-highlight">The Crown Dance Studio</span>, integrando a los bailarines más destacados para llevar la danza desde el salón de clases hasta los escenarios profesionales más exigentes.
+            <p style="font-size: 1.4rem; color: var(--text-secondary); max-width: 900px; margin: 0 auto;">
+                <span class="highlight-red">TOG</span> es la fuerza de élite de nuestro estudio. Una compañía diseñada para bailarines que han decidido trascender el salón de clases. Aquí, la <span class="highlight-red">precisión técnica</span> se encuentra con la potencia escénica para crear ejecuciones que no solo se ven, se sienten.
                 <br><br>
-                Nuestra identidad se define por la <span class="highlight-red">precisión técnica</span>, la fuerza visual y una disciplina inquebrantable.
+                Somos la culminación del esfuerzo. La prueba real del talento.
             </p>
         </div>
 
         <div class="mv-grid">
-            <div class="mv-tile">
+            <div class="mv-tile reveal">
                 <h3>Misión</h3>
-                <p class="tog-text" style="text-align: left;">Proyectar el talento de nuestros integrantes a través de producciones de alta calidad, demostrando que la danza es una ejecución de maestría, pasión y disciplina profesional.</p>
+                <p style="color: var(--text-secondary);">Proyectar el talento de nuestros integrantes a través de producciones de alta gama, elevando los estándares de la danza profesional en cada escenario que pisamos.</p>
             </div>
-            <div class="mv-tile">
+            <div class="mv-tile reveal">
                 <h3>Visión</h3>
-                <p class="tog-text" style="text-align: left;">Consolidarnos como la compañía de danza referente en el estado por nuestra claridad pedagógica en escena y nuestra capacidad de ejecutar arte que trasciende lo convencional.</p>
+                <p style="color: var(--text-secondary);">Ser el referente nacional de ejecución artística, donde la disciplina inquebrantable y la maestría técnica definan el futuro de la danza en México.</p>
             </div>
         </div>
     </section>
 
-    <section class="whatsapp-section">
-        <h2>¿Listo para el escenario?</h2>
-        <p class="tog-text" style="margin-bottom: 40px;">Contacta con nuestra dirección artística para informes sobre contrataciones o audiciones.</p>
+    <section class="whatsapp-section reveal">
+        <h2 style="margin-bottom: 20px;">¿Tienes lo que se necesita?</h2>
+        <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 50px;">Contrataciones, audiciones y proyectos especiales.</p>
         
         <a href="https://wa.me/524423479755?text=%C2%A1Hola%20TOG!%20Me%20interesa%20saber%20m%C3%A1s%20sobre%20la%20compa%C3%B1%C3%ADa.%20En%20The%20Crown%20Entrenamos%2C%20En%20TOG%20Ejecutamos." target="_blank" class="wa-btn-tog">
             <i class="fab fa-whatsapp"></i>
-            Enviar Mensaje
+            Ejecuta con nosotros
         </a>
     </section>
 
@@ -225,26 +260,28 @@
 
     <script>
         // LÓGICA DEL MENÚ HAMBURGUESA
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
 
-        if (hamburger) {
-            hamburger.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-                const icon = hamburger.querySelector('i');
-                icon.classList.toggle('fa-bars');
-                icon.classList.toggle('fa-times');
-            });
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = navToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
 
-            navLinks.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navLinks.classList.remove('active');
-                    const icon = hamburger.querySelector('i');
-                    icon.classList.add('fa-bars');
-                    icon.classList.remove('fa-times');
-                });
+        // ANIMACIÓN DE REVELACIÓN AL HACER SCROLL
+        const reveals = document.querySelectorAll('.reveal');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
             });
-        }
+        }, { threshold: 0.1 });
+
+        reveals.forEach(reveal => observer.observe(reveal));
     </script>
 </body>
 </html>
