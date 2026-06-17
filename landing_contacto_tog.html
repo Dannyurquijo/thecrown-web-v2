@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Contacto TOG | Dance Company</title>
-    <meta name="description" content="Contacta a TOG Dance Company para contrataciones, audiciones y proyectos especiales.">
+    <title>Cotiza tu Evento | TOG Dance Company</title>
+    <meta name="description" content="Contrata a TOG Dance Company para eventos corporativos, lanzamientos y espectáculos a la medida.">
     
     <link rel="icon" type="image/png" href="logo_corona.png">
 
@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* --- AJUSTE GLOBAL --- */
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
 
         :root {
@@ -30,19 +29,12 @@
         }
         
         html, body { 
-            scroll-behavior: smooth; 
-            max-width: 100vw; 
-            overflow-x: hidden; 
-            background-color: #000;
-            background-image: url('https://www.transparenttextures.com/patterns/black-leather.png');
-            color: var(--text-primary);
-            font-family: 'Glacial Indifference', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            scroll-behavior: smooth; max-width: 100vw; overflow-x: hidden; 
+            background-color: #000; background-image: url('https://www.transparenttextures.com/patterns/black-leather.png');
+            color: var(--text-primary); font-family: 'Glacial Indifference', sans-serif;
+            min-height: 100vh; display: flex; flex-direction: column;
         }
 
-        /* --- LUZ AMBIENTAL --- */
         body::before {
             content: ''; position: fixed; top: -10%; left: -10%; width: 50vw; height: 50vw;
             background: radial-gradient(circle, rgba(139, 0, 0, 0.4) 0%, transparent 70%);
@@ -54,12 +46,9 @@
             z-index: -3; pointer-events: none; filter: blur(100px);
         }
 
-        /* --- NAV FLOTANTE (Idéntico a la página principal) --- */
         .navbar {
-            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-            width: 95%; max-width: 1200px;
-            background: rgba(10, 10, 10, 0.5);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 1200px;
+            background: rgba(10, 10, 10, 0.5); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--apple-border); border-radius: 40px; padding: 10px 25px; 
             z-index: 1000; display: flex; justify-content: space-between; align-items: center;
             box-shadow: 0 10px 40px rgba(0,0,0,0.8);
@@ -69,17 +58,14 @@
         .nav-links { display: flex; align-items: center; }
         .nav-links a {
             color: var(--text-primary); text-decoration: none; margin-left: 20px;
-            font-size: 0.85rem; text-transform: uppercase; font-weight: 700; font-family: 'League Spartan';
-            transition: 0.3s;
+            font-size: 0.85rem; text-transform: uppercase; font-weight: 700; font-family: 'League Spartan'; transition: 0.3s;
         }
         .nav-links a:hover:not(.nav-cta) { color: var(--tog-red-light); }
         
         .nav-cta {
-            position: relative;
-            background: linear-gradient(135deg, var(--tog-red), #500000);
+            position: relative; background: linear-gradient(135deg, var(--tog-red), #500000);
             color: #fff !important; padding: 10px 25px; border-radius: 30px; margin-left: 20px;
-            border: 1px solid var(--dorado); box-shadow: 0 0 15px rgba(139, 0, 0, 0.4);
-            transition: 0.4s;
+            border: 1px solid var(--dorado); box-shadow: 0 0 15px rgba(139, 0, 0, 0.4); transition: 0.4s;
         }
         .nav-cta::after {
             content: ''; position: absolute; top: 5px; left: 50%; transform: translateX(-50%) scale(0.5);
@@ -90,11 +76,9 @@
         .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(139, 0, 0, 0.6); }
         .nav-cta:hover::after { opacity: 1; transform: translateX(-50%) scale(1); top: -22px; }
 
-        /* --- CONTENEDOR DE LA LANDING --- */
         .landing-container {
             flex: 1; display: flex; justify-content: center; align-items: center;
-            padding: 140px 5% 80px 5%;
-            animation: fadeIn 1s ease-out forwards;
+            padding: 140px 5% 80px 5%; animation: fadeIn 1s ease-out forwards;
         }
         @keyframes fadeIn {
             0% { opacity: 0; transform: translateY(20px); }
@@ -102,65 +86,41 @@
         }
 
         .glass-card-tog {
-            background: rgba(15, 15, 15, 0.7);
-            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            background: rgba(15, 15, 15, 0.7); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
             border: 1px solid var(--apple-border); border-radius: 40px;
-            width: 100%; max-width: 600px; padding: 50px 40px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-            text-align: center;
+            width: 100%; max-width: 650px; padding: 50px 40px; box-shadow: 0 30px 60px rgba(0,0,0,0.8); text-align: center;
         }
 
         h1 {
-            font-family: 'Cinzel Decorative', serif; font-size: 2.8rem; font-weight: 900;
-            margin-bottom: 10px; color: #fff; text-shadow: 0 0 20px rgba(139, 0, 0, 0.6);
+            font-family: 'Cinzel Decorative', serif; font-size: 2.5rem; font-weight: 900;
+            margin-bottom: 10px; color: #fff; text-shadow: 0 0 20px rgba(139, 0, 0, 0.6); line-height: 1.2;
         }
         
         .highlight-red { color: var(--tog-red-light); }
 
         p.subtitle { color: var(--text-secondary); margin-bottom: 40px; font-size: 1.1rem; }
 
-        /* --- FORMULARIO DE ÉLITE --- */
         .form-group { text-align: left; margin-bottom: 20px; }
-        label { 
-            display: block; font-family: 'League Spartan'; font-size: 0.85rem; 
-            text-transform: uppercase; margin-bottom: 8px; color: var(--dorado); 
-            font-weight: 700; padding-left: 5px;
-        }
+        label { display: block; font-family: 'League Spartan'; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 8px; color: var(--dorado); font-weight: 700; padding-left: 5px; }
         
         input, select, textarea {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--apple-border);
-            border-radius: 15px; padding: 15px; color: #fff;
-            font-family: 'Glacial Indifference'; font-size: 1rem;
-            transition: 0.3s;
+            width: 100%; background: rgba(0, 0, 0, 0.4); border: 1px solid var(--apple-border);
+            border-radius: 15px; padding: 15px; color: #fff; font-family: 'Glacial Indifference'; font-size: 1rem; transition: 0.3s;
         }
         
-        input:focus, select:focus, textarea:focus { 
-            outline: none; border-color: var(--tog-red-light); 
-            background: rgba(20, 0, 0, 0.4); box-shadow: 0 0 15px rgba(255, 46, 46, 0.2); 
-        }
-        
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--tog-red-light); background: rgba(20, 0, 0, 0.4); box-shadow: 0 0 15px rgba(255, 46, 46, 0.2); }
         textarea { resize: vertical; min-height: 100px; }
         option { background: #111; color: #fff; }
 
-        /* --- BOTÓN DE ENVÍO DINÁMICO --- */
         .submit-btn {
             position: relative; width: 100%; padding: 20px;
             background: linear-gradient(135deg, var(--tog-red) 0%, #500000 50%, var(--dorado) 100%);
-            background-size: 200% auto;
-            color: white; border: 2px solid var(--dorado); border-radius: 20px;
-            font-family: 'League Spartan'; font-weight: 900; font-size: 1.2rem;
-            text-transform: uppercase; cursor: pointer; margin-top: 15px;
-            box-shadow: 0 10px 30px rgba(139, 0, 0, 0.4);
-            transition: 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-            animation: pulse-red 2s infinite;
+            background-size: 200% auto; color: white; border: 2px solid var(--dorado); border-radius: 20px;
+            font-family: 'League Spartan'; font-weight: 900; font-size: 1.2rem; text-transform: uppercase; cursor: pointer; margin-top: 15px;
+            box-shadow: 0 10px 30px rgba(139, 0, 0, 0.4); transition: 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); animation: pulse-red 2s infinite;
         }
         
-        .submit-btn:hover { 
-            background-position: right center; transform: translateY(-3px) scale(1.02); 
-            box-shadow: 0 20px 40px rgba(255, 46, 46, 0.5); border-color: #fff; 
-        }
+        .submit-btn:hover { background-position: right center; transform: translateY(-3px) scale(1.02); box-shadow: 0 20px 40px rgba(255, 46, 46, 0.5); border-color: #fff; }
 
         @keyframes pulse-red {
             0% { box-shadow: 0 0 0 0 rgba(139, 0, 0, 0.7); }
@@ -170,15 +130,12 @@
 
         footer { padding: 40px; color: var(--text-secondary); font-size: 0.9rem; text-align: center; border-top: 1px solid var(--apple-border); background: #050505; margin-top: auto; }
 
-        /* --- MÓVILES --- */
         @media (max-width: 768px) {
             .navbar { width: 92%; }
             .hamburger { display: block; }
             .nav-links {
-                position: absolute; top: 70px; right: 0; width: 100%;
-                background: rgba(0, 0, 0, 0.98); backdrop-filter: blur(25px);
-                border: 1px solid var(--apple-border); border-radius: 20px;
-                flex-direction: column; padding: 30px 0; gap: 25px;
+                position: absolute; top: 70px; right: 0; width: 100%; background: rgba(0, 0, 0, 0.98); backdrop-filter: blur(25px);
+                border: 1px solid var(--apple-border); border-radius: 20px; flex-direction: column; padding: 30px 0; gap: 25px;
                 opacity: 0; transform: translateY(-20px); pointer-events: none; transition: 0.4s;
             }
             .nav-links.active { opacity: 1; transform: translateY(0); pointer-events: all; }
@@ -209,51 +166,49 @@
 
     <div class="landing-container">
         <div class="glass-card-tog">
-            <h1>Forma parte de la <span class="highlight-red">Élite</span></h1>
-            <p class="subtitle">Audiciones, contrataciones y proyectos especiales.</p>
+            <h1>Impacto Visual para <span class="highlight-red">Marcas</span></h1>
+            <p class="subtitle">Espectáculos a la medida para eventos corporativos y activaciones.</p>
 
             <form id="togContactForm">
                 <div class="form-group">
-                    <label>Nombre / Organización</label>
-                    <input type="text" id="togNombre" placeholder="Tu nombre o el de tu empresa" required>
-                </div>
-
-                <div class="form-group" style="display: grid; grid-template-columns: 1fr; gap: 15px;">
-                    <div>
-                        <label>WhatsApp de Contacto</label>
-                        <input type="tel" id="togPhone" placeholder="10 dígitos" pattern="[0-9]{10}" required>
-                    </div>
+                    <label>Nombre de la Empresa o Agencia</label>
+                    <input type="text" id="togNombre" placeholder="Tu nombre o empresa productora" required>
                 </div>
 
                 <div class="form-group">
-                    <label>Tipo de Solicitud</label>
+                    <label>WhatsApp de Contacto</label>
+                    <input type="tel" id="togPhone" placeholder="10 dígitos" pattern="[0-9]{10}" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Tipo de Evento</label>
                     <select id="togMotivo" required>
-                        <option value="" disabled selected>Selecciona un motivo</option>
-                        <option value="Audición para la Compañía">Audición para la Compañía</option>
-                        <option value="Contratación para Evento">Contratación para Evento / Espectáculo</option>
-                        <option value="Taller / Masterclass">Impartir Taller / Masterclass</option>
-                        <option value="Colaboración Artística">Colaboración Artística</option>
+                        <option value="" disabled selected>Selecciona una opción</option>
+                        <option value="Lanzamiento de Marca / Producto">Lanzamiento de Marca / Producto</option>
+                        <option value="Cena de Gala / Fiesta Corporativa">Cena de Gala / Fiesta Corporativa</option>
+                        <option value="Activación BTL">Activación BTL / Performance</option>
+                        <option value="Espectáculo en Festival / Concierto">Espectáculo en Festival / Concierto</option>
+                        <option value="Otro Requerimiento Empresarial">Otro Requerimiento Empresarial</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label>Mensaje Breve</label>
-                    <textarea id="togMensaje" placeholder="Cuéntanos un poco sobre tu proyecto o trayectoria..." required></textarea>
+                    <label>Detalles del Requerimiento</label>
+                    <textarea id="togMensaje" placeholder="Cuéntanos brevemente sobre la fecha, concepto o idea de tu evento..." required></textarea>
                 </div>
 
                 <button type="submit" class="submit-btn">
-                    <i class="fab fa-whatsapp" style="margin-right: 8px;"></i> Enviar Solicitud
+                    <i class="fab fa-whatsapp" style="margin-right: 8px;"></i> Iniciar Cotización
                 </button>
             </form>
         </div>
     </div>
 
     <footer>
-        <p>© 2026 TOG Dance Company | The Crown Ecosystem</p>
+        <p>© 2026 TOG Dance Company | Producción y Entretenimiento Corporativo</p>
     </footer>
 
     <script>
-        // --- LÓGICA DEL MENÚ HAMBURGUESA ---
         const navToggle = document.getElementById('nav-toggle');
         const navMenu = document.getElementById('nav-menu');
 
@@ -264,7 +219,6 @@
             icon.classList.toggle('fa-times');
         });
 
-        // --- LÓGICA DE ENVÍO A WHATSAPP ---
         document.getElementById('togContactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -273,16 +227,13 @@
             const motivo = document.getElementById('togMotivo').value;
             const mensaje = document.getElementById('togMensaje').value;
 
-            // Formateo del mensaje para WhatsApp
-            const textoWhatsApp = `¡Hola TOG! 👑🔥%0A%0ASoy *${nombre}*.%0A%0A*Me interesa:* ${motivo}%0A*Mi número:* ${telefono}%0A%0A*Detalles:* ${mensaje}%0A%0A_En The Crown Entrenamos, En TOG Ejecutamos._`;
+            // Formateo del mensaje corporativo para WhatsApp
+            const textoWhatsApp = `¡Hola TOG! 👑🔥%0A%0ASomos *${nombre}*.%0A%0A*Nos interesa cotizar para:* ${motivo}%0A*WhatsApp de contacto:* ${telefono}%0A%0A*Detalles del evento:* ${mensaje}%0A%0A_En The Crown Entrenamos, En TOG Ejecutamos._`;
             
-            // Número de WhatsApp de TOG (4423479755)
+            // Número de WhatsApp (4423479755)
             const url = `https://wa.me/524423479755?text=${textoWhatsApp}`;
             
-            // Abrir WhatsApp en una nueva pestaña
             window.open(url, '_blank');
-            
-            // Opcional: Limpiar el formulario
             this.reset();
         });
     </script>
