@@ -124,7 +124,9 @@
             transition: 0.3s;
         }
         input:focus, select:focus { outline: none; border-color: var(--rosa-neon); background: rgba(255,255,255,0.1); box-shadow: 0 0 15px var(--rosa-glow); }
-        option { background: var(--apple-dark); color: #fff; }
+        
+        option { background: var(--apple-dark); color: #fff; font-family: 'Glacial Indifference'; }
+        optgroup { background: var(--apple-dark); color: var(--dorado); font-family: 'League Spartan'; font-weight: 700; font-size: 1rem; }
 
         /* --- BOTÓN DE ENVÍO --- */
         .submit-btn {
@@ -224,10 +226,49 @@
                     <label>Disciplina de interés</label>
                     <select required>
                         <option value="" disabled selected>Selecciona una clase</option>
-                        <option value="urbano">Urbano (Hip Hop / Reggaetón)</option>
-                        <option value="tecnica">Técnica (Ballet / Jazz)</option>
-                        <option value="kids">Kids (Baby Ballet / Jazz Kids)</option>
-                        <option value="complementario">Aéreo / Acrobacia</option>
+                        
+                        <optgroup label="INFANTIL (KIDS)">
+                            <option value="baby_ballet">Baby Ballet</option>
+                            <option value="ballet_kids">Ballet Kids</option>
+                            <option value="hip_hop_kids">Hip Hop Kids</option>
+                            <option value="jazz_kids">Jazz Kids</option>
+                            <option value="circo_kids">Circo Kids</option>
+                            <option value="danza_aerea_kids">Danza Aérea Kids</option>
+                        </optgroup>
+
+                        <optgroup label="URBANO">
+                            <option value="urbano">Urbano (Adultos / Multinivel)</option>
+                            <option value="hip_hop_1">Hip Hop 1</option>
+                            <option value="hip_hop_2">Hip Hop 2</option>
+                            <option value="hip_hop_multinivel">Hip Hop Multinivel</option>
+                            <option value="reggaeton">Reggaetón</option>
+                            <option value="kpop">K-Pop</option>
+                        </optgroup>
+
+                        <optgroup label="CONTEMPORÁNEO">
+                            <option value="contemporaneo_1">Contemporáneo 1</option>
+                            <option value="contemporaneo_2">Contemporáneo 2</option>
+                            <option value="contemporaneo_teens">Contemporáneo Teens</option>
+                            <option value="contemporaneo_multinivel">Contemporáneo Multinivel</option>
+                            <option value="contemporaneo_piso">Contemporáneo Piso</option>
+                        </optgroup>
+
+                        <optgroup label="TÉCNICA (BALLET / JAZZ)">
+                            <option value="ballet_1">Ballet 1</option>
+                            <option value="ballet_2">Ballet 2</option>
+                            <option value="puntas">Puntas</option>
+                            <option value="jazz_1">Jazz 1</option>
+                            <option value="jazz_2">Jazz 2</option>
+                        </optgroup>
+
+                        <optgroup label="ESPECIALIDADES Y ACONDICIONAMIENTO">
+                            <option value="heels">Heels</option>
+                            <option value="danza_aerea_multinivel">Danza Aérea Multinivel</option>
+                            <option value="acrobacia">Trucos Acrobáticos / Acrobacia</option>
+                            <option value="flexibilidad">Flexibilidad y Balances</option>
+                            <option value="acondicionamiento">Acondicionamiento para Bailarines</option>
+                            <option value="fitness_dance">Fitness Dance</option>
+                        </optgroup>
                     </select>
                 </div>
 
