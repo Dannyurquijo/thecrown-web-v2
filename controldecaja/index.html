@@ -53,7 +53,7 @@
 
         h1, h2, h3 { font-family: 'League Spartan', sans-serif; text-transform: uppercase; }
 
-        /* Contenedores Glassmorphism (Adaptativos) */
+        /* Contenedores Glassmorphism */
         .glass-card {
             background: var(--superficie);
             backdrop-filter: blur(20px);
@@ -81,18 +81,13 @@
         }
         .pin-input:focus { outline: none; border-color: var(--rosa-neon); }
 
-        /* Estructura Principal (Oculta al inicio) */
-        #main-content {
-            display: none; width: 100%; max-width: 1200px;
-        }
+        /* Estructura Principal */
+        #main-content { display: none; width: 100%; max-width: 1200px; }
         
-        /* Grid Responsivo para Formularios */
         .forms-grid {
             display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 30px;
         }
-        @media (min-width: 768px) {
-            .forms-grid { grid-template-columns: 1fr 1fr; }
-        }
+        @media (min-width: 768px) { .forms-grid { grid-template-columns: 1fr 1fr; } }
 
         /* Elementos de Formulario */
         .form-group { text-align: left; margin-bottom: 15px; }
@@ -103,8 +98,6 @@
             font-family: 'Glacial Indifference'; font-size: 1rem;
         }
         input:focus, select:focus { outline: none; border-color: var(--dorado); }
-        
-        /* SOLUCIÓN AL MENÚ DESPLEGABLE */
         select option { background-color: #0A0A0A; color: #FFFFFF; font-family: 'Glacial Indifference', sans-serif; }
 
         /* Botones */
@@ -120,25 +113,27 @@
         .btn-outline { background: transparent; color: white; border: 2px solid var(--texto-secundario); margin-bottom: 20px; }
         .btn-outline:hover { border-color: white; }
 
+        .btn-filtro { padding: 8px 15px; font-size: 0.9rem; margin-top: 0; width: auto; opacity: 0.6; }
+        .btn-filtro.activo { opacity: 1; box-shadow: 0 0 15px rgba(255,255,255,0.2); }
+
         .alert { margin-top: 15px; font-size: 0.9rem; display: none; text-align: center; }
 
-        /* Modal para el PIN 2 */
+        /* Modal y Gráficas */
         #modal-graficas {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
             justify-content: center; align-items: center; z-index: 1000; padding: 20px;
         }
-
-        /* Sección de Gráficas (Oculta al inicio) */
-        #seccion-graficas { display: none; margin-top: 20px; }
-        .chart-container { position: relative; height: 300px; width: 100%; }
+        #seccion-graficas { display: none; margin-top: 20px; text-align: center; }
+        .chart-container { position: relative; height: 300px; width: 100%; margin-top: 20px; }
         @media (min-width: 768px) { .chart-container { height: 400px; } }
-
+        
+        #loading-datos { color: var(--rosa-neon); margin-top: 20px; font-weight: bold; display: none; }
     </style>
 </head>
 <body>
 
-    <!-- CAPA 1: PANTALLA DE BLOQUEO PRINCIPAL -->
+    <!-- CAPA 1: PANTALLA DE BLOQUEO (Recepción) -->
     <div id="login-screen" class="login-container">
         <div class="glass-card login-box">
             <h1>THE CROWN</h1>
@@ -149,10 +144,8 @@
         </div>
     </div>
 
-    <!-- CONTENIDO PRINCIPAL (Formularios) -->
+    <!-- CONTENIDO PRINCIPAL -->
     <div id="main-content">
-        
-        <!-- Botón para solicitar gráficas -->
         <button class="btn btn-outline" onclick="abrirModalGraficas()">📊 Ver Balance y Gráficas (Requiere Autorización)</button>
 
         <div class="forms-grid">
@@ -169,15 +162,15 @@
                         <input type="number" id="corteFinal" required oninput="calcularNeto()">
                     </div>
                     <div class="form-group">
-                        <label>Ingreso Neto Calculado ($)</label>
+                        <label>Ingreso Neto ($)</label>
                         <input type="number" id="ingresoNeto" readonly style="background: rgba(255,102,196,0.1); color: var(--rosa-neon); font-weight: bold;">
                     </div>
                     <div class="form-group">
-                        <label>Responsable en Turno</label>
+                        <label>Responsable</label>
                         <input type="text" id="respCorte" required placeholder="Nombre de recepción">
                     </div>
                     <button type="submit" class="btn btn-rosa" id="btnCorte">Guardar Corte</button>
-                    <p id="msgCorte" class="alert" style="color: #4CAF50;">¡Corte registrado con éxito!</p>
+                    <p id="msgCorte" class="alert" style="color: #4CAF50;">¡Corte registrado!</p>
                 </form>
             </div>
 
@@ -201,7 +194,7 @@
                         <input type="number" id="montoEgreso" required>
                     </div>
                     <div class="form-group">
-                        <label>Descripción del Gasto</label>
+                        <label>Descripción</label>
                         <input type="text" id="descEgreso" required placeholder="Ej. Focos, quincena, etc.">
                     </div>
                     <div class="form-group">
@@ -209,45 +202,51 @@
                         <input type="text" id="respEgreso" required placeholder="Tu nombre">
                     </div>
                     <button type="submit" class="btn btn-dorado" id="btnEgreso">Registrar Egreso</button>
-                    <p id="msgEgreso" class="alert" style="color: #4CAF50;">¡Egreso registrado con éxito!</p>
+                    <p id="msgEgreso" class="alert" style="color: #4CAF50;">¡Egreso registrado!</p>
                 </form>
             </div>
         </div>
 
-        <!-- SECCIÓN DE GRÁFICAS (Oculta hasta PIN 2) -->
+        <!-- SECCIÓN DE GRÁFICAS -->
         <div id="seccion-graficas" class="glass-card">
-            <h2 style="color: white; margin-bottom: 15px; text-align: center;">Balance Financiero</h2>
-            <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap;">
-                <button class="btn btn-rosa" style="width: auto; padding: 10px 20px;" onclick="actualizarGrafica('diario')">Diario</button>
-                <button class="btn btn-dorado" style="width: auto; padding: 10px 20px;" onclick="actualizarGrafica('semanal')">Semanal</button>
+            <h2 style="color: white; margin-bottom: 5px;">Balance Financiero</h2>
+            <p id="loading-datos">Conectando con la base de datos...</p>
+            
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px; flex-wrap: wrap;" id="controles-grafica" style="display: none;">
+                <button id="btn-diario" class="btn btn-rosa btn-filtro" onclick="procesarYDibujar('diario')">Diario (Hoy)</button>
+                <button id="btn-semanal" class="btn btn-dorado btn-filtro activo" onclick="procesarYDibujar('semanal')">Últimos 7 días</button>
+                <button id="btn-mensual" class="btn btn-outline btn-filtro" style="margin-bottom:0;" onclick="procesarYDibujar('mensual')">Mes Actual</button>
             </div>
+            
             <div class="chart-container">
                 <canvas id="miGrafica"></canvas>
             </div>
         </div>
     </div>
 
-    <!-- CAPA 2: MODAL PARA PIN DE GRÁFICAS -->
+    <!-- CAPA 2: MODAL PARA PIN MAESTRO -->
     <div id="modal-graficas">
         <div class="glass-card login-box">
             <h2 style="color: var(--rosa-neon); margin-bottom: 15px;">Acceso Directivo</h2>
             <p style="color: var(--texto-secundario); margin-bottom: 20px;">Ingresa el PIN maestro para ver gráficas.</p>
             <input type="password" id="pin-input-2" class="pin-input" maxlength="4" placeholder="••••">
-            <button class="btn btn-rosa" onclick="verificarPIN2()">Visualizar Datos</button>
+            <button class="btn btn-rosa" onclick="verificarPIN2()">Descargar Datos</button>
             <button class="btn btn-outline" style="margin-top:10px; padding: 10px;" onclick="cerrarModalGraficas()">Cancelar</button>
             <p id="error-pin-2" class="alert" style="color: #ff4444;">PIN incorrecto</p>
         </div>
     </div>
 
     <script>
-        // --- CONFIGURACIÓN ---
-        // PEGA AQUÍ TU URL DE GOOGLE APPS SCRIPT
-        const scriptURL = 'TU_URL_DE_APPS_SCRIPT_AQUI';
+        // ==========================================
+        // 1. CONFIGURACIÓN VITAL
+        // ==========================================
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzCqyq555AUPc4jm6RS05eG6eqa1cM9K_jSH4NtNANvyiUjIU2FBrOz8NYLQDbffREs8g/exec'; // <--- ¡PEGA TU URL AQUÍ!
 
-        // --- LÓGICA DE SEGURIDAD CAPA 1 (Recepción) ---
+        // ==========================================
+        // 2. SEGURIDAD Y PANTALLAS
+        // ==========================================
         function verificarPIN1() {
-            const pin = document.getElementById('pin-input-1').value;
-            if (pin === '1234') {
+            if (document.getElementById('pin-input-1').value === '1234') {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
             } else {
@@ -256,121 +255,120 @@
             }
         }
 
-        // --- LÓGICA DE SEGURIDAD CAPA 2 (Directiva) ---
-        function abrirModalGraficas() {
-            document.getElementById('modal-graficas').style.display = 'flex';
-        }
-        function cerrarModalGraficas() {
+        function abrirModalGraficas() { document.getElementById('modal-graficas').style.display = 'flex'; }
+        function cerrarModalGraficas() { 
             document.getElementById('modal-graficas').style.display = 'none';
             document.getElementById('pin-input-2').value = '';
         }
 
-        let graficaFinanciera; // Variable global para la gráfica
-
         function verificarPIN2() {
-            const pin = document.getElementById('pin-input-2').value;
-            if (pin === '4321') {
+            if (document.getElementById('pin-input-2').value === '4321') {
                 cerrarModalGraficas();
                 document.getElementById('seccion-graficas').style.display = 'block';
-                // Iniciar gráfica solo cuando se desbloquea
-                if(!graficaFinanciera) inicializarGrafica(); 
-                // Desplazar pantalla hacia abajo suavemente
                 document.getElementById('seccion-graficas').scrollIntoView({ behavior: 'smooth' });
+                
+                // Si aún no hay datos, descargarlos de Google Sheets
+                if (!datosCrudos) {
+                    descargarDatos();
+                }
             } else {
                 document.getElementById('error-pin-2').style.display = 'block';
                 setTimeout(() => document.getElementById('error-pin-2').style.display = 'none', 3000);
             }
         }
 
-        // --- CÁLCULOS Y FORMULARIOS ---
+        // ==========================================
+        // 3. ENVÍO DE DATOS A GOOGLE SHEETS
+        // ==========================================
         function calcularNeto() {
             const inicial = parseFloat(document.getElementById('fondoInicial').value) || 0;
             const final = parseFloat(document.getElementById('corteFinal').value) || 0;
             document.getElementById('ingresoNeto').value = (final - inicial).toFixed(2);
         }
 
+        function peticionPost(datos, btnId, msgId, formId, txtOriginal) {
+            const btn = document.getElementById(btnId);
+            btn.innerText = 'Guardando...'; btn.disabled = true;
+
+            fetch(scriptURL, {
+                method: 'POST', body: JSON.stringify(datos),
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+            })
+            .then(() => {
+                document.getElementById(msgId).style.display = 'block';
+                document.getElementById(formId).reset();
+                setTimeout(() => document.getElementById(msgId).style.display = 'none', 3000);
+                
+                // Si la gráfica ya estaba abierta, forzar recarga silenciosa de datos
+                if(datosCrudos) descargarDatos(true); 
+            })
+            .catch(err => alert('Error: ' + err.message))
+            .finally(() => { btn.innerText = txtOriginal; btn.disabled = false; });
+        }
+
         function enviarCorte(e) {
             e.preventDefault();
-            const btn = document.getElementById('btnCorte');
-            btn.innerText = 'Guardando...';
-            btn.disabled = true;
-
-            const datos = {
+            peticionPost({
                 tipo: "corte",
                 fondoInicial: document.getElementById('fondoInicial').value,
                 corteFinal: document.getElementById('corteFinal').value,
                 ingresoNeto: document.getElementById('ingresoNeto').value,
                 responsable: document.getElementById('respCorte').value
-            };
-
-            fetch(scriptURL, {
-                method: 'POST', body: JSON.stringify(datos),
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-            })
-            .then(res => {
-                document.getElementById('msgCorte').style.display = 'block';
-                document.getElementById('formCorte').reset();
-                setTimeout(() => document.getElementById('msgCorte').style.display = 'none', 3000);
-            })
-            .catch(error => alert('Error: ' + error.message))
-            .finally(() => { btn.innerText = 'Guardar Corte'; btn.disabled = false; });
+            }, 'btnCorte', 'msgCorte', 'formCorte', 'Guardar Corte');
         }
 
         function enviarEgreso(e) {
             e.preventDefault();
-            const btn = document.getElementById('btnEgreso');
-            btn.innerText = 'Registrando...';
-            btn.disabled = true;
-
-            const datos = {
+            peticionPost({
                 tipo: "egreso",
                 categoria: document.getElementById('categoriaEgreso').value,
                 monto: document.getElementById('montoEgreso').value,
                 descripcion: document.getElementById('descEgreso').value,
                 responsable: document.getElementById('respEgreso').value
-            };
-
-            fetch(scriptURL, {
-                method: 'POST', body: JSON.stringify(datos),
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-            })
-            .then(res => {
-                document.getElementById('msgEgreso').style.display = 'block';
-                document.getElementById('formEgreso').reset();
-                setTimeout(() => document.getElementById('msgEgreso').style.display = 'none', 3000);
-            })
-            .catch(error => alert('Error: ' + error.message))
-            .finally(() => { btn.innerText = 'Registrar Egreso'; btn.disabled = false; });
+            }, 'btnEgreso', 'msgEgreso', 'formEgreso', 'Registrar Egreso');
         }
 
-        // --- INICIALIZACIÓN DE GRÁFICAS (CHART.JS) ---
-        function inicializarGrafica() {
+        // ==========================================
+        // 4. LÓGICA DE GRÁFICAS Y MOTOR MATEMÁTICO
+        // ==========================================
+        let graficaFinanciera;
+        let datosCrudos = null; // Aquí vivirá la base de datos descargada
+
+        // Descarga inicial desde Apps Script
+        function descargarDatos(silencioso = false) {
+            if(!silencioso) document.getElementById('loading-datos').style.display = 'block';
+            
+            fetch(scriptURL)
+                .then(res => res.json())
+                .then(data => {
+                    datosCrudos = data;
+                    if(!silencioso) {
+                        document.getElementById('loading-datos').style.display = 'none';
+                        inicializarGraficaVacia();
+                    }
+                    procesarYDibujar('semanal'); // Vista por defecto
+                })
+                .catch(err => {
+                    document.getElementById('loading-datos').innerText = "Error de conexión. Intenta recargar.";
+                    console.error(err);
+                });
+        }
+
+        // Crear la estructura visual vacía de Chart.js
+        function inicializarGraficaVacia() {
+            if (graficaFinanciera) graficaFinanciera.destroy();
             const ctx = document.getElementById('miGrafica').getContext('2d');
             Chart.defaults.color = '#a1a1a6';
             Chart.defaults.font.family = "'Glacial Indifference', sans-serif";
 
             graficaFinanciera = new Chart(ctx, {
                 type: 'bar',
-                data: {
-                    labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'], // Datos de prueba
-                    datasets: [
-                        {
-                            label: 'Ingresos Netos',
-                            data: [1200, 1900, 800, 1500, 2200, 3000],
-                            backgroundColor: '#FF66C4',
-                            borderRadius: 5
-                        },
-                        {
-                            label: 'Egresos',
-                            data: [300, 150, 0, 500, 200, 1000],
-                            backgroundColor: '#C19A51',
-                            borderRadius: 5
-                        }
-                    ]
-                },
+                data: { labels: [], datasets: [
+                    { label: 'Ingresos Netos', data: [], backgroundColor: '#FF66C4', borderRadius: 5 },
+                    { label: 'Egresos', data: [], backgroundColor: '#C19A51', borderRadius: 5 }
+                ]},
                 options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
+                    responsive: true, maintainAspectRatio: false,
                     plugins: { legend: { position: 'top' } },
                     scales: {
                         y: { grid: { color: 'rgba(255, 255, 255, 0.1)' }, beginAtZero: true },
@@ -380,8 +378,72 @@
             });
         }
 
-        function actualizarGrafica(vista) {
-            alert("En el futuro, este botón filtrará la vista " + vista + " leyendo tu Google Sheet.");
+        // Filtrar y Matemáticas
+        function procesarYDibujar(filtro) {
+            if (!datosCrudos) return;
+
+            // Actualizar estilo de botones
+            document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('activo'));
+            document.getElementById('btn-' + filtro).classList.add('activo');
+
+            const hoy = new Date();
+            hoy.setHours(0,0,0,0);
+            
+            let fechaLimite = new Date();
+            let esMensual = false;
+
+            if (filtro === 'diario') {
+                fechaLimite.setDate(hoy.getDate()); // Solo de hoy
+            } else if (filtro === 'semanal') {
+                fechaLimite.setDate(hoy.getDate() - 6); // Hace 7 días
+            } else if (filtro === 'mensual') {
+                fechaLimite.setDate(1); // Desde el día 1 del mes actual
+                esMensual = true;
+            }
+
+            let reporteAgrupado = {};
+
+            // Función interna para organizar ingresos y egresos
+            const agruparFila = (filaFechaStr, montoStr, tipo) => {
+                let fechaRegistro = new Date(filaFechaStr);
+                fechaRegistro.setHours(0,0,0,0);
+                
+                // Solo procesar si entra en el rango de tiempo
+                if (fechaRegistro >= fechaLimite) {
+                    let monto = parseFloat(montoStr) || 0;
+                    
+                    // Crear la etiqueta (ej. "15/09")
+                    let etiqueta = fechaRegistro.toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit' });
+                    
+                    if (!reporteAgrupado[etiqueta]) {
+                        reporteAgrupado[etiqueta] = { ingresos: 0, egresos: 0, ms: fechaRegistro.getTime() };
+                    }
+                    reporteAgrupado[etiqueta][tipo] += monto;
+                }
+            };
+
+            // Recorrer los datos crudos (Cortes Columna 3 es Ingreso Neto, Egresos Columna 2 es Monto)
+            if (datosCrudos.cortes) datosCrudos.cortes.forEach(fila => agruparFila(fila[0], fila[3], 'ingresos'));
+            if (datosCrudos.egresos) datosCrudos.egresos.forEach(fila => agruparFila(fila[0], fila[2], 'egresos'));
+
+            // Extraer las fechas ordenadas
+            let etiquetasOrdenadas = Object.keys(reporteAgrupado).sort((a, b) => reporteAgrupado[a].ms - reporteAgrupado[b].ms);
+            
+            // Si es vista diaria y no hay datos, forzar que salga "Hoy" en ceros
+            if (filtro === 'diario' && etiquetasOrdenadas.length === 0) {
+                let etiquetaHoy = hoy.toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit' });
+                etiquetasOrdenadas = [etiquetaHoy];
+                reporteAgrupado[etiquetaHoy] = { ingresos: 0, egresos: 0 };
+            }
+
+            let datosIngresos = etiquetasOrdenadas.map(etiqueta => reporteAgrupado[etiqueta].ingresos);
+            let datosEgresos = etiquetasOrdenadas.map(etiqueta => reporteAgrupado[etiqueta].egresos);
+
+            // Inyectar en la gráfica y actualizar
+            graficaFinanciera.data.labels = etiquetasOrdenadas;
+            graficaFinanciera.data.datasets[0].data = datosIngresos;
+            graficaFinanciera.data.datasets[1].data = datosEgresos;
+            graficaFinanciera.update();
         }
     </script>
 </body>
