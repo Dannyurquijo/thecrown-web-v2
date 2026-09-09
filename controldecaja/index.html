@@ -447,36 +447,58 @@
             graficaFinanciera.update();
         }
 
-        // --- EXPORTAR A PDF (CORREGIDO PARA MODO OSCURO) ---
+       // --- EXPORTAR A PDF (MÉTODO BLINDADO DUPIXELCODE) ---
         function generarPDF() {
             const elemento = document.getElementById('reporte-exportar');
             const boton = document.getElementById('btn-descargar-pdf');
+            const canvas = document.getElementById('miGrafica');
             
-            // Ocultamos controles durante la captura para un reporte limpio
+            // 1. Ocultar botones para un reporte limpio
             document.getElementById('controles-grafica').style.display = 'none';
             boton.innerHTML = 'Generando archivo... ⏳'; 
             boton.disabled = true;
 
-            // Aplicamos los colores estrictos de DUPIXELCODE al contenedor antes de la foto
-            elemento.style.backgroundColor = '#0A0A0A'; // Modo oscuro premium
-            elemento.style.color = '#FFFFFF';           // Texto blanco puro para alta legibilidad
+            // 2. TRUCO INFALIBLE: Convertir la gráfica a imagen estática
+            // Esto evita que el PDF colapse con las animaciones y transparencias
+            const imgCanvas = document.createElement('img');
+            imgCanvas.src = canvas.toDataURL('image/png', 1.0);
+            imgCanvas.style.width = '100%';
+            imgCanvas.style.maxHeight = '400px'; 
+            imgCanvas.style.objectFit = 'contain';
+            
+            // Escondemos el canvas real interactivo y mostramos la foto
+            canvas.style.display = 'none';
+            canvas.parentNode.appendChild(imgCanvas);
+
+            // 3. Forzar el diseño de DUPIXELCODE para el PDF
+            const estiloOriginal = elemento.getAttribute('style') || '';
+            elemento.style.backgroundColor = '#0A0A0A'; // Fondo oscuro premium
+            elemento.style.color = '#FFFFFF';           // Texto blanco puro
+            elemento.style.padding = '30px';
+            elemento.style.borderRadius = '0px';        // Quitar bordes redondos para el PDF
 
             const opt = {
                 margin:       10,
                 filename:     `Reporte_TheCrown_${filtroActualStr.replace(/\s+/g, '_')}.pdf`,
-                image:        { type: 'png', quality: 1 }, // <-- CLAVE: PNG evita la corrupción negra del JPEG
+                image:        { type: 'jpeg', quality: 1 }, 
                 html2canvas:  { 
                     scale: 2, 
-                    backgroundColor: '#0A0A0A', // Refuerzo de fondo oscuro
-                    useCORS: true               // Permite leer la gráfica de Chart.js sin bloqueos
+                    backgroundColor: '#0A0A0A',
+                    useCORS: true
                 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
             };
 
+            // 4. Tomar la foto y guardar el PDF
             html2pdf().set(opt).from(elemento).save().then(() => {
-                // Restauramos la vista en la página web
+                
+                // 5. Restaurar la página a su estado original interactivo
+                canvas.style.display = 'block';
+                imgCanvas.remove();
+                
+                elemento.setAttribute('style', estiloOriginal); // Devolver transparencias
                 document.getElementById('controles-grafica').style.display = 'flex';
-                elemento.style.backgroundColor = 'transparent';
+                
                 boton.innerHTML = '📥 Descargar Reporte PDF'; 
                 boton.disabled = false;
             });
