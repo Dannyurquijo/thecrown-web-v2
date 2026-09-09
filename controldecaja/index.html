@@ -447,31 +447,38 @@
             graficaFinanciera.update();
         }
 
-        // --- EXPORTAR A PDF ---
+        // --- EXPORTAR A PDF (CORREGIDO PARA MODO OSCURO) ---
         function generarPDF() {
             const elemento = document.getElementById('reporte-exportar');
             const boton = document.getElementById('btn-descargar-pdf');
             
             // Ocultamos controles durante la captura para un reporte limpio
             document.getElementById('controles-grafica').style.display = 'none';
-            boton.innerHTML = 'Generando archivo... ⏳'; boton.disabled = true;
+            boton.innerHTML = 'Generando archivo... ⏳'; 
+            boton.disabled = true;
 
-            // Fijamos un fondo sólido negro oscuro para el PDF 
-            elemento.style.background = '#0d0d0d';
+            // Aplicamos los colores estrictos de DUPIXELCODE al contenedor antes de la foto
+            elemento.style.backgroundColor = '#0A0A0A'; // Modo oscuro premium
+            elemento.style.color = '#FFFFFF';           // Texto blanco puro para alta legibilidad
 
             const opt = {
                 margin:       10,
                 filename:     `Reporte_TheCrown_${filtroActualStr.replace(/\s+/g, '_')}.pdf`,
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, backgroundColor: '#0d0d0d' },
+                image:        { type: 'png', quality: 1 }, // <-- CLAVE: PNG evita la corrupción negra del JPEG
+                html2canvas:  { 
+                    scale: 2, 
+                    backgroundColor: '#0A0A0A', // Refuerzo de fondo oscuro
+                    useCORS: true               // Permite leer la gráfica de Chart.js sin bloqueos
+                },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
             };
 
             html2pdf().set(opt).from(elemento).save().then(() => {
-                // Restauramos la vista
+                // Restauramos la vista en la página web
                 document.getElementById('controles-grafica').style.display = 'flex';
-                elemento.style.background = 'transparent';
-                boton.innerHTML = '📥 Descargar Reporte PDF'; boton.disabled = false;
+                elemento.style.backgroundColor = 'transparent';
+                boton.innerHTML = '📥 Descargar Reporte PDF'; 
+                boton.disabled = false;
             });
         }
     </script>
