@@ -21,6 +21,7 @@
             --texto-principal: #ffffff;
             --texto-secundario: #a1a1a6;
         }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             background-color: var(--fondo); color: var(--texto-principal);
@@ -38,13 +39,15 @@
             background: radial-gradient(circle, rgba(193, 154, 81, 0.15) 0%, transparent 70%);
             z-index: -1; filter: blur(80px);
         }
+
         h1, h2, h3 { font-family: 'League Spartan', sans-serif; text-transform: uppercase; }
-        
+
         .glass-card {
             background: var(--superficie); backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px); border: 1px solid var(--borde);
             border-radius: 24px; padding: 30px; width: 100%; box-shadow: 0 20px 40px rgba(0,0,0,0.8);
         }
+
         .login-container { display: flex; justify-content: center; align-items: center; min-height: 80vh; width: 100%; }
         .login-box { max-width: 400px; text-align: center; }
         .login-box h1 { color: var(--dorado); margin-bottom: 10px; font-size: 2.5rem; }
@@ -80,9 +83,9 @@
         .btn-dorado:hover { box-shadow: 0 0 20px rgba(193,154,81,0.4); transform: translateY(-2px); }
         .btn-outline { background: transparent; color: white; border: 2px solid var(--texto-secundario); margin-bottom: 20px; }
         .btn-outline:hover { border-color: white; }
-
         .btn-filtro { padding: 8px 15px; font-size: 0.9rem; margin-top: 0; width: auto; opacity: 0.6; }
         .btn-filtro.activo { opacity: 1; box-shadow: 0 0 15px rgba(255,255,255,0.2); }
+
         .alert { margin-top: 15px; font-size: 0.9rem; display: none; text-align: center; }
 
         #modal-graficas {
@@ -98,7 +101,7 @@
 </head>
 <body>
 
-    <!-- CAPA 1: RECEPCIÓN -->
+    <!-- LOGIN -->
     <div id="login-screen" class="login-container">
         <div class="glass-card login-box">
             <h1>THE CROWN</h1>
@@ -109,11 +112,11 @@
         </div>
     </div>
 
+    <!-- MAIN DASHBOARD -->
     <div id="main-content">
         <button class="btn btn-outline" onclick="abrirModalGraficas()">📊 Ver Balance y Gráficas (Requiere Autorización)</button>
 
         <div class="forms-grid">
-            <!-- ARQUEO -->
             <div class="glass-card">
                 <h2 style="color: var(--rosa-neon); margin-bottom: 25px; text-align: center;">Corte de Caja Diario</h2>
                 <form id="formCorte" onsubmit="enviarCorte(event)">
@@ -138,7 +141,6 @@
                 </form>
             </div>
 
-            <!-- EGRESOS -->
             <div class="glass-card">
                 <h2 style="color: var(--dorado); margin-bottom: 25px; text-align: center;">Registro de Egresos</h2>
                 <form id="formEgreso" onsubmit="enviarEgreso(event)">
@@ -171,10 +173,9 @@
             </div>
         </div>
 
-        <!-- GRÁFICAS -->
         <div id="seccion-graficas" class="glass-card">
             <h2 style="color: white; margin-bottom: 5px;">Balance Financiero</h2>
-            <p id="loading-datos">Conectando con la base de datos segura...</p>
+            <p id="loading-datos">Conectando con la base de datos...</p>
             
             <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px; flex-wrap: wrap;" id="controles-grafica" style="display: none;">
                 <button id="btn-diario" class="btn btn-rosa btn-filtro" onclick="procesarYDibujar('diario')">Diario (Hoy)</button>
@@ -188,7 +189,7 @@
         </div>
     </div>
 
-    <!-- MODAL DIRECTIVO -->
+    <!-- MODAL GRÁFICAS -->
     <div id="modal-graficas">
         <div class="glass-card login-box">
             <h2 style="color: var(--rosa-neon); margin-bottom: 15px;">Acceso Directivo</h2>
@@ -202,7 +203,7 @@
 
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzCqyq555AUPc4jm6RS05eG6eqa1cM9K_jSH4NtNANvyiUjIU2FBrOz8NYLQDbffREs8g/exec';
-        //const scriptURL = "https://script.google.com/macros/s/AKfycbzCqyq555AUPc4jm6RS05eG6eqa1cM9K_jSH4NtNANvyiUjIU2FBrOz8NYLQDbffREs8g/exec"
+
         // --- SEGURIDAD ---
         function verificarPIN1() {
             if (document.getElementById('pin-input-1').value === '1234') {
@@ -225,14 +226,17 @@
                 cerrarModalGraficas();
                 document.getElementById('seccion-graficas').style.display = 'block';
                 document.getElementById('seccion-graficas').scrollIntoView({ behavior: 'smooth' });
-                if (!datosCrudos) descargarDatos();
+                
+                if (!datosCrudos) {
+                    descargarDatos();
+                }
             } else {
                 document.getElementById('error-pin-2').style.display = 'block';
                 setTimeout(() => document.getElementById('error-pin-2').style.display = 'none', 3000);
             }
         }
 
-        // --- ENVIAR DATOS ---
+        // --- ENVIAR DATOS (HACK NO-CORS) ---
         function calcularNeto() {
             const inicial = parseFloat(document.getElementById('fondoInicial').value) || 0;
             const final = parseFloat(document.getElementById('corteFinal').value) || 0;
@@ -243,8 +247,11 @@
             const btn = document.getElementById(btnId);
             btn.innerText = 'Guardando...'; btn.disabled = true;
 
+            // MODO SIGILO: 'no-cors' salta el bloqueo de Chrome
             fetch(scriptURL, {
-                method: 'POST', body: JSON.stringify(datos),
+                method: 'POST', 
+                mode: 'no-cors',
+                body: JSON.stringify(datos),
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' }
             })
             .then(() => {
@@ -253,7 +260,7 @@
                 setTimeout(() => document.getElementById(msgId).style.display = 'none', 3000);
                 if(datosCrudos) descargarDatos(true); 
             })
-            .catch(err => alert('Error: ' + err.message))
+            .catch(err => alert('Error local: ' + err.message))
             .finally(() => { btn.innerText = txtOriginal; btn.disabled = false; });
         }
 
@@ -279,19 +286,15 @@
             }, 'btnEgreso', 'msgEgreso', 'formEgreso', 'Registrar Egreso');
         }
 
-        // --- GRÁFICAS (LECTURA SEGURA POR POST) ---
+        // --- GRÁFICAS (LECTURA GET PURA) ---
         let graficaFinanciera;
         let datosCrudos = null; 
 
         function descargarDatos(silencioso = false) {
             if(!silencioso) document.getElementById('loading-datos').style.display = 'block';
             
-            // Usamos POST para leer y evitamos el bloqueo del navegador
-            fetch(scriptURL, {
-                method: 'POST',
-                body: JSON.stringify({ tipo: "leer" }),
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-            })
+            // GET NATURAL: Google sí lo permite
+            fetch(scriptURL)
             .then(res => res.json())
             .then(data => {
                 if(data.estatus === "Error") throw new Error(data.mensaje);
@@ -304,7 +307,7 @@
                 procesarYDibujar('semanal');
             })
             .catch(err => {
-                document.getElementById('loading-datos').innerText = "Error: " + err.message;
+                document.getElementById('loading-datos').innerText = "Error leyendo base de datos: " + err.message;
             });
         }
 
@@ -337,7 +340,9 @@
             document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('activo'));
             document.getElementById('btn-' + filtro).classList.add('activo');
 
-            const hoy = new Date(); hoy.setHours(0,0,0,0);
+            const hoy = new Date();
+            hoy.setHours(0,0,0,0);
+            
             let fechaLimite = new Date();
             
             if (filtro === 'diario') fechaLimite.setDate(hoy.getDate()); 
