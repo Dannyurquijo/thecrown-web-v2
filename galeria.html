@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Galería de Baile | The Crown Dance Studio Querétaro</title>
-    <meta name="description" content="Explora la galería multimedia de The Crown Dance Studio. Fotos y videos de nuestras clases de Hip Hop, Ballet, Jazz, Reggaetón y presentaciones en vivo.">
+    <title>Galería Multimedia | The Crown Dance Studio Querétaro</title>
+    <meta name="description" content="Explora la galería multimedia de The Crown Dance Studio. Fotos y videos del Festival 2026, clases de Hip Hop, Ballet, Jazz, Reggaetón y presentaciones en vivo.">
     <meta name="robots" content="index, follow">
     
     <link rel="icon" type="image/png" href="logo_corona.png">
@@ -14,48 +14,53 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700;900&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/glacial-indifference-2" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         /* --- AJUSTE GLOBAL --- */
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
 
-        /* --- PALETA DE COLORES iOS 27 / NOON STYLE --- */
+        /* --- PALETA DE COLORES INSTITUCIONAL --- */
         :root {
             --apple-dark: #000000;
-            --apple-surface: rgba(28, 28, 30, 0.4);
+            --apple-surface: rgba(28, 28, 30, 0.45);
             --apple-border: rgba(255, 255, 255, 0.08);
             --rosa-neon: #FF66C4;
-            --rosa-glow: rgba(255, 102, 196, 0.3);
+            --rosa-glow: rgba(255, 102, 196, 0.35);
             --dorado: #C19A51;
             --text-primary: #f5f5f7;
             --text-secondary: #86868b;
+            --mouse-x: 50vw;
+            --mouse-y: 50vh;
         }
         
-        html, body { scroll-behavior: smooth; max-width: 100vw; overflow-x: hidden; background-color: var(--apple-dark); color: var(--text-primary); font-family: 'Glacial Indifference', sans-serif; font-size: 1.1rem; line-height: 1.6; }
+        html, body { 
+            scroll-behavior: smooth; max-width: 100vw; overflow-x: hidden; 
+            background-color: var(--apple-dark); color: var(--text-primary); 
+            font-family: 'Glacial Indifference', sans-serif; font-size: 1.1rem; line-height: 1.6; 
+        }
 
-        /* LUZ AMBIENTAL DE FONDO */
+        /* LUZ AMBIENTAL CURSOR */
         body::before { content: ''; position: fixed; top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, var(--rosa-glow) 0%, transparent 70%); z-index: -3; pointer-events: none; filter: blur(80px); }
         body::after { content: ''; position: fixed; bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(193, 154, 81, 0.15) 0%, transparent 70%); z-index: -3; pointer-events: none; filter: blur(100px); }
 
         /* --- CLASES IDIOMA --- */
         .en { display: none; }
-        .lang-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--apple-border); color: var(--text-primary); padding: 8px 15px; cursor: pointer; font-family: 'League Spartan', sans-serif; font-weight: bold; font-size: 0.8rem; margin-left: 15px; border-radius: 20px; transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); backdrop-filter: blur(10px); }
+        .lang-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--apple-border); color: var(--text-primary); padding: 8px 15px; cursor: pointer; font-family: 'League Spartan', sans-serif; font-weight: bold; font-size: 0.8rem; margin-left: 15px; border-radius: 20px; transition: 0.3s; backdrop-filter: blur(10px); }
         .lang-btn:hover { background: var(--rosa-neon); color: #000; border-color: var(--rosa-neon); }
 
-        /* --- NAV FLOTANTE (Pill Style) --- */
+        /* --- NAV FLOTANTE --- */
         .navbar {
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 1200px;
-            background: rgba(15, 15, 15, 0.6); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
+            background: rgba(15, 15, 15, 0.65); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
             border: 1px solid var(--apple-border); border-radius: 40px; padding: 10px 25px; z-index: 1000;
-            display: flex; justify-content: space-between; align-items: center; /* <-- Corregido alineación */
+            display: flex; justify-content: space-between; align-items: center;
             transition: top 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .nav-hidden { top: -100px; opacity: 0; }
-        .nav-logo { display: flex; align-items: center; }
-        .nav-logo img { height: 40px; width: auto; transition: 0.3s; }
+        .nav-logo img { height: 42px; width: auto; transition: 0.3s; }
+        .nav-logo img:hover { transform: scale(1.05); }
 
-        /* --- BOTÓN HAMBURGUESA --- */
         .hamburger { display: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; transition: 0.3s; }
         .hamburger:hover { color: var(--rosa-neon); }
 
@@ -66,27 +71,44 @@
         .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 25px var(--rosa-glow); }
 
         /* --- GALLERY HERO --- */
-        .gallery-hero { padding-top: 160px; padding-bottom: 40px; text-align: center; }
-        .gallery-title { font-family: 'League Spartan', sans-serif; font-weight: 900; font-size: 4rem; margin: 0; letter-spacing: -1px; text-transform: uppercase; background: linear-gradient(to bottom right, #fff, #a8a8a8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gallery-hero { padding-top: 150px; padding-bottom: 30px; text-align: center; }
+        .gallery-title { font-family: 'League Spartan', sans-serif; font-weight: 900; font-size: clamp(3rem, 6vw, 4.5rem); margin: 0; letter-spacing: -1px; text-transform: uppercase; background: linear-gradient(135deg, #fff, #a8a8a8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .gallery-subtitle { font-family: 'League Spartan', sans-serif; font-size: 1.1rem; letter-spacing: 4px; text-transform: uppercase; margin-top: 5px; color: var(--dorado); font-weight: 700; }
 
         /* --- FILTROS DE CATEGORÍAS --- */
-        .filter-container { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin: 30px auto 50px auto; max-width: 800px; padding: 0 5%; }
-        .filter-btn { background: var(--apple-surface); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--apple-border); color: var(--text-primary); padding: 10px 22px; border-radius: 25px; cursor: pointer; font-family: 'League Spartan', sans-serif; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
-        .filter-btn:hover, .filter-btn.active { background: var(--rosa-neon); border-color: var(--rosa-neon); color: #000; box-shadow: 0 5px 15px var(--rosa-glow); }
+        .filter-container { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 30px auto 45px auto; max-width: 900px; padding: 0 5%; }
+        .filter-btn { background: var(--apple-surface); backdrop-filter: blur(10px); border: 1px solid var(--apple-border); color: var(--text-primary); padding: 10px 22px; border-radius: 25px; cursor: pointer; font-family: 'League Spartan', sans-serif; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); display: inline-flex; align-items: center; gap: 8px; }
+        .filter-btn:hover, .filter-btn.active { background: var(--rosa-neon); border-color: var(--rosa-neon); color: #000; box-shadow: 0 5px 20px var(--rosa-glow); transform: translateY(-2px); }
+        .filter-btn.gold.active { background: var(--dorado); border-color: var(--dorado); color: #000; box-shadow: 0 5px 20px rgba(193, 154, 81, 0.4); }
 
         /* --- SECCIÓN GALERÍA --- */
         .gallery-section { padding: 0 5% 100px 5%; max-width: 1300px; margin: 0 auto; position: relative; z-index: 1; }
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; position: relative; z-index: 2; }
-        .gallery-item { background: var(--apple-surface); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--apple-border); border-radius: 24px; padding: 12px; overflow: hidden; transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); display: flex; flex-direction: column; position: relative; z-index: 3; }
-        .media-wrapper { position: relative; width: 100%; border-radius: 16px; overflow: hidden; background: #050505; aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center; z-index: 4; }
-        .media-wrapper img, .media-wrapper video { position: relative; z-index: 5; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
-        .item-info { padding: 15px 8px 5px 8px; text-align: left; position: relative; z-index: 4; }
-        .item-info h3 { font-family: 'League Spartan', sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; position: relative; z-index: 2; }
+        .gallery-item { background: var(--apple-surface); backdrop-filter: blur(20px); border: 1px solid var(--apple-border); border-radius: 24px; padding: 12px; overflow: hidden; transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); display: flex; flex-direction: column; position: relative; cursor: pointer; }
+        .media-wrapper { position: relative; width: 100%; border-radius: 16px; overflow: hidden; background: #050505; aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center; }
+        .media-wrapper img, .media-wrapper video { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+        .media-tag { position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); border: 1px solid var(--apple-border); color: #fff; padding: 4px 12px; border-radius: 20px; font-family: 'League Spartan', sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; z-index: 6; }
+        .media-tag.festival { border-color: var(--dorado); color: var(--dorado); }
+        .media-icon { position: absolute; center: center; width: 50px; height: 50px; border-radius: 50%; background: rgba(255,102,196,0.85); color: #000; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; opacity: 0; transition: 0.3s ease; pointer-events: none; z-index: 6; }
+        .gallery-item:hover .media-icon { opacity: 1; transform: scale(1.1); }
+        .item-info { padding: 15px 8px 5px 8px; text-align: left; }
+        .item-info h3 { font-family: 'League Spartan', sans-serif; font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
         .item-info p { font-size: 0.95rem; color: var(--text-secondary); }
-        .gallery-item:hover { border-color: rgba(255, 102, 196, 0.5); transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.6); background: rgba(28,28,30,0.7); }
-        .gallery-item:hover .media-wrapper img { transform: scale(1.04); }
+        .gallery-item:hover { border-color: rgba(255, 102, 196, 0.5); transform: translateY(-8px); box-shadow: 0 18px 40px rgba(0,0,0,0.7); background: rgba(35,35,40,0.8); }
+        .gallery-item:hover .media-wrapper img { transform: scale(1.06); }
         .gallery-item.hidden { display: none; }
+
+        /* --- LIGHTBOX MODAL INMERSIVO --- */
+        .lightbox-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.93); backdrop-filter: blur(25px); z-index: 2000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: 0.4s ease; padding: 20px; }
+        .lightbox-modal.active { opacity: 1; pointer-events: all; }
+        .lightbox-content { max-width: 950px; width: 100%; max-height: 90vh; background: rgba(20, 20, 25, 0.85); border: 1px solid var(--apple-border); border-radius: 30px; overflow: hidden; display: flex; flex-direction: column; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.9); }
+        .lightbox-close { position: absolute; top: 15px; right: 20px; background: rgba(255,255,255,0.1); border: 1px solid var(--apple-border); color: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; z-index: 10; transition: 0.3s; }
+        .lightbox-close:hover { background: var(--rosa-neon); color: #000; }
+        .lightbox-media-container { width: 100%; max-height: 65vh; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .lightbox-media-container img, .lightbox-media-container video { max-width: 100%; max-height: 65vh; object-fit: contain; }
+        .lightbox-info { padding: 25px 30px; text-align: left; }
+        .lightbox-info h3 { font-family: 'League Spartan', sans-serif; font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: 5px; }
+        .lightbox-info p { color: var(--text-secondary); font-size: 1rem; }
 
         /* --- SIDEBAR --- */
         .social-sidebar { position: fixed; top: 50%; right: 20px; transform: translateY(-50%); z-index: 1000; display: flex; flex-direction: column; gap: 15px; background: var(--apple-surface); backdrop-filter: blur(15px); border-radius: 30px; padding: 20px 15px; border: 1px solid var(--apple-border); }
@@ -95,17 +117,13 @@
 
         footer { background: transparent; padding: 40px; color: var(--text-secondary); font-size: 0.9rem; text-align: center; border-top: 1px solid var(--apple-border); }
 
-        /* --- MÓVILES --- */
         @media (max-width: 768px) {
-            .navbar { flex-wrap: wrap; justify-content: space-between; align-items: center; padding: 15px 20px; border-radius: 25px; width: 90%; top: 10px; }
+            .navbar { flex-wrap: wrap; justify-content: space-between; align-items: center; padding: 12px 20px; border-radius: 25px; width: 92%; top: 10px; }
             .hamburger { display: block; }
-            .nav-links { position: absolute; top: 70px; right: 0; width: 100%; background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--apple-border); border-radius: 20px; flex-direction: column; align-items: center; padding: 25px 0; gap: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); opacity: 0; transform: translateY(-15px); pointer-events: none; transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); margin-top: 0; }
+            .nav-links { position: absolute; top: 70px; right: 0; width: 100%; background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--apple-border); border-radius: 20px; flex-direction: column; align-items: center; padding: 25px 0; gap: 22px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); opacity: 0; transform: translateY(-15px); pointer-events: none; transition: 0.4s; }
             .nav-links.active { opacity: 1; transform: translateY(0); pointer-events: all; }
             .nav-links a { margin-left: 0; font-size: 1.1rem; }
-            .gallery-title { font-size: 2.8rem; }
             .social-sidebar { display: none; }
-            .gallery-section { padding-bottom: 60px; }
-            .filter-container { margin-bottom: 35px; }
         }
     </style>
 </head>
@@ -130,11 +148,12 @@
 
     <header class="gallery-hero">
         <h1 class="gallery-title"><span class="es">Galería</span><span class="en">Gallery</span></h1>
-        <p class="gallery-subtitle">The Crown Experience</p>
+        <p class="gallery-subtitle">The Crown Experience & Festival 2026</p>
     </header>
 
     <div class="filter-container">
         <button class="filter-btn active" onclick="filterGallery('all')">Todos</button>
+        <button class="filter-btn gold" onclick="filterGallery('festival2026')"><i class="fas fa-crown"></i> Festival 2026</button>
         <button class="filter-btn" onclick="filterGallery('urbano')">Urbano</button>
         <button class="filter-btn" onclick="filterGallery('tecnica')">Técnica</button>
         <button class="filter-btn" onclick="filterGallery('kids')">Kids</button>
@@ -143,12 +162,29 @@
 
     <section class="gallery-section">
         <div class="gallery-grid">
-            
-            <div class="gallery-item urbano">
+
+            <!-- FESTIVAL 2026 HIGHLIGHT (VIDEO) -->
+            <div class="gallery-item festival2026 eventos" onclick="openLightbox('video', 'festivales.mp4', 'Gran Festival Anual 2026', 'Showcase escénico completo de The Crown Dance Studio en el teatro.')">
                 <div class="media-wrapper">
-                    <video controls playsinline preload="metadata">
+                    <span class="media-tag festival">Festival 2026 👑</span>
+                    <video playsinline muted poster="logo_corona.png" preload="metadata">
+                        <source src="festivales.mp4" type="video/mp4">
+                    </video>
+                    <div class="media-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <div class="item-info">
+                    <h3>Gran Festival Anual 2026</h3>
+                    <p>Categoría: Festival 2026 / Escenario</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item urbano" onclick="openLightbox('video', 'Hip_Hop.mp4', 'Hip Hop Session', 'Clase intensiva de groove, aislamiento y rítmica urbana.')">
+                <div class="media-wrapper">
+                    <span class="media-tag">Urbano</span>
+                    <video playsinline muted preload="metadata">
                         <source src="Hip_Hop.mp4" type="video/mp4">
                     </video>
+                    <div class="media-icon"><i class="fas fa-play"></i></div>
                 </div>
                 <div class="item-info">
                     <h3>Hip Hop Session</h3>
@@ -156,9 +192,11 @@
                 </div>
             </div>
 
-            <div class="gallery-item tecnica">
+            <div class="gallery-item tecnica" onclick="openLightbox('image', 'Ballet.jpg', 'Clase de Ballet', 'Técnica de barra, postura y centro para bailarines.')">
                 <div class="media-wrapper">
+                    <span class="media-tag">Técnica</span>
                     <img src="Ballet.jpg" alt="Clase de Ballet - The Crown">
+                    <div class="media-icon"><i class="fas fa-search-plus"></i></div>
                 </div>
                 <div class="item-info">
                     <h3>Clase de Ballet</h3>
@@ -166,9 +204,11 @@
                 </div>
             </div>
 
-            <div class="gallery-item kids">
+            <div class="gallery-item kids" onclick="openLightbox('image', 'kids.jpg', 'Crown Kids Team', 'Nuestras futuras estrellas en formación artística.')">
                 <div class="media-wrapper">
+                    <span class="media-tag">Kids</span>
                     <img src="kids.jpg" alt="Alumnos infantiles en The Crown">
+                    <div class="media-icon"><i class="fas fa-search-plus"></i></div>
                 </div>
                 <div class="item-info">
                     <h3>Crown Kids Team</h3>
@@ -176,23 +216,13 @@
                 </div>
             </div>
 
-            <div class="gallery-item eventos">
+            <div class="gallery-item urbano" onclick="openLightbox('video', 'Heels.mp4', 'Heels Choreography', 'Líneas, balance y empoderamiento escénico en tacones.')">
                 <div class="media-wrapper">
-                    <video controls playsinline poster="logo_corona.png" preload="metadata">
-                        <source src="festivales.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="item-info">
-                    <h3>Gran Festival Anual</h3>
-                    <p>Categoría: Eventos / Escenario</p>
-                </div>
-            </div>
-
-            <div class="gallery-item urbano">
-                <div class="media-wrapper">
-                    <video controls playsinline preload="metadata">
+                    <span class="media-tag">Urbano</span>
+                    <video playsinline muted preload="metadata">
                         <source src="Heels.mp4" type="video/mp4">
                     </video>
+                    <div class="media-icon"><i class="fas fa-play"></i></div>
                 </div>
                 <div class="item-info">
                     <h3>Heels Choreography</h3>
@@ -200,11 +230,13 @@
                 </div>
             </div>
 
-            <div class="gallery-item tecnica">
+            <div class="gallery-item tecnica" onclick="openLightbox('video', 'Contemporaneo.mp4', 'Danza Contemporánea', 'Fluidez, trabajo de piso y expresión emotiva.')">
                 <div class="media-wrapper">
-                    <video controls playsinline preload="metadata">
+                    <span class="media-tag">Técnica</span>
+                    <video playsinline muted preload="metadata">
                         <source src="Contemporaneo.mp4" type="video/mp4">
                     </video>
+                    <div class="media-icon"><i class="fas fa-play"></i></div>
                 </div>
                 <div class="item-info">
                     <h3>Danza Contemporánea</h3>
@@ -212,9 +244,11 @@
                 </div>
             </div>
 
-            <div class="gallery-item kids">
+            <div class="gallery-item kids" onclick="openLightbox('image', 'hiphopkids.jpg', 'Hip Hop Kids', 'Desarrollo de coordinación y ritmo para niños.')">
                 <div class="media-wrapper">
+                    <span class="media-tag">Kids</span>
                     <img src="hiphopkids.jpg" alt="Clase de Hip Hop Infantil">
+                    <div class="media-icon"><i class="fas fa-search-plus"></i></div>
                 </div>
                 <div class="item-info">
                     <h3>Hip Hop Kids</h3>
@@ -222,9 +256,11 @@
                 </div>
             </div>
 
-            <div class="gallery-item tecnica">
+            <div class="gallery-item tecnica" onclick="openLightbox('image', 'jazz.jpg', 'Jazz Técnico', 'Saltos, giros y energía en cada combinación.')">
                 <div class="media-wrapper">
+                    <span class="media-tag">Técnica</span>
                     <img src="jazz.jpg" alt="Clase de Jazz Dance">
+                    <div class="media-icon"><i class="fas fa-search-plus"></i></div>
                 </div>
                 <div class="item-info">
                     <h3>Jazz Técnico</h3>
@@ -232,9 +268,11 @@
                 </div>
             </div>
 
-            <div class="gallery-item kids">
+            <div class="gallery-item kids" onclick="openLightbox('image', 'jazzkids.jpg', 'Jazz Kids Rehearsal', 'Preparación coreográfica para alumnos infantiles.')">
                 <div class="media-wrapper">
+                    <span class="media-tag">Kids</span>
                     <img src="jazzkids.jpg" alt="Alumnos de Jazz Kids">
+                    <div class="media-icon"><i class="fas fa-search-plus"></i></div>
                 </div>
                 <div class="item-info">
                     <h3>Jazz Kids Rehearsal</h3>
@@ -242,11 +280,13 @@
                 </div>
             </div>
 
-            <div class="gallery-item urbano">
+            <div class="gallery-item urbano" onclick="openLightbox('video', 'Reggeton.mp4', 'Reggaetón Class', 'Ritmo, soltura y fuerza corporal en el escenario.')">
                 <div class="media-wrapper">
-                    <video controls playsinline preload="metadata">
+                    <span class="media-tag">Urbano</span>
+                    <video playsinline muted preload="metadata">
                         <source src="Reggeton.mp4" type="video/mp4">
                     </video>
+                    <div class="media-icon"><i class="fas fa-play"></i></div>
                 </div>
                 <div class="item-info">
                     <h3>Reggaetón Class</h3>
@@ -254,9 +294,11 @@
                 </div>
             </div>
 
-            <div class="gallery-item tecnica">
+            <div class="gallery-item tecnica" onclick="openLightbox('image', 'Acro.jpg', 'Acrobacia & Balances', 'Fortalecimiento de flexibilidad y trucos acrobáticos.')">
                 <div class="media-wrapper">
+                    <span class="media-tag">Técnica</span>
                     <img src="Acro.jpg" alt="Clase de Acrobacia y balances">
+                    <div class="media-icon"><i class="fas fa-search-plus"></i></div>
                 </div>
                 <div class="item-info">
                     <h3>Acrobacia & Balances</h3>
@@ -264,9 +306,11 @@
                 </div>
             </div>
 
-            <div class="gallery-item kids">
+            <div class="gallery-item kids" onclick="openLightbox('image', 'aereokids.jpg', 'Aéreo Kids', 'Entrenamiento seguro en telas aéreas para niños.')">
                 <div class="media-wrapper">
+                    <span class="media-tag">Kids</span>
                     <img src="aereokids.jpg" alt="Danza aérea para niños">
+                    <div class="media-icon"><i class="fas fa-search-plus"></i></div>
                 </div>
                 <div class="item-info">
                     <h3>Aéreo Kids</h3>
@@ -274,9 +318,11 @@
                 </div>
             </div>
 
-            <div class="gallery-item tecnica">
+            <div class="gallery-item tecnica" onclick="openLightbox('image', 'danzaaerea.jpg', 'Danza Aérea (Telas)', 'Expresión artística suspensión y desarrollo muscular.')">
                 <div class="media-wrapper">
+                    <span class="media-tag">Técnica</span>
                     <img src="danzaaerea.jpg" alt="Clase de danza aérea en telas">
+                    <div class="media-icon"><i class="fas fa-search-plus"></i></div>
                 </div>
                 <div class="item-info">
                     <h3>Danza Aérea (Telas)</h3>
@@ -284,9 +330,11 @@
                 </div>
             </div>
 
-            <div class="gallery-item kids">
+            <div class="gallery-item kids" onclick="openLightbox('image', 'kpopkids.jpg', 'Kpop Kids Team', 'Coreografías populares de K-Pop adaptadas para niños.')">
                 <div class="media-wrapper">
+                    <span class="media-tag">Kids</span>
                     <img src="kpopkids.jpg" alt="Clase de Kpop infantil">
+                    <div class="media-icon"><i class="fas fa-search-plus"></i></div>
                 </div>
                 <div class="item-info">
                     <h3>Kpop Kids Team</h3>
@@ -296,6 +344,20 @@
 
         </div>
     </section>
+
+    <!-- LIGHTBOX MODAL -->
+    <div class="lightbox-modal" id="lightboxModal">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+            <div class="lightbox-media-container" id="lightboxMedia">
+                <!-- Se inyecta dinámicamente -->
+            </div>
+            <div class="lightbox-info">
+                <h3 id="lightboxTitle">Título</h3>
+                <p id="lightboxDesc">Descripción</p>
+            </div>
+        </div>
+    </div>
 
     <div class="social-sidebar">
         <a href="https://www.instagram.com/thecrown.dancestudio" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -308,19 +370,14 @@
     </footer>
 
     <script>
-        // --- LÓGICA INTERACTIVA DE FILTROS ---
+        // FILTROS DE GALERÍA
         function filterGallery(category) {
-            // 1. Quitar clase active de todos los botones
             const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             
-            // 2. Activar botón clickeado o el que viene de la URL
             const targetBtn = Array.from(buttons).find(btn => btn.getAttribute('onclick').includes(category));
-            if (targetBtn) {
-                targetBtn.classList.add('active');
-            }
+            if (targetBtn) targetBtn.classList.add('active');
 
-            // 3. Filtrar los items visuales
             const items = document.querySelectorAll('.gallery-item');
             items.forEach(item => {
                 if (category === 'all' || item.classList.contains(category)) {
@@ -331,17 +388,42 @@
             });
         }
 
-        // --- LECTURA AUTOMÁTICA DE URL (HASHTAG) ---
+        // LIGHTBOX MODAL LOGIC
+        const modal = document.getElementById('lightboxModal');
+        const mediaContainer = document.getElementById('lightboxMedia');
+        const titleEl = document.getElementById('lightboxTitle');
+        const descEl = document.getElementById('lightboxDesc');
+
+        function openLightbox(type, src, title, desc) {
+            mediaContainer.innerHTML = '';
+            if (type === 'video') {
+                mediaContainer.innerHTML = `<video controls autoplay playsinline><source src="${src}" type="video/mp4"></video>`;
+            } else {
+                mediaContainer.innerHTML = `<img src="${src}" alt="${title}">`;
+            }
+            titleEl.innerText = title;
+            descEl.innerText = desc;
+            modal.classList.add('active');
+        }
+
+        function closeLightbox() {
+            modal.classList.remove('active');
+            mediaContainer.innerHTML = '';
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeLightbox();
+        });
+
         window.addEventListener('DOMContentLoaded', () => {
             const hash = window.location.hash.substring(1); 
-            const categoriasValidas = ['all', 'urbano', 'tecnica', 'kids', 'eventos'];
-            
+            const categoriasValidas = ['all', 'festival2026', 'urbano', 'tecnica', 'kids', 'eventos'];
             if (hash && categoriasValidas.includes(hash)) {
                 filterGallery(hash);
             }
         });
 
-        // --- SMART NAVBAR FLOTANTE ---
+        // NAVBAR FLOTANTE
         let lastScrollTop = 0;
         const navbar = document.querySelector('.navbar');
         window.addEventListener('scroll', function() {
@@ -354,7 +436,7 @@
             lastScrollTop = scrollTop;
         });
 
-        // --- LANGUAGE TOGGLE ---
+        // LANGUAGE TOGGLE
         let currentLang = 'es';
         function toggleLanguage() {
             currentLang = (currentLang === 'es') ? 'en' : 'es';
@@ -369,14 +451,13 @@
             }
         }
 
-        // --- LÓGICA DEL MENÚ HAMBURGUESA ---
+        // HAMBURGER MENU
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
 
         if (hamburger) {
             hamburger.addEventListener('click', () => {
                 navLinks.classList.toggle('active');
-                
                 const icon = hamburger.querySelector('i');
                 if (navLinks.classList.contains('active')) {
                     icon.classList.remove('fa-bars');

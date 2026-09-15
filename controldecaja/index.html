@@ -264,8 +264,7 @@
     </div>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxDl7kLexrbdG9O65b2qjFh3anOLa1ikxEZZdT_hRkheQYYtHTVM978pXHN4pL6lM8sug/exec';
-        //                 https://script.google.com/macros/s/AKfycbxDl7kLexrbdG9O65b2qjFh3anOLa1ikxEZZdT_hRkheQYYtHTVM978pXHN4pL6lM8sug/exec
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzCqyq555AUPc4jm6RS05eG6eqa1cM9K_jSH4NtNANvyiUjIU2FBrOz8NYLQDbffREs8g/exec';
 
         // --- SEGURIDAD ---
         function verificarPIN1() {
@@ -447,60 +446,31 @@
             graficaFinanciera.update();
         }
 
-       // --- EXPORTAR A PDF (MÉTODO BLINDADO DUPIXELCODE) ---
+        // --- EXPORTAR A PDF ---
         function generarPDF() {
             const elemento = document.getElementById('reporte-exportar');
             const boton = document.getElementById('btn-descargar-pdf');
-            const canvas = document.getElementById('miGrafica');
             
-            // 1. Ocultar botones para un reporte limpio
+            // Ocultamos controles durante la captura para un reporte limpio
             document.getElementById('controles-grafica').style.display = 'none';
-            boton.innerHTML = 'Generando archivo... ⏳'; 
-            boton.disabled = true;
+            boton.innerHTML = 'Generando archivo... ⏳'; boton.disabled = true;
 
-            // 2. TRUCO INFALIBLE: Convertir la gráfica a imagen estática
-            // Esto evita que el PDF colapse con las animaciones y transparencias
-            const imgCanvas = document.createElement('img');
-            imgCanvas.src = canvas.toDataURL('image/png', 1.0);
-            imgCanvas.style.width = '100%';
-            imgCanvas.style.maxHeight = '400px'; 
-            imgCanvas.style.objectFit = 'contain';
-            
-            // Escondemos el canvas real interactivo y mostramos la foto
-            canvas.style.display = 'none';
-            canvas.parentNode.appendChild(imgCanvas);
-
-            // 3. Forzar el diseño de DUPIXELCODE para el PDF
-            const estiloOriginal = elemento.getAttribute('style') || '';
-            elemento.style.backgroundColor = '#0A0A0A'; // Fondo oscuro premium
-            elemento.style.color = '#FFFFFF';           // Texto blanco puro
-            elemento.style.padding = '30px';
-            elemento.style.borderRadius = '0px';        // Quitar bordes redondos para el PDF
+            // Fijamos un fondo sólido negro oscuro para el PDF 
+            elemento.style.background = '#0d0d0d';
 
             const opt = {
                 margin:       10,
                 filename:     `Reporte_TheCrown_${filtroActualStr.replace(/\s+/g, '_')}.pdf`,
-                image:        { type: 'jpeg', quality: 1 }, 
-                html2canvas:  { 
-                    scale: 2, 
-                    backgroundColor: '#0A0A0A',
-                    useCORS: true
-                },
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, backgroundColor: '#0d0d0d' },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
             };
 
-            // 4. Tomar la foto y guardar el PDF
             html2pdf().set(opt).from(elemento).save().then(() => {
-                
-                // 5. Restaurar la página a su estado original interactivo
-                canvas.style.display = 'block';
-                imgCanvas.remove();
-                
-                elemento.setAttribute('style', estiloOriginal); // Devolver transparencias
+                // Restauramos la vista
                 document.getElementById('controles-grafica').style.display = 'flex';
-                
-                boton.innerHTML = '📥 Descargar Reporte PDF'; 
-                boton.disabled = false;
+                elemento.style.background = 'transparent';
+                boton.innerHTML = '📥 Descargar Reporte PDF'; boton.disabled = false;
             });
         }
     </script>
