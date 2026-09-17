@@ -15,135 +15,135 @@
     <link href="https://fonts.cdnfonts.com/css/glacial-indifference-2" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/3d-effects.css">
+
     <style>
-        /* --- ESTILO BASE iOS 27 --- */
-        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
-
-        :root {
-            --apple-dark: #000000;
-            --apple-surface: rgba(28, 28, 30, 0.45);
-            --apple-border: rgba(255, 255, 255, 0.08);
-            --rosa-neon: #FF66C4;
-            --rosa-glow: rgba(255, 102, 196, 0.35);
-            --dorado: #C19A51;
-            --text-primary: #f5f5f7;
-            --text-secondary: #86868b;
-        }
-
-        body {
-            background-color: var(--apple-dark);
-            color: var(--text-primary);
-            font-family: 'Glacial Indifference', sans-serif;
-            overflow-x: hidden;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* AMBIENT GLOW */
-        body::before {
-            content: ''; position: fixed; top: -10%; left: -10%; width: 50vw; height: 50vw;
-            background: radial-gradient(circle, var(--rosa-glow) 0%, transparent 70%);
-            z-index: -1; filter: blur(80px); pointer-events: none;
-        }
-        body::after {
-            content: ''; position: fixed; bottom: -20%; right: -10%; width: 60vw; height: 60vw;
-            background: radial-gradient(circle, rgba(193, 154, 81, 0.15) 0%, transparent 70%);
-            z-index: -1; filter: blur(100px); pointer-events: none;
-        }
-
-        /* --- NAV FLOTANTE --- */
-        .navbar {
-            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-            width: 95%; max-width: 1200px;
-            background: rgba(15, 15, 15, 0.65); backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border: 1px solid var(--apple-border); border-radius: 40px;
-            padding: 10px 25px; z-index: 1000;
-            display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .nav-logo img { height: 42px; width: auto; transition: 0.3s; }
-        
-        .hamburger { display: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; transition: 0.3s; }
-        .hamburger:hover { color: var(--rosa-neon); }
-
-        .nav-links { display: flex; align-items: center; }
-        .nav-links a {
-            color: var(--text-primary); text-decoration: none; margin-left: 20px;
-            font-size: 0.85rem; text-transform: uppercase; font-weight: 700; font-family: 'League Spartan';
-            transition: 0.3s;
-        }
-        .nav-links a:hover { color: var(--rosa-neon); }
-
-        /* --- CONTENEDOR DE AGENDA --- */
         .agenda-container {
-            flex: 1; display: flex; justify-content: center; align-items: center;
-            padding: 130px 5% 70px 5%;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 140px 5% 80px 5%;
         }
 
         .glass-card {
             background: var(--apple-surface);
-            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             border: 1px solid var(--apple-border);
-            border-radius: 40px; width: 100%; max-width: 580px;
-            padding: 50px 40px; text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-            position: relative; transition: 0.3s ease;
-        }
-        .glass-card:hover { border-color: rgba(255, 102, 196, 0.3); }
-
-        h1 {
-            font-family: 'League Spartan', sans-serif;
-            font-size: clamp(2.4rem, 5vw, 3.2rem); font-weight: 900; letter-spacing: -1px;
-            margin-bottom: 10px; background: linear-gradient(135deg, #fff, #a8a8a8);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            border-radius: 40px;
+            width: 100%;
+            max-width: 580px;
+            padding: 50px 40px;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+            position: relative;
+            transition: border-color 0.3s ease;
         }
 
-        p.subtitle { color: var(--text-secondary); margin-bottom: 35px; font-size: 1.1rem; }
+        .glass-card:hover {
+            border-color: rgba(255, 102, 196, 0.35);
+        }
 
-        /* --- FORMULARIO --- */
-        .form-group { text-align: left; margin-bottom: 22px; }
-        label { display: block; font-family: 'League Spartan'; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 8px; color: var(--dorado); font-weight: 700; padding-left: 5px;}
-        
+        .glass-card h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(2.4rem, 5vw, 3.4rem);
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffffff 30%, #a8a8a8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 0.88rem;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            color: var(--dorado);
+            font-weight: 700;
+            padding-left: 4px;
+        }
+
         input, select {
             width: 100%;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.06);
             border: 1px solid var(--apple-border);
-            border-radius: 16px; padding: 16px; color: #fff;
-            font-family: 'Glacial Indifference'; font-size: 1.05rem;
-            transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border-radius: 16px;
+            padding: 16px;
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 1.05rem;
+            transition: var(--transition-smooth);
         }
-        input:focus, select:focus { outline: none; border-color: var(--rosa-neon); background: rgba(255,255,255,0.1); box-shadow: 0 0 20px var(--rosa-glow); }
-        
-        option { background: var(--apple-dark); color: #fff; font-family: 'Glacial Indifference'; }
-        optgroup { background: var(--apple-dark); color: var(--dorado); font-family: 'League Spartan'; font-weight: 700; font-size: 1rem; }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--rosa-neon);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px var(--rosa-glow);
+        }
+
+        option {
+            background: #000;
+            color: #fff;
+            font-family: var(--font-body);
+        }
+
+        optgroup {
+            background: #000;
+            color: var(--dorado);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1rem;
+        }
 
         .submit-btn {
-            width: 100%; padding: 18px;
+            width: 100%;
+            padding: 18px;
             background: linear-gradient(135deg, var(--rosa-neon), #ff3399);
-            color: white; border: none; border-radius: 22px;
-            font-family: 'League Spartan'; font-weight: 900; font-size: 1.15rem;
-            text-transform: uppercase; cursor: pointer;
+            color: white;
+            border: none;
+            border-radius: 22px;
+            font-family: var(--font-heading);
+            font-weight: 900;
+            font-size: 1.15rem;
+            text-transform: uppercase;
+            cursor: pointer;
             box-shadow: 0 10px 25px var(--rosa-glow);
-            transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            margin-top: 10px; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            transition: var(--transition-smooth);
+            margin-top: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
-        .submit-btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 35px var(--rosa-glow); }
 
-        footer { padding: 30px; text-align: center; color: var(--text-secondary); font-size: 0.9rem; border-top: 1px solid var(--apple-border); }
+        .submit-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 35px var(--rosa-glow);
+        }
 
         @media (max-width: 600px) {
-            .glass-card { padding: 35px 22px; border-radius: 30px; }
-            .navbar { flex-wrap: wrap; justify-content: space-between; align-items: center; padding: 12px 18px; border-radius: 25px; width: 92%; top: 10px;}
-            .hamburger { display: block; }
-            .nav-links { display: flex; position: absolute; top: 65px; right: 0; width: 100%; background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--apple-border); border-radius: 20px; flex-direction: column; align-items: center; padding: 25px 0; gap: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); opacity: 0; transform: translateY(-15px); pointer-events: none; transition: 0.4s; }
-            .nav-links.active { opacity: 1; transform: translateY(0); pointer-events: all; }
-            .nav-links a { margin-left: 0; font-size: 1.1rem; }
+            .glass-card {
+                padding: 35px 22px;
+                border-radius: 30px;
+            }
         }
     </style>
 </head>
 <body>
+
+    <div class="cursor-glow"></div>
 
     <nav class="navbar">
         <a href="index.html" class="nav-logo"><img src="logo.png" alt="The Crown Logo"></a>
@@ -162,7 +162,9 @@
     <div class="agenda-container">
         <div class="glass-card">
             <h1>Agenda tu Clase</h1>
-            <p class="subtitle">Comienza tu formación en The Crown Studio 👑</p>
+            <p style="color: var(--text-secondary); margin-bottom: 35px; font-size: 1.15rem;">
+                Comienza tu formación en The Crown Studio 👑
+            </p>
 
             <form id="agendaForm">
                 <div class="form-group">
@@ -242,7 +244,13 @@
     </footer>
 
     <script>
-        // AUTO-SELECCIÓN DE DISCIPLINA POR PARAMETRO DE URL
+        // Spotlight cursor glow
+        window.addEventListener('mousemove', (e) => {
+            document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+            document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+        }, { passive: true });
+
+        // Auto-selección de disciplina desde parámetros de URL
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const disc = urlParams.get('disciplina');
@@ -259,35 +267,16 @@
             }
         });
 
-        // MENÚ HAMBURGUESA
+        // Menú hamburguesa
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
-
-        if (hamburger) {
+        if (hamburger && navLinks) {
             hamburger.addEventListener('click', () => {
                 navLinks.classList.toggle('active');
-                const icon = hamburger.querySelector('i');
-                if (navLinks.classList.contains('active')) {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                } else {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            });
-
-            const links = navLinks.querySelectorAll('a, button');
-            links.forEach(link => {
-                link.addEventListener('click', () => {
-                    navLinks.classList.remove('active');
-                    const icon = hamburger.querySelector('i');
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                });
             });
         }
 
-        // ENVÍO DE FORMULARIO A WHATSAPP DIRECTO
+        // Envío directo a WhatsApp
         document.getElementById('agendaForm').addEventListener('submit', function(e) {
             e.preventDefault();
             

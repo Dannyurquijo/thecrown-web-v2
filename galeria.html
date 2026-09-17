@@ -16,118 +16,195 @@
     <link href="https://fonts.cdnfonts.com/css/glacial-indifference-2" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/3d-effects.css">
+
     <style>
-        /* --- AJUSTE GLOBAL --- */
-        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
-
-        /* --- PALETA DE COLORES INSTITUCIONAL --- */
-        :root {
-            --apple-dark: #000000;
-            --apple-surface: rgba(28, 28, 30, 0.45);
-            --apple-border: rgba(255, 255, 255, 0.08);
-            --rosa-neon: #FF66C4;
-            --rosa-glow: rgba(255, 102, 196, 0.35);
-            --dorado: #C19A51;
-            --text-primary: #f5f5f7;
-            --text-secondary: #86868b;
-            --mouse-x: 50vw;
-            --mouse-y: 50vh;
+        .gallery-hero {
+            padding-top: 160px;
+            padding-bottom: 30px;
+            text-align: center;
         }
-        
-        html, body { 
-            scroll-behavior: smooth; max-width: 100vw; overflow-x: hidden; 
-            background-color: var(--apple-dark); color: var(--text-primary); 
-            font-family: 'Glacial Indifference', sans-serif; font-size: 1.1rem; line-height: 1.6; 
+        .gallery-title {
+            font-family: var(--font-heading);
+            font-weight: 900;
+            font-size: clamp(3rem, 6vw, 4.8rem);
+            margin: 0;
+            letter-spacing: -1.5px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #fff 30%, #a8a8a8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        /* LUZ AMBIENTAL CURSOR */
-        body::before { content: ''; position: fixed; top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, var(--rosa-glow) 0%, transparent 70%); z-index: -3; pointer-events: none; filter: blur(80px); }
-        body::after { content: ''; position: fixed; bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(193, 154, 81, 0.15) 0%, transparent 70%); z-index: -3; pointer-events: none; filter: blur(100px); }
-
-        /* --- CLASES IDIOMA --- */
-        .en { display: none; }
-        .lang-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--apple-border); color: var(--text-primary); padding: 8px 15px; cursor: pointer; font-family: 'League Spartan', sans-serif; font-weight: bold; font-size: 0.8rem; margin-left: 15px; border-radius: 20px; transition: 0.3s; backdrop-filter: blur(10px); }
-        .lang-btn:hover { background: var(--rosa-neon); color: #000; border-color: var(--rosa-neon); }
-
-        /* --- NAV FLOTANTE --- */
-        .navbar {
-            position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 1200px;
-            background: rgba(15, 15, 15, 0.65); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border: 1px solid var(--apple-border); border-radius: 40px; padding: 10px 25px; z-index: 1000;
-            display: flex; justify-content: space-between; align-items: center;
-            transition: top 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        .gallery-subtitle {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-top: 8px;
+            color: var(--dorado);
+            font-weight: 700;
         }
-        .nav-hidden { top: -100px; opacity: 0; }
-        .nav-logo img { height: 42px; width: auto; transition: 0.3s; }
-        .nav-logo img:hover { transform: scale(1.05); }
-
-        .hamburger { display: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; transition: 0.3s; }
-        .hamburger:hover { color: var(--rosa-neon); }
-
-        .nav-links { display: flex; align-items: center; }
-        .nav-links a { color: var(--text-primary); text-decoration: none; margin-left: 20px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; font-weight: 700; font-family: 'League Spartan', sans-serif; }
-        .nav-links a:not(.nav-cta):hover { color: var(--rosa-neon); }
-        .nav-cta { background: linear-gradient(135deg, var(--rosa-neon), #ff3399); color: #fff !important; padding: 10px 25px; border-radius: 30px; margin-left: 20px; font-weight: 700; border: none; box-shadow: 0 4px 15px var(--rosa-glow); }
-        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 25px var(--rosa-glow); }
-
-        /* --- GALLERY HERO --- */
-        .gallery-hero { padding-top: 150px; padding-bottom: 30px; text-align: center; }
-        .gallery-title { font-family: 'League Spartan', sans-serif; font-weight: 900; font-size: clamp(3rem, 6vw, 4.5rem); margin: 0; letter-spacing: -1px; text-transform: uppercase; background: linear-gradient(135deg, #fff, #a8a8a8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .gallery-subtitle { font-family: 'League Spartan', sans-serif; font-size: 1.1rem; letter-spacing: 4px; text-transform: uppercase; margin-top: 5px; color: var(--dorado); font-weight: 700; }
-
-        /* --- FILTROS DE CATEGORÍAS --- */
-        .filter-container { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 30px auto 45px auto; max-width: 900px; padding: 0 5%; }
-        .filter-btn { background: var(--apple-surface); backdrop-filter: blur(10px); border: 1px solid var(--apple-border); color: var(--text-primary); padding: 10px 22px; border-radius: 25px; cursor: pointer; font-family: 'League Spartan', sans-serif; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); display: inline-flex; align-items: center; gap: 8px; }
-        .filter-btn:hover, .filter-btn.active { background: var(--rosa-neon); border-color: var(--rosa-neon); color: #000; box-shadow: 0 5px 20px var(--rosa-glow); transform: translateY(-2px); }
-        .filter-btn.gold.active { background: var(--dorado); border-color: var(--dorado); color: #000; box-shadow: 0 5px 20px rgba(193, 154, 81, 0.4); }
-
-        /* --- SECCIÓN GALERÍA --- */
-        .gallery-section { padding: 0 5% 100px 5%; max-width: 1300px; margin: 0 auto; position: relative; z-index: 1; }
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; position: relative; z-index: 2; }
-        .gallery-item { background: var(--apple-surface); backdrop-filter: blur(20px); border: 1px solid var(--apple-border); border-radius: 24px; padding: 12px; overflow: hidden; transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); display: flex; flex-direction: column; position: relative; cursor: pointer; }
-        .media-wrapper { position: relative; width: 100%; border-radius: 16px; overflow: hidden; background: #050505; aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center; }
-        .media-wrapper img, .media-wrapper video { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
-        .media-tag { position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); border: 1px solid var(--apple-border); color: #fff; padding: 4px 12px; border-radius: 20px; font-family: 'League Spartan', sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; z-index: 6; }
-        .media-tag.festival { border-color: var(--dorado); color: var(--dorado); }
-        .media-icon { position: absolute; center: center; width: 50px; height: 50px; border-radius: 50%; background: rgba(255,102,196,0.85); color: #000; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; opacity: 0; transition: 0.3s ease; pointer-events: none; z-index: 6; }
-        .gallery-item:hover .media-icon { opacity: 1; transform: scale(1.1); }
-        .item-info { padding: 15px 8px 5px 8px; text-align: left; }
-        .item-info h3 { font-family: 'League Spartan', sans-serif; font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-        .item-info p { font-size: 0.95rem; color: var(--text-secondary); }
-        .gallery-item:hover { border-color: rgba(255, 102, 196, 0.5); transform: translateY(-8px); box-shadow: 0 18px 40px rgba(0,0,0,0.7); background: rgba(35,35,40,0.8); }
-        .gallery-item:hover .media-wrapper img { transform: scale(1.06); }
-        .gallery-item.hidden { display: none; }
-
-        /* --- LIGHTBOX MODAL INMERSIVO --- */
-        .lightbox-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.93); backdrop-filter: blur(25px); z-index: 2000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: 0.4s ease; padding: 20px; }
-        .lightbox-modal.active { opacity: 1; pointer-events: all; }
-        .lightbox-content { max-width: 950px; width: 100%; max-height: 90vh; background: rgba(20, 20, 25, 0.85); border: 1px solid var(--apple-border); border-radius: 30px; overflow: hidden; display: flex; flex-direction: column; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.9); }
-        .lightbox-close { position: absolute; top: 15px; right: 20px; background: rgba(255,255,255,0.1); border: 1px solid var(--apple-border); color: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; z-index: 10; transition: 0.3s; }
-        .lightbox-close:hover { background: var(--rosa-neon); color: #000; }
-        .lightbox-media-container { width: 100%; max-height: 65vh; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .lightbox-media-container img, .lightbox-media-container video { max-width: 100%; max-height: 65vh; object-fit: contain; }
-        .lightbox-info { padding: 25px 30px; text-align: left; }
-        .lightbox-info h3 { font-family: 'League Spartan', sans-serif; font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: 5px; }
-        .lightbox-info p { color: var(--text-secondary); font-size: 1rem; }
-
-        /* --- SIDEBAR --- */
-        .social-sidebar { position: fixed; top: 50%; right: 20px; transform: translateY(-50%); z-index: 1000; display: flex; flex-direction: column; gap: 15px; background: var(--apple-surface); backdrop-filter: blur(15px); border-radius: 30px; padding: 20px 15px; border: 1px solid var(--apple-border); }
-        .social-sidebar a { color: var(--text-secondary); font-size: 1.3rem; transition: 0.3s; text-align: center; }
-        .social-sidebar a:hover { color: var(--rosa-neon); transform: scale(1.2); }
-
-        footer { background: transparent; padding: 40px; color: var(--text-secondary); font-size: 0.9rem; text-align: center; border-top: 1px solid var(--apple-border); }
-
-        @media (max-width: 768px) {
-            .navbar { flex-wrap: wrap; justify-content: space-between; align-items: center; padding: 12px 20px; border-radius: 25px; width: 92%; top: 10px; }
-            .hamburger { display: block; }
-            .nav-links { position: absolute; top: 70px; right: 0; width: 100%; background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--apple-border); border-radius: 20px; flex-direction: column; align-items: center; padding: 25px 0; gap: 22px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); opacity: 0; transform: translateY(-15px); pointer-events: none; transition: 0.4s; }
-            .nav-links.active { opacity: 1; transform: translateY(0); pointer-events: all; }
-            .nav-links a { margin-left: 0; font-size: 1.1rem; }
-            .social-sidebar { display: none; }
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 30px auto 45px auto;
+            max-width: 900px;
+            padding: 0 5%;
+        }
+        .filter-btn {
+            background: var(--apple-surface);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--apple-border);
+            color: var(--text-primary);
+            padding: 10px 22px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.92rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--rosa-neon);
+            border-color: var(--rosa-neon);
+            color: #000;
+            box-shadow: 0 5px 20px var(--rosa-glow);
+            transform: translateY(-2px);
+        }
+        .filter-btn.gold.active {
+            background: var(--dorado);
+            border-color: var(--dorado);
+            color: #000;
+            box-shadow: 0 5px 20px rgba(193, 154, 81, 0.45);
+        }
+        .gallery-section {
+            padding: 0 5% 100px 5%;
+            max-width: 1300px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 26px;
+            position: relative;
+            z-index: 2;
+        }
+        .gallery-item {
+            background: var(--apple-surface);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--apple-border);
+            border-radius: 24px;
+            padding: 12px;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            cursor: pointer;
+        }
+        .media-wrapper {
+            position: relative;
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #050505;
+            aspect-ratio: 4 / 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .media-wrapper img, .media-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .media-tag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--apple-border);
+            color: #fff;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-family: var(--font-heading);
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 6;
+        }
+        .media-tag.festival {
+            border-color: var(--dorado);
+            color: var(--dorado);
+            box-shadow: 0 0 10px rgba(193, 154, 81, 0.4);
+        }
+        .media-icon {
+            position: absolute;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: rgba(255,102,196,0.9);
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+            z-index: 6;
+        }
+        .gallery-item:hover .media-icon {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        .item-info {
+            padding: 16px 8px 6px 8px;
+            text-align: left;
+        }
+        .item-info h3 {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .item-info p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        .gallery-item:hover {
+            border-color: rgba(255, 102, 196, 0.5);
+            transform: translateY(-8px);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.75);
+            background: rgba(36, 36, 44, 0.85);
+        }
+        .gallery-item:hover .media-wrapper img {
+            transform: scale(1.06);
+        }
+        .gallery-item.hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
+
+    <div class="cursor-glow"></div>
 
     <nav class="navbar">
         <a href="index.html" class="nav-logo"><img src="logo.png" alt="Logotipo The Crown Dance Studio"></a>
@@ -152,19 +229,19 @@
     </header>
 
     <div class="filter-container">
-        <button class="filter-btn active" onclick="filterGallery('all')">Todos</button>
-        <button class="filter-btn gold" onclick="filterGallery('festival2026')"><i class="fas fa-crown"></i> Festival 2026</button>
-        <button class="filter-btn" onclick="filterGallery('urbano')">Urbano</button>
-        <button class="filter-btn" onclick="filterGallery('tecnica')">Técnica</button>
-        <button class="filter-btn" onclick="filterGallery('kids')">Kids</button>
-        <button class="filter-btn" onclick="filterGallery('eventos')">Eventos</button>
+        <button class="filter-btn active" onclick="filterGallery('all', this)">Todos</button>
+        <button class="filter-btn gold" onclick="filterGallery('festival2026', this)"><i class="fas fa-crown"></i> Festival 2026</button>
+        <button class="filter-btn" onclick="filterGallery('urbano', this)">Urbano</button>
+        <button class="filter-btn" onclick="filterGallery('tecnica', this)">Técnica</button>
+        <button class="filter-btn" onclick="filterGallery('kids', this)">Kids</button>
+        <button class="filter-btn" onclick="filterGallery('eventos', this)">Eventos</button>
     </div>
 
     <section class="gallery-section">
         <div class="gallery-grid">
 
             <!-- FESTIVAL 2026 HIGHLIGHT (VIDEO) -->
-            <div class="gallery-item festival2026 eventos" onclick="openLightbox('video', 'festivales.mp4', 'Gran Festival Anual 2026', 'Showcase escénico completo de The Crown Dance Studio en el teatro.')">
+            <div class="gallery-item festival2026 eventos" onclick="openLightbox('video', 'festivales.mp4', 'Gran Festival Anual 2026', 'Showcase escénico completo de The Crown Dance Studio en el teatro profesional.')">
                 <div class="media-wrapper">
                     <span class="media-tag festival">Festival 2026 👑</span>
                     <video playsinline muted poster="logo_corona.png" preload="metadata">
@@ -345,13 +422,11 @@
         </div>
     </section>
 
-    <!-- LIGHTBOX MODAL -->
+    <!-- LIGHTBOX MODAL FULLSCREEN -->
     <div class="lightbox-modal" id="lightboxModal">
         <div class="lightbox-content">
             <button class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
-            <div class="lightbox-media-container" id="lightboxMedia">
-                <!-- Se inyecta dinámicamente -->
-            </div>
+            <div class="lightbox-media-container" id="lightboxMedia"></div>
             <div class="lightbox-info">
                 <h3 id="lightboxTitle">Título</h3>
                 <p id="lightboxDesc">Descripción</p>
@@ -369,14 +444,21 @@
         <p>© 2026 The Crown Dance Studio</p>
     </footer>
 
-    <script>
-        // FILTROS DE GALERÍA
-        function filterGallery(category) {
+    <script type="module">
+        import { initLightbox } from './js/modules/lightbox.js';
+        initLightbox();
+
+        // Spotlight cursor glow
+        window.addEventListener('mousemove', (e) => {
+            document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+            document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+        }, { passive: true });
+
+        // Filtrado
+        window.filterGallery = function(category, btn) {
             const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            
-            const targetBtn = Array.from(buttons).find(btn => btn.getAttribute('onclick').includes(category));
-            if (targetBtn) targetBtn.classList.add('active');
+            buttons.forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
 
             const items = document.querySelectorAll('.gallery-item');
             items.forEach(item => {
@@ -386,98 +468,29 @@
                     item.classList.add('hidden');
                 }
             });
-        }
+        };
 
-        // LIGHTBOX MODAL LOGIC
-        const modal = document.getElementById('lightboxModal');
-        const mediaContainer = document.getElementById('lightboxMedia');
-        const titleEl = document.getElementById('lightboxTitle');
-        const descEl = document.getElementById('lightboxDesc');
-
-        function openLightbox(type, src, title, desc) {
-            mediaContainer.innerHTML = '';
-            if (type === 'video') {
-                mediaContainer.innerHTML = `<video controls autoplay playsinline><source src="${src}" type="video/mp4"></video>`;
-            } else {
-                mediaContainer.innerHTML = `<img src="${src}" alt="${title}">`;
-            }
-            titleEl.innerText = title;
-            descEl.innerText = desc;
-            modal.classList.add('active');
-        }
-
-        function closeLightbox() {
-            modal.classList.remove('active');
-            mediaContainer.innerHTML = '';
-        }
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeLightbox();
-        });
-
+        // Lectura de URL hash
         window.addEventListener('DOMContentLoaded', () => {
-            const hash = window.location.hash.substring(1); 
-            const categoriasValidas = ['all', 'festival2026', 'urbano', 'tecnica', 'kids', 'eventos'];
-            if (hash && categoriasValidas.includes(hash)) {
-                filterGallery(hash);
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                const targetBtn = Array.from(document.querySelectorAll('.filter-btn')).find(b => b.getAttribute('onclick')?.includes(hash));
+                if (targetBtn) window.filterGallery(hash, targetBtn);
             }
         });
 
-        // NAVBAR FLOTANTE
-        let lastScrollTop = 0;
-        const navbar = document.querySelector('.navbar');
-        window.addEventListener('scroll', function() {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop && scrollTop > 100) { 
-                navbar.classList.add('nav-hidden'); 
-            } else { 
-                navbar.classList.remove('nav-hidden'); 
-            }
-            lastScrollTop = scrollTop;
-        });
-
-        // LANGUAGE TOGGLE
-        let currentLang = 'es';
-        function toggleLanguage() {
-            currentLang = (currentLang === 'es') ? 'en' : 'es';
-            const esElements = document.querySelectorAll('.es');
-            const enElements = document.querySelectorAll('.en');
-            if (currentLang === 'es') {
-                esElements.forEach(el => el.style.display = 'inline-block');
-                enElements.forEach(el => el.style.display = 'none');
-            } else {
-                esElements.forEach(el => el.style.display = 'none');
-                enElements.forEach(el => el.style.display = 'inline-block');
-            }
-        }
-
-        // HAMBURGER MENU
+        // Menú hamburguesa
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
-
-        if (hamburger) {
+        if (hamburger && navLinks) {
             hamburger.addEventListener('click', () => {
                 navLinks.classList.toggle('active');
-                const icon = hamburger.querySelector('i');
-                if (navLinks.classList.contains('active')) {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                } else {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            });
-
-            const links = navLinks.querySelectorAll('a, button');
-            links.forEach(link => {
-                link.addEventListener('click', () => {
-                    navLinks.classList.remove('active');
-                    const icon = hamburger.querySelector('i');
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                });
             });
         }
+
+        window.toggleLanguage = function() {
+            document.body.classList.toggle('lang-en');
+        };
     </script>
 </body>
 </html>

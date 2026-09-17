@@ -1,0 +1,165 @@
+/* ==========================================================================
+   THE CROWN DANCE STUDIO - 3D EFFECTS, SPOTLIGHT GLOW & LIGHTBOX
+   ========================================================================== */
+
+/* --- CANVAS 3D INTERACTIVO HERO (Crown Particle WebGL/Canvas) --- */
+#crown3dCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0.85;
+}
+
+/* --- SPOTLIGHT CURSOR GLOW --- */
+.cursor-glow {
+    position: fixed;
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(255, 102, 196, 0.14) 0%, rgba(193, 154, 81, 0.06) 45%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -2;
+    transform: translate(-50%, -50%);
+    left: var(--mouse-x);
+    top: var(--mouse-y);
+    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+    will-change: left, top;
+}
+
+/* --- PERSPECTIVA Y TILT 3D EN CARDS --- */
+.tilt-card-container {
+    perspective: 1200px;
+}
+
+.tilt-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+    will-change: transform;
+}
+
+.tilt-3d-inner {
+    transform: translateZ(30px);
+    transition: transform 0.3s ease;
+}
+
+/* --- SCROLL REVEAL ANIMATIONS --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    will-change: opacity, transform;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- MODAL LIGHTBOX 3D (Galería) --- */
+.lightbox-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.94);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    padding: 20px;
+}
+
+.lightbox-modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.lightbox-content {
+    max-width: 960px;
+    width: 100%;
+    max-height: 90vh;
+    background: rgba(22, 22, 28, 0.88);
+    border: 1px solid var(--apple-border-bright);
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95);
+    transform: scale(0.95);
+    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.lightbox-modal.active .lightbox-content {
+    transform: scale(1);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--apple-border);
+    color: #fff;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: 0.3s;
+}
+
+.lightbox-close:hover {
+    background: var(--rosa-neon);
+    color: #000;
+    transform: scale(1.1);
+}
+
+.lightbox-media-container {
+    width: 100%;
+    max-height: 65vh;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.lightbox-media-container img,
+.lightbox-media-container video {
+    max-width: 100%;
+    max-height: 65vh;
+    object-fit: contain;
+}
+
+.lightbox-info {
+    padding: 25px 30px;
+    text-align: left;
+}
+
+.lightbox-info h3 {
+    font-family: var(--font-heading);
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+}
+
+.lightbox-info p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+}
