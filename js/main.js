@@ -42,14 +42,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Scroll Reveal Animations
     const reveals = document.querySelectorAll('.reveal');
     if (reveals.length > 0) {
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
-        reveals.forEach(r => revealObserver.observe(r));
+        if ('IntersectionObserver' in window) {
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' });
+            reveals.forEach(r => revealObserver.observe(r));
+        } else {
+            reveals.forEach(r => r.classList.add('active'));
+        }
+
+        // Fallback de seguridad: visibilidad garantizada en móviles
+        setTimeout(() => {
+            reveals.forEach(r => r.classList.add('active'));
+        }, 1200);
     }
 
     // 5. Contadores Numéricos Animados

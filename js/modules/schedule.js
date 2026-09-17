@@ -11,7 +11,7 @@ export function initSchedule() {
         
         if (btnElement) {
             btnElement.classList.add('active');
-        } else if (event && event.target) {
+        } else if (typeof event !== 'undefined' && event && event.target) {
             event.target.classList.add('active');
         }
 
