@@ -261,11 +261,11 @@
             'tecnica': 'ballet-tecnica',
             'ballet': 'ballet-tecnica',
             'kids': 'backstage-emocion',
-            'festival': 'backstage-emocion',
-            'festival2025': 'crown-company',
-            'company': 'crown-company',
-            'compania': 'crown-company',
-            'crown-company': 'crown-company'
+            'festival2025': 'backstage-emocion',
+            'festival2026': 'backstage-emocion',
+            'company': 'backstage-emocion',
+            'compania': 'backstage-emocion',
+            'crown-company': 'backstage-emocion'
         };
 
         if (aliasMap[hash]) {
