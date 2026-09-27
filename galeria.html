@@ -230,6 +230,7 @@
     <div class="filter-container">
         <button class="filter-btn active" onclick="filterGallery('all', this)">Todos</button>
         <button class="filter-btn gold" onclick="filterGallery('festival2026', this)"><i class="fas fa-crown"></i> Festival 2026</button>
+        <button class="filter-btn gold" onclick="filterGallery('festival2025', this)"><i class="fas fa-star"></i> Festival 2025</button>
         <button class="filter-btn" onclick="filterGallery('urbano', this)">Urbano</button>
         <button class="filter-btn" onclick="filterGallery('tecnica', this)">Técnica</button>
         <button class="filter-btn" onclick="filterGallery('kids', this)">Kids</button>
@@ -239,18 +240,33 @@
     <section class="gallery-section">
         <div class="gallery-grid">
 
-            <!-- FESTIVAL 2026 HIGHLIGHT (VIDEO) -->
-            <div class="gallery-item festival2026 eventos" onclick="openLightbox('video', 'festivales.mp4', 'Gran Festival Anual 2026', 'Showcase escénico completo de The Crown Dance Studio en el teatro profesional.')">
+            <!-- FESTIVAL 2026 HIGHLIGHT (NUEVO VIDEO) -->
+            <div class="gallery-item festival2026 eventos" onclick="openLightbox('video', 'festival2026.mp4', 'Gran Festival Anual 2026', 'Showcase escénico y producción completa del Festival 2026 de The Crown Dance Studio.')">
                 <div class="media-wrapper">
                     <span class="media-tag festival">Festival 2026 👑</span>
                     <video playsinline muted poster="logo_corona.png" preload="metadata">
-                        <source src="festivales.mp4" type="video/mp4">
+                        <source src="festival2026.mp4" type="video/mp4">
                     </video>
                     <div class="media-icon"><i class="fas fa-play"></i></div>
                 </div>
                 <div class="item-info">
                     <h3>Gran Festival Anual 2026</h3>
                     <p>Categoría: Festival 2026 / Escenario</p>
+                </div>
+            </div>
+
+            <!-- FESTIVAL 2025 HIGHLIGHT (VIDEO ANTERIOR) -->
+            <div class="gallery-item festival2025 eventos" onclick="openLightbox('video', 'festivales.mp4', 'Festival Anual 2025', 'Showcase escénico y mejores momentos del Festival 2025 de The Crown Dance Studio.')">
+                <div class="media-wrapper">
+                    <span class="media-tag festival" style="background: rgba(193, 154, 81, 0.9);">Festival 2025 ⭐</span>
+                    <video playsinline muted poster="logo_corona.png" preload="metadata">
+                        <source src="festivales.mp4" type="video/mp4">
+                    </video>
+                    <div class="media-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <div class="item-info">
+                    <h3>Festival Anual 2025</h3>
+                    <p>Categoría: Festival 2025 / Escenario</p>
                 </div>
             </div>
             
