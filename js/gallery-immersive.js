@@ -262,9 +262,10 @@
             'ballet': 'ballet-tecnica',
             'kids': 'backstage-emocion',
             'festival': 'backstage-emocion',
-            'festival2026': 'backstage-emocion',
-            'festival2025': 'tog-company',
-            'company': 'tog-company'
+            'festival2025': 'crown-company',
+            'company': 'crown-company',
+            'compania': 'crown-company',
+            'crown-company': 'crown-company'
         };
 
         if (aliasMap[hash]) {
