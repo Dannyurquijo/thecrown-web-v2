@@ -4,508 +4,1105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Galería Multimedia | The Crown Dance Studio Querétaro</title>
-    <meta name="description" content="Explora la galería multimedia de The Crown Dance Studio. Fotos y videos del Festival 2026, clases de Hip Hop, Ballet, Jazz, Reggaetón y presentaciones en vivo.">
+    <title>Galería Inmersiva | The Crown Dance Studio Querétaro</title>
+    <meta name="description" content="Galería editorial inmersiva de The Crown Dance Studio. Ballet clásico, danzas urbanas, contemporáneo, heels, TOG Company y momentos de festival. Dirección inspirada en alta fotografía escénica.">
     <meta name="robots" content="index, follow">
     
     <link rel="icon" type="image/png" href="logo_corona.png">
     
+    <!-- Tipografías de Lujo: League Spartan, Poppins, Montserrat, Glacial Indifference -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700;900&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Estilos Base & Sistema de Diseño The Crown -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/3d-effects.css">
-
-    <style>
-        .gallery-hero {
-            padding-top: 160px;
-            padding-bottom: 30px;
-            text-align: center;
-        }
-        .gallery-title {
-            font-family: var(--font-heading);
-            font-weight: 900;
-            font-size: clamp(3rem, 6vw, 4.8rem);
-            margin: 0;
-            letter-spacing: -1.5px;
-            text-transform: uppercase;
-            background: linear-gradient(135deg, #fff 30%, #a8a8a8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .gallery-subtitle {
-            font-family: var(--font-heading);
-            font-size: 1.15rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            margin-top: 8px;
-            color: var(--dorado);
-            font-weight: 700;
-        }
-        .filter-container {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin: 30px auto 45px auto;
-            max-width: 900px;
-            padding: 0 5%;
-        }
-        .filter-btn {
-            background: var(--apple-surface);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--apple-border);
-            color: var(--text-primary);
-            padding: 10px 22px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-family: var(--font-heading);
-            font-weight: 700;
-            font-size: 0.92rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: var(--transition-smooth);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--rosa-neon);
-            border-color: var(--rosa-neon);
-            color: #000;
-            box-shadow: 0 5px 20px var(--rosa-glow);
-            transform: translateY(-2px);
-        }
-        .filter-btn.gold.active {
-            background: var(--dorado);
-            border-color: var(--dorado);
-            color: #000;
-            box-shadow: 0 5px 20px rgba(193, 154, 81, 0.45);
-        }
-        .gallery-section {
-            padding: 0 5% 100px 5%;
-            max-width: 1300px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-            gap: 26px;
-            position: relative;
-            z-index: 2;
-        }
-        .gallery-item {
-            background: var(--apple-surface);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--apple-border);
-            border-radius: 24px;
-            padding: 12px;
-            overflow: hidden;
-            transition: var(--transition-smooth);
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            cursor: pointer;
-        }
-        .media-wrapper {
-            position: relative;
-            width: 100%;
-            border-radius: 16px;
-            overflow: hidden;
-            background: #050505;
-            aspect-ratio: 4 / 3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .media-wrapper img, .media-wrapper video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-        .media-tag {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            background: rgba(0,0,0,0.75);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--apple-border);
-            color: #fff;
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-family: var(--font-heading);
-            font-size: 0.78rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            z-index: 6;
-        }
-        .media-tag.festival {
-            border-color: var(--dorado);
-            color: var(--dorado);
-            box-shadow: 0 0 10px rgba(193, 154, 81, 0.4);
-        }
-        .media-icon {
-            position: absolute;
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            background: rgba(255,102,196,0.9);
-            color: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.35rem;
-            opacity: 0;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            pointer-events: none;
-            z-index: 6;
-        }
-        .gallery-item:hover .media-icon {
-            opacity: 1;
-            transform: scale(1.1);
-        }
-        .item-info {
-            padding: 16px 8px 6px 8px;
-            text-align: left;
-        }
-        .item-info h3 {
-            font-family: var(--font-heading);
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 4px;
-        }
-        .item-info p {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-        }
-        .gallery-item:hover {
-            border-color: rgba(255, 102, 196, 0.5);
-            transform: translateY(-8px);
-            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.75);
-            background: rgba(36, 36, 44, 0.85);
-        }
-        .gallery-item:hover .media-wrapper img {
-            transform: scale(1.06);
-        }
-        .gallery-item.hidden {
-            display: none;
-        }
-    </style>
+    <!-- Estilos de Galería Inmersiva & Asymmetrical Masonry (Rachel Neville Direction) -->
+    <link rel="stylesheet" href="css/gallery-immersive.css">
 </head>
 <body>
 
+    <!-- Cursor Spotlight Teatral Dinámico -->
     <div class="cursor-glow"></div>
 
+    <!-- NAVEGACIÓN INSTITUCIONAL -->
     <nav class="navbar">
-        <a href="index.html" class="nav-logo"><img src="logo.png" alt="Logotipo The Crown Dance Studio"></a>
+        <a href="index.html" class="nav-logo" title="The Crown Dance Studio"><img src="logo.png" alt="Logotipo The Crown Dance Studio"></a>
         
-        <div class="hamburger">
+        <div class="hamburger" aria-label="Abrir Menú" onclick="toggleMenu()">
             <i class="fas fa-bars"></i>
         </div>
 
-        <div class="nav-links">
+        <div class="nav-links" id="navLinks">
             <a href="index.html#inicio"><span class="es">Inicio</span><span class="en">Home</span></a>
             <a href="index.html#nosotros"><span class="es">Nosotros</span><span class="en">About</span></a>
             <a href="index.html#disciplinas"><span class="es">Clases</span><span class="en">Classes</span></a>
+            <a href="index.html#festivales"><span class="es">Festivales</span><span class="en">Festivals</span></a>
             <a href="index.html#horarios"><span class="es">Horarios</span><span class="en">Schedule</span></a>
+            <a href="galeria.html" class="active" style="color: var(--rosa-neon); font-weight: 700;"><span class="es">Galería</span><span class="en">Gallery</span></a>
             <a href="agenda.html" class="nav-cta">AGENDAR</a>
             <button class="lang-btn" onclick="toggleLanguage()">ES / EN</button>
         </div>
     </nav>
 
-    <header class="gallery-hero">
-        <h1 class="gallery-title"><span class="es">Galería</span><span class="en">Gallery</span></h1>
-        <p class="gallery-subtitle">The Crown Experience & Festival 2026</p>
-    </header>
+    <!-- SECCIÓN DE GALERÍA INMERSIVA Y EDITORIAL -->
+    <main class="immersive-gallery-section" id="galeria">
+        <div class="theatrical-backdrop"></div>
 
-    <div class="filter-container">
-        <button class="filter-btn active" onclick="filterGallery('all', this)">Todos</button>
-        <button class="filter-btn gold" onclick="filterGallery('festival2026', this)"><i class="fas fa-crown"></i> Festival 2026</button>
-        <button class="filter-btn gold" onclick="filterGallery('festival2025', this)"><i class="fas fa-star"></i> Festival 2025</button>
-        <button class="filter-btn" onclick="filterGallery('urbano', this)">Urbano</button>
-        <button class="filter-btn" onclick="filterGallery('tecnica', this)">Técnica</button>
-        <button class="filter-btn" onclick="filterGallery('kids', this)">Kids</button>
-        <button class="filter-btn" onclick="filterGallery('eventos', this)">Eventos</button>
-    </div>
-
-    <section class="gallery-section">
-        <div class="gallery-grid">
-
-            <!-- FESTIVAL 2026 HIGHLIGHT (NUEVO VIDEO) -->
-            <div class="gallery-item festival2026 eventos" onclick="openLightbox('video', 'festival2026.mp4', 'Gran Festival Anual 2026', 'Showcase escénico y producción completa del Festival 2026 de The Crown Dance Studio.')">
-                <div class="media-wrapper">
-                    <span class="media-tag festival">Festival 2026 👑</span>
-                    <video playsinline muted poster="logo_corona.png" preload="metadata">
-                        <source src="festival2026.mp4" type="video/mp4">
-                    </video>
-                    <div class="media-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <div class="item-info">
-                    <h3>Gran Festival Anual 2026</h3>
-                    <p>Categoría: Festival 2026 / Escenario</p>
-                </div>
+        <!-- Encabezado Editorial de Alta Gama -->
+        <header class="gallery-header-editorial">
+            <div class="gallery-overtitle">
+                <i class="fas fa-crown"></i> The Crown Visual Arts • Dirección Escénica
             </div>
+            <h1 class="gallery-title-luxury">
+                <span class="es">El Arte del Movimiento</span>
+                <span class="en" style="display:none;">The Art of Motion</span>
+            </h1>
+            <p class="gallery-subtitle-luxury">
+                <span class="es">Explora la cinética, la precisión técnica y la pasión teatral de nuestros bailarines. Una experiencia editorial concebida bajo la luz del escenario profesional.</span>
+                <span class="en" style="display:none;">Explore kinetics, technical precision, and theatrical passion. An editorial showcase captured under professional stage lighting.</span>
+            </p>
+        </header>
 
-            <!-- FESTIVAL 2025 HIGHLIGHT (VIDEO ANTERIOR) -->
-            <div class="gallery-item festival2025 eventos" onclick="openLightbox('video', 'festivales.mp4', 'Festival Anual 2025', 'Showcase escénico y mejores momentos del Festival 2025 de The Crown Dance Studio.')">
-                <div class="media-wrapper">
-                    <span class="media-tag festival" style="background: rgba(193, 154, 81, 0.9);">Festival 2025 ⭐</span>
-                    <video playsinline muted poster="logo_corona.png" preload="metadata">
-                        <source src="festivales.mp4" type="video/mp4">
-                    </video>
-                    <div class="media-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <div class="item-info">
-                    <h3>Festival Anual 2025</h3>
-                    <p>Categoría: Festival 2025 / Escenario</p>
-                </div>
-            </div>
-            
-            <div class="gallery-item urbano" onclick="openLightbox('video', 'Hip_Hop.mp4', 'Hip Hop Session', 'Clase intensiva de groove, aislamiento y rítmica urbana.')">
-                <div class="media-wrapper">
-                    <span class="media-tag">Urbano</span>
-                    <video playsinline muted preload="metadata">
-                        <source src="Hip_Hop.mp4" type="video/mp4">
-                    </video>
-                    <div class="media-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <div class="item-info">
-                    <h3>Hip Hop Session</h3>
-                    <p>Categoría: Urbano</p>
-                </div>
-            </div>
+        <!-- BARRA DE FILTROS INTERACTIVA (PILLS) -->
+        <nav class="filter-pills-container" aria-label="Filtros de la Galería">
+            <button class="filter-pill active" data-filter="all">
+                <i class="fas fa-border-all"></i> <span class="es">Todos</span><span class="en" style="display:none;">All</span>
+            </button>
+            <button class="filter-pill gold" data-filter="ballet-tecnica">
+                <i class="fas fa-feather-alt"></i> <span class="es">Ballet & Técnica</span><span class="en" style="display:none;">Ballet & Technique</span>
+            </button>
+            <button class="filter-pill" data-filter="urbano-heels">
+                <i class="fas fa-fire"></i> <span class="es">Urbano & Heels</span><span class="en" style="display:none;">Urban & Heels</span>
+            </button>
+            <button class="filter-pill gold" data-filter="tog-company">
+                <i class="fas fa-crown"></i> <span class="es">TOG Company</span><span class="en" style="display:none;">TOG Company</span>
+            </button>
+            <button class="filter-pill" data-filter="backstage-emocion">
+                <i class="fas fa-heart"></i> <span class="es">Backstage & Emoción</span><span class="en" style="display:none;">Backstage & Emotion</span>
+            </button>
+        </nav>
 
-            <div class="gallery-item tecnica" onclick="openLightbox('image', 'Ballet.jpg', 'Clase de Ballet', 'Técnica de barra, postura y centro para bailarines.')">
-                <div class="media-wrapper">
-                    <span class="media-tag">Técnica</span>
-                    <img src="Ballet.jpg" alt="Clase de Ballet - The Crown">
-                    <div class="media-icon"><i class="fas fa-search-plus"></i></div>
-                </div>
-                <div class="item-info">
-                    <h3>Clase de Ballet</h3>
-                    <p>Categoría: Técnica</p>
-                </div>
-            </div>
-
-            <div class="gallery-item kids" onclick="openLightbox('image', 'kids.jpg', 'Crown Kids Team', 'Nuestras futuras estrellas en formación artística.')">
-                <div class="media-wrapper">
-                    <span class="media-tag">Kids</span>
-                    <img src="kids.jpg" alt="Alumnos infantiles en The Crown">
-                    <div class="media-icon"><i class="fas fa-search-plus"></i></div>
-                </div>
-                <div class="item-info">
-                    <h3>Crown Kids Team</h3>
-                    <p>Categoría: Kids</p>
-                </div>
-            </div>
-
-            <div class="gallery-item urbano" onclick="openLightbox('video', 'Heels.mp4', 'Heels Choreography', 'Líneas, balance y empoderamiento escénico en tacones.')">
-                <div class="media-wrapper">
-                    <span class="media-tag">Urbano</span>
-                    <video playsinline muted preload="metadata">
-                        <source src="Heels.mp4" type="video/mp4">
-                    </video>
-                    <div class="media-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <div class="item-info">
-                    <h3>Heels Choreography</h3>
-                    <p>Categoría: Urbano</p>
-                </div>
-            </div>
-
-            <div class="gallery-item tecnica" onclick="openLightbox('video', 'Contemporaneo.mp4', 'Danza Contemporánea', 'Fluidez, trabajo de piso y expresión emotiva.')">
-                <div class="media-wrapper">
-                    <span class="media-tag">Técnica</span>
-                    <video playsinline muted preload="metadata">
+        <!-- CUADRÍCULA MASONRY ASIMÉTRICA -->
+        <div class="masonry-container" id="galleryGrid">
+        <!-- ITEM: Fluidez & Suspensión (ballet-tecnica) -->
+        <article class="gallery-card" 
+                 data-category="ballet-tecnica" 
+                 data-type="video" 
+                 data-src="Contemporaneo.mp4"
+                 data-discipline="Danza Contemporánea"
+                 data-title="Fluidez & Suspensión"
+                 data-desc="Clase intensiva de suelo, gravedad y líneas dinámicas en contemporáneo.">
+            <div class="card-media-wrapper ratio-16-9">
+                <span class="card-badge pink">Video Escénico</span>
+                <div class="card-action-icon"><i class="fas fa-play"></i></div>
+                    <video playsinline muted loop preload="metadata" poster="fotos_galeria/contemporaneo_1.webp">
                         <source src="Contemporaneo.mp4" type="video/mp4">
                     </video>
-                    <div class="media-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <div class="item-info">
-                    <h3>Danza Contemporánea</h3>
-                    <p>Categoría: Técnica</p>
-                </div>
-            </div>
-
-            <div class="gallery-item kids" onclick="openLightbox('image', 'hiphopkids.jpg', 'Hip Hop Kids', 'Desarrollo de coordinación y ritmo para niños.')">
-                <div class="media-wrapper">
-                    <span class="media-tag">Kids</span>
-                    <img src="hiphopkids.jpg" alt="Clase de Hip Hop Infantil">
-                    <div class="media-icon"><i class="fas fa-search-plus"></i></div>
-                </div>
-                <div class="item-info">
-                    <h3>Hip Hop Kids</h3>
-                    <p>Categoría: Kids</p>
+                    <div class="video-playing-indicator"><span class="dot"></span> Loop</div>
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline pink">Danza Contemporánea</div>
+                        <h3 class="card-piece-title">Fluidez & Suspensión</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Clase intensiva de suelo, gravedad y líneas dinámicas en contemporáneo.</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </article>
 
-            <div class="gallery-item tecnica" onclick="openLightbox('image', 'jazz.jpg', 'Jazz Técnico', 'Saltos, giros y energía en cada combinación.')">
-                <div class="media-wrapper">
-                    <span class="media-tag">Técnica</span>
-                    <img src="jazz.jpg" alt="Clase de Jazz Dance">
-                    <div class="media-icon"><i class="fas fa-search-plus"></i></div>
-                </div>
-                <div class="item-info">
-                    <h3>Jazz Técnico</h3>
-                    <p>Categoría: Técnica</p>
+        <!-- ITEM: Extensión & Grand Jeté (ballet-tecnica) -->
+        <article class="gallery-card gold-border" 
+                 data-category="ballet-tecnica" 
+                 data-type="image" 
+                 data-src="fotos_galeria/ballet_v2_v.webp"
+                 data-discipline="Ballet & Puntas"
+                 data-title="Extensión & Grand Jeté"
+                 data-desc="Precisión académica, postura corporal y proyección escénica en puntas.">
+            <div class="card-media-wrapper ratio-4-5">
+                <span class="card-badge gold">Ballet Clásico</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/ballet_v2_v.webp" alt="Extensión & Grand Jeté - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline ">Ballet & Puntas</div>
+                        <h3 class="card-piece-title">Extensión & Grand Jeté</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Precisión académica, postura corporal y proyección escénica en puntas.</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </article>
 
-            <div class="gallery-item kids" onclick="openLightbox('image', 'jazzkids.jpg', 'Jazz Kids Rehearsal', 'Preparación coreográfica para alumnos infantiles.')">
-                <div class="media-wrapper">
-                    <span class="media-tag">Kids</span>
-                    <img src="jazzkids.jpg" alt="Alumnos de Jazz Kids">
-                    <div class="media-icon"><i class="fas fa-search-plus"></i></div>
-                </div>
-                <div class="item-info">
-                    <h3>Jazz Kids Rehearsal</h3>
-                    <p>Categoría: Kids</p>
+        <!-- ITEM: Equilibrio & Flexibilidad (ballet-tecnica) -->
+        <article class="gallery-card" 
+                 data-category="ballet-tecnica" 
+                 data-type="image" 
+                 data-src="fotos_galeria/flexybalances_v1_v.webp"
+                 data-discipline="Acondicionamiento"
+                 data-title="Equilibrio & Flexibilidad"
+                 data-desc="Entrenamiento biomecánico enfocado en rangos de apertura y control muscular.">
+            <div class="card-media-wrapper ratio-4-5">
+                <span class="card-badge pink">Flex & Balance</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/flexybalances_v1_v.webp" alt="Equilibrio & Flexibilidad - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline pink">Acondicionamiento</div>
+                        <h3 class="card-piece-title">Equilibrio & Flexibilidad</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Entrenamiento biomecánico enfocado en rangos de apertura y control muscular.</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </article>
 
-            <div class="gallery-item urbano" onclick="openLightbox('video', 'Reggeton.mp4', 'Reggaetón Class', 'Ritmo, soltura y fuerza corporal en el escenario.')">
-                <div class="media-wrapper">
-                    <span class="media-tag">Urbano</span>
-                    <video playsinline muted preload="metadata">
-                        <source src="Reggeton.mp4" type="video/mp4">
+        <!-- ITEM: Líneas de Suelo (ballet-tecnica) -->
+        <article class="gallery-card gold-border" 
+                 data-category="ballet-tecnica" 
+                 data-type="image" 
+                 data-src="fotos_galeria/contemporaneo1_sq.webp"
+                 data-discipline="Contemporáneo"
+                 data-title="Líneas de Suelo"
+                 data-desc="Exploración de peso, espirales y contacto escénico.">
+            <div class="card-media-wrapper ratio-1-1">
+                <span class="card-badge gold">Contemporáneo</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/contemporaneo1_sq.webp" alt="Líneas de Suelo - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline ">Contemporáneo</div>
+                        <h3 class="card-piece-title">Líneas de Suelo</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Exploración de peso, espirales y contacto escénico.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Cuerpo de Baile (ballet-tecnica) -->
+        <article class="gallery-card gold-border" 
+                 data-category="ballet-tecnica" 
+                 data-type="image" 
+                 data-src="fotos_galeria/ballet_v1.webp"
+                 data-discipline="Ballet Clásico"
+                 data-title="Cuerpo de Baile"
+                 data-desc="Composición coral y armonía espacial en el escenario principal.">
+            <div class="card-media-wrapper ratio-16-9">
+                <span class="card-badge gold">Ensamble</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/ballet_v1.webp" alt="Cuerpo de Baile - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline ">Ballet Clásico</div>
+                        <h3 class="card-piece-title">Cuerpo de Baile</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Composición coral y armonía espacial en el escenario principal.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Ingravidez en Telas (ballet-tecnica) -->
+        <article class="gallery-card" 
+                 data-category="ballet-tecnica" 
+                 data-type="image" 
+                 data-src="danzaaerea.jpg"
+                 data-discipline="Aéreo & Fuerza"
+                 data-title="Ingravidez en Telas"
+                 data-desc="Acrobacia aérea combinada con gracia estética y fuerza de core.">
+            <div class="card-media-wrapper ratio-4-5">
+                <span class="card-badge pink">Danza Aérea</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="danzaaerea.jpg" alt="Ingravidez en Telas - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline pink">Aéreo & Fuerza</div>
+                        <h3 class="card-piece-title">Ingravidez en Telas</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Acrobacia aérea combinada con gracia estética y fuerza de core.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Arquitectura Corpórea (ballet-tecnica) -->
+        <article class="gallery-card" 
+                 data-category="ballet-tecnica" 
+                 data-type="image" 
+                 data-src="fotos_galeria/contemporaneo2_v1_v.webp"
+                 data-discipline="Contemporáneo"
+                 data-title="Arquitectura Corpórea"
+                 data-desc="Tensión y liberación en la danza teatral de vanguardia.">
+            <div class="card-media-wrapper ratio-4-5">
+                <span class="card-badge pink">Contemporáneo</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/contemporaneo2_v1_v.webp" alt="Arquitectura Corpórea - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline pink">Contemporáneo</div>
+                        <h3 class="card-piece-title">Arquitectura Corpórea</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Tensión y liberación en la danza teatral de vanguardia.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Disciplina & En Dehors (ballet-tecnica) -->
+        <article class="gallery-card gold-border" 
+                 data-category="ballet-tecnica" 
+                 data-type="image" 
+                 data-src="Ballet.jpg"
+                 data-discipline="Ballet Académico"
+                 data-title="Disciplina & En Dehors"
+                 data-desc="La base innegociable de toda disciplina de danza en The Crown.">
+            <div class="card-media-wrapper ratio-4-5">
+                <span class="card-badge gold">Técnica de Barra</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="Ballet.jpg" alt="Disciplina & En Dehors - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline ">Ballet Académico</div>
+                        <h3 class="card-piece-title">Disciplina & En Dehors</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>La base innegociable de toda disciplina de danza en The Crown.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Alineación & Arco (ballet-tecnica) -->
+        <article class="gallery-card" 
+                 data-category="ballet-tecnica" 
+                 data-type="image" 
+                 data-src="fotos_galeria/flexybalances_v2_sq.webp"
+                 data-discipline="Técnica"
+                 data-title="Alineación & Arco"
+                 data-desc="Ampliación de arcos y flexibilidad activa para bailarines.">
+            <div class="card-media-wrapper ratio-1-1">
+                <span class="card-badge pink">Flexibilidad</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/flexybalances_v2_sq.webp" alt="Alineación & Arco - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline pink">Técnica</div>
+                        <h3 class="card-piece-title">Alineación & Arco</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Ampliación de arcos y flexibilidad activa para bailarines.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Sinfonía Clásica (ballet-tecnica) -->
+        <article class="gallery-card gold-border" 
+                 data-category="ballet-tecnica" 
+                 data-type="image" 
+                 data-src="fotos_galeria/ballet2_v2.webp"
+                 data-discipline="Ballet Escénico"
+                 data-title="Sinfonía Clásica"
+                 data-desc="Coreografía de festival con vestuario institucional y técnica depurada.">
+            <div class="card-media-wrapper ratio-16-9">
+                <span class="card-badge gold">Ballet Pro</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/ballet2_v2.webp" alt="Sinfonía Clásica - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline ">Ballet Escénico</div>
+                        <h3 class="card-piece-title">Sinfonía Clásica</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Coreografía de festival con vestuario institucional y técnica depurada.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Empoderamiento en Tacones (urbano-heels) -->
+        <article class="gallery-card" 
+                 data-category="urbano-heels" 
+                 data-type="video" 
+                 data-src="Heels.mp4"
+                 data-discipline="Heels Performance"
+                 data-title="Empoderamiento en Tacones"
+                 data-desc="Sensualidad, equilibrio de peso y actitud escénica frente a la cámara.">
+            <div class="card-media-wrapper ratio-16-9">
+                <span class="card-badge pink">Video Escénico</span>
+                <div class="card-action-icon"><i class="fas fa-play"></i></div>
+                    <video playsinline muted loop preload="metadata" poster="fotos_galeria/heels_v1_v.webp">
+                        <source src="Heels.mp4" type="video/mp4">
                     </video>
-                    <div class="media-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <div class="item-info">
-                    <h3>Reggaetón Class</h3>
-                    <p>Categoría: Urbano</p>
-                </div>
-            </div>
-
-            <div class="gallery-item tecnica" onclick="openLightbox('image', 'Acro.jpg', 'Acrobacia & Balances', 'Fortalecimiento de flexibilidad y trucos acrobáticos.')">
-                <div class="media-wrapper">
-                    <span class="media-tag">Técnica</span>
-                    <img src="Acro.jpg" alt="Clase de Acrobacia y balances">
-                    <div class="media-icon"><i class="fas fa-search-plus"></i></div>
-                </div>
-                <div class="item-info">
-                    <h3>Acrobacia & Balances</h3>
-                    <p>Categoría: Técnica</p>
+                    <div class="video-playing-indicator"><span class="dot"></span> Loop</div>
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline pink">Heels Performance</div>
+                        <h3 class="card-piece-title">Empoderamiento en Tacones</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Sensualidad, equilibrio de peso y actitud escénica frente a la cámara.</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </article>
 
-            <div class="gallery-item kids" onclick="openLightbox('image', 'aereokids.jpg', 'Aéreo Kids', 'Entrenamiento seguro en telas aéreas para niños.')">
-                <div class="media-wrapper">
-                    <span class="media-tag">Kids</span>
-                    <img src="aereokids.jpg" alt="Danza aérea para niños">
-                    <div class="media-icon"><i class="fas fa-search-plus"></i></div>
-                </div>
-                <div class="item-info">
-                    <h3>Aéreo Kids</h3>
-                    <p>Categoría: Kids</p>
+        <!-- ITEM: Líneas & Confianza (urbano-heels) -->
+        <article class="gallery-card" 
+                 data-category="urbano-heels" 
+                 data-type="image" 
+                 data-src="fotos_galeria/heels_v1_v.webp"
+                 data-discipline="Heels"
+                 data-title="Líneas & Confianza"
+                 data-desc="Alineación de tacón, postura y presencia escénica arrolladora.">
+            <div class="card-media-wrapper ratio-4-5">
+                <span class="card-badge pink">Heels</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/heels_v1_v.webp" alt="Líneas & Confianza - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline pink">Heels</div>
+                        <h3 class="card-piece-title">Líneas & Confianza</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Alineación de tacón, postura y presencia escénica arrolladora.</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </article>
 
-            <div class="gallery-item tecnica" onclick="openLightbox('image', 'danzaaerea.jpg', 'Danza Aérea (Telas)', 'Expresión artística suspensión y desarrollo muscular.')">
-                <div class="media-wrapper">
-                    <span class="media-tag">Técnica</span>
-                    <img src="danzaaerea.jpg" alt="Clase de danza aérea en telas">
-                    <div class="media-icon"><i class="fas fa-search-plus"></i></div>
-                </div>
-                <div class="item-info">
-                    <h3>Danza Aérea (Telas)</h3>
-                    <p>Categoría: Técnica</p>
+        <!-- ITEM: Groove & Aislamiento (urbano-heels) -->
+        <article class="gallery-card gold-border" 
+                 data-category="urbano-heels" 
+                 data-type="image" 
+                 data-src="fotos_galeria/hiphop_v1_v.webp"
+                 data-discipline="Hip Hop Comercial"
+                 data-title="Groove & Aislamiento"
+                 data-desc="Fundamentos de la cultura callejera trasladados al escenario teatral.">
+            <div class="card-media-wrapper ratio-4-5">
+                <span class="card-badge gold">Hip Hop</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/hiphop_v1_v.webp" alt="Groove & Aislamiento - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline ">Hip Hop Comercial</div>
+                        <h3 class="card-piece-title">Groove & Aislamiento</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Fundamentos de la cultura callejera trasladados al escenario teatral.</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </article>
 
-            <div class="gallery-item kids" onclick="openLightbox('image', 'kpopkids.jpg', 'Kpop Kids Team', 'Coreografías populares de K-Pop adaptadas para niños.')">
-                <div class="media-wrapper">
-                    <span class="media-tag">Kids</span>
-                    <img src="kpopkids.jpg" alt="Clase de Kpop infantil">
-                    <div class="media-icon"><i class="fas fa-search-plus"></i></div>
-                </div>
-                <div class="item-info">
-                    <h3>Kpop Kids Team</h3>
-                    <p>Categoría: Kids</p>
+        <!-- ITEM: Beat & Velocidad (urbano-heels) -->
+        <article class="gallery-card gold-border" 
+                 data-category="urbano-heels" 
+                 data-type="video" 
+                 data-src="Hip_Hop.mp4"
+                 data-discipline="Urbano"
+                 data-title="Beat & Velocidad"
+                 data-desc="Rutina de alta velocidad con transiciones dinámicas y acentos percusivos.">
+            <div class="card-media-wrapper ratio-16-9">
+                <span class="card-badge gold">Video Escénico</span>
+                <div class="card-action-icon"><i class="fas fa-play"></i></div>
+                    <video playsinline muted loop preload="metadata" poster="fotos_galeria/hiphop_v1.webp">
+                        <source src="Hip_Hop.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-playing-indicator"><span class="dot"></span> Loop</div>
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline ">Urbano</div>
+                        <h3 class="card-piece-title">Beat & Velocidad</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Rutina de alta velocidad con transiciones dinámicas y acentos percusivos.</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </article>
 
+        <!-- ITEM: Power & Style (urbano-heels) -->
+        <article class="gallery-card" 
+                 data-category="urbano-heels" 
+                 data-type="image" 
+                 data-src="fotos_galeria/urbano_v1_v.webp"
+                 data-discipline="Danza Urbana"
+                 data-title="Power & Style"
+                 data-desc="Fuerza interpretativa y musicalidad al límite.">
+            <div class="card-media-wrapper ratio-4-5">
+                <span class="card-badge pink">Urbano</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/urbano_v1_v.webp" alt="Power & Style - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline pink">Danza Urbana</div>
+                        <h3 class="card-piece-title">Power & Style</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Fuerza interpretativa y musicalidad al límite.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Esencia Callejera (urbano-heels) -->
+        <article class="gallery-card gold-border" 
+                 data-category="urbano-heels" 
+                 data-type="image" 
+                 data-src="fotos_galeria/hiphop_v2_sq.webp"
+                 data-discipline="Hip Hop"
+                 data-title="Esencia Callejera"
+                 data-desc="Acentos y síncopas en el corazón del ritmo urbano.">
+            <div class="card-media-wrapper ratio-1-1">
+                <span class="card-badge gold">Street</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/hiphop_v2_sq.webp" alt="Esencia Callejera - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline ">Hip Hop</div>
+                        <h3 class="card-piece-title">Esencia Callejera</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Acentos y síncopas en el corazón del ritmo urbano.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Sincronía Milimétrica (urbano-heels) -->
+        <article class="gallery-card" 
+                 data-category="urbano-heels" 
+                 data-type="image" 
+                 data-src="fotos_galeria/kpop_v1_sq.webp"
+                 data-discipline="K-Pop Cover"
+                 data-title="Sincronía Milimétrica"
+                 data-desc="Geometría visual, sharp movements y visual styling.">
+            <div class="card-media-wrapper ratio-1-1">
+                <span class="card-badge pink">K-Pop</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/kpop_v1_sq.webp" alt="Sincronía Milimétrica - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline pink">K-Pop Cover</div>
+                        <h3 class="card-piece-title">Sincronía Milimétrica</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Geometría visual, sharp movements y visual styling.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Talento en Desarrollo (urbano-heels) -->
+        <article class="gallery-card gold-border" 
+                 data-category="urbano-heels" 
+                 data-type="image" 
+                 data-src="hiphopkids.jpg"
+                 data-discipline="Hip Hop Kids"
+                 data-title="Talento en Desarrollo"
+                 data-desc="Las nuevas generaciones dominando el flow y la coordinación.">
+            <div class="card-media-wrapper ratio-4-5">
+                <span class="card-badge gold">Kids Urbano</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="hiphopkids.jpg" alt="Talento en Desarrollo - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline ">Hip Hop Kids</div>
+                        <h3 class="card-piece-title">Talento en Desarrollo</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Las nuevas generaciones dominando el flow y la coordinación.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Ritmo Latino & Escenario (urbano-heels) -->
+        <article class="gallery-card" 
+                 data-category="urbano-heels" 
+                 data-type="image" 
+                 data-src="fotos_galeria/reggaeton_v1.webp"
+                 data-discipline="Reggaetón Comercial"
+                 data-title="Ritmo Latino & Escenario"
+                 data-desc="Sabor caribeño con la disciplina y pulcritud de The Crown.">
+            <div class="card-media-wrapper ratio-16-9">
+                <span class="card-badge pink">Reggaetón</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/reggaeton_v1.webp" alt="Ritmo Latino & Escenario - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline pink">Reggaetón Comercial</div>
+                        <h3 class="card-piece-title">Ritmo Latino & Escenario</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Sabor caribeño con la disciplina y pulcritud de The Crown.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Idol Performance (urbano-heels) -->
+        <article class="gallery-card gold-border" 
+                 data-category="urbano-heels" 
+                 data-type="image" 
+                 data-src="fotos_galeria/kpop_v2.webp"
+                 data-discipline="K-Pop"
+                 data-title="Idol Performance"
+                 data-desc="Cover oficial en vivo con iluminación teatral completa.">
+            <div class="card-media-wrapper ratio-16-9">
+                <span class="card-badge gold">K-Pop Stage</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/kpop_v2.webp" alt="Idol Performance - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline ">K-Pop</div>
+                        <h3 class="card-piece-title">Idol Performance</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Cover oficial en vivo con iluminación teatral completa.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Showcase Corporativo (tog-company) -->
+        <article class="gallery-card gold-border" 
+                 data-category="tog-company" 
+                 data-type="video" 
+                 data-src="festivales.mp4"
+                 data-discipline="Compañía Escénica"
+                 data-title="Showcase Corporativo"
+                 data-desc="Impacto visual, acróbatas y bailarines profesionales para eventos de alto perfil.">
+            <div class="card-media-wrapper ratio-16-9">
+                <span class="card-badge gold">Producción TOG</span>
+                <div class="card-action-icon"><i class="fas fa-play"></i></div>
+                    <video playsinline muted loop preload="metadata" poster="fotos_galeria/escenario.webp">
+                        <source src="festivales.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-playing-indicator"><span class="dot"></span> Loop</div>
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline ">Compañía Escénica</div>
+                        <h3 class="card-piece-title">Showcase Corporativo</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Impacto visual, acróbatas y bailarines profesionales para eventos de alto perfil.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Luz Cenital & Carisma (tog-company) -->
+        <article class="gallery-card gold-border" 
+                 data-category="tog-company" 
+                 data-type="image" 
+                 data-src="fotos_galeria/solojazz_v.webp"
+                 data-discipline="Jazz Funk Pro"
+                 data-title="Luz Cenital & Carisma"
+                 data-desc="Solistas de la compañía demostrando virtuosismo bajo la luz del teatro.">
+            <div class="card-media-wrapper ratio-4-5">
+                <span class="card-badge gold">Company Solo</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/solojazz_v.webp" alt="Luz Cenital & Carisma - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline ">Jazz Funk Pro</div>
+                        <h3 class="card-piece-title">Luz Cenital & Carisma</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Solistas de la compañía demostrando virtuosismo bajo la luz del teatro.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Caja Negra Escénica (tog-company) -->
+        <article class="gallery-card" 
+                 data-category="tog-company" 
+                 data-type="image" 
+                 data-src="fotos_galeria/escenario_v.webp"
+                 data-discipline="Dirección Artística"
+                 data-title="Caja Negra Escénica"
+                 data-desc="Diseño de iluminación cinematográfica que potencia cada silueta.">
+            <div class="card-media-wrapper ratio-4-5">
+                <span class="card-badge pink">Puesta en Escena</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/escenario_v.webp" alt="Caja Negra Escénica - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline pink">Dirección Artística</div>
+                        <h3 class="card-piece-title">Caja Negra Escénica</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Diseño de iluminación cinematográfica que potencia cada silueta.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Acento & Precisión (tog-company) -->
+        <article class="gallery-card gold-border" 
+                 data-category="tog-company" 
+                 data-type="image" 
+                 data-src="fotos_galeria/jaz2_v1_sq.webp"
+                 data-discipline="Jazz Company"
+                 data-title="Acento & Precisión"
+                 data-desc="La fuerza y pulcritud del elenco élite de The Crown Studio.">
+            <div class="card-media-wrapper ratio-1-1">
+                <span class="card-badge gold">Company Jazz</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/jaz2_v1_sq.webp" alt="Acento & Precisión - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline ">Jazz Company</div>
+                        <h3 class="card-piece-title">Acento & Precisión</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>La fuerza y pulcritud del elenco élite de The Crown Studio.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Magia en Gran Formato (tog-company) -->
+        <article class="gallery-card gold-border" 
+                 data-category="tog-company" 
+                 data-type="image" 
+                 data-src="fotos_galeria/escenario.webp"
+                 data-discipline="Show Pro"
+                 data-title="Magia en Gran Formato"
+                 data-desc="Producción integral con pantallas, luces inteligentes y elenco masivo.">
+            <div class="card-media-wrapper ratio-16-9">
+                <span class="card-badge gold">Gran Escenario</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/escenario.webp" alt="Magia en Gran Formato - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline ">Show Pro</div>
+                        <h3 class="card-piece-title">Magia en Gran Formato</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Producción integral con pantallas, luces inteligentes y elenco masivo.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Impacto Teatral (tog-company) -->
+        <article class="gallery-card" 
+                 data-category="tog-company" 
+                 data-type="image" 
+                 data-src="fotos_galeria/escenario_2.webp"
+                 data-discipline="Showcase"
+                 data-title="Impacto Teatral"
+                 data-desc="Narrativas coreográficas que cautivan a la audiencia de principio a fin.">
+            <div class="card-media-wrapper ratio-16-9">
+                <span class="card-badge pink">Compañía</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/escenario_2.webp" alt="Impacto Teatral - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline pink">Showcase</div>
+                        <h3 class="card-piece-title">Impacto Teatral</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Narrativas coreográficas que cautivan a la audiencia de principio a fin.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Broadway & Dinamismo (tog-company) -->
+        <article class="gallery-card gold-border" 
+                 data-category="tog-company" 
+                 data-type="image" 
+                 data-src="fotos_galeria/jazzmulti_v1.webp"
+                 data-discipline="Jazz Repertoire"
+                 data-title="Broadway & Dinamismo"
+                 data-desc="Velocidad, cambios de nivel y sincronía absoluta.">
+            <div class="card-media-wrapper ratio-16-9">
+                <span class="card-badge gold">Ensamble Jazz</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/jazzmulti_v1.webp" alt="Broadway & Dinamismo - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline ">Jazz Repertoire</div>
+                        <h3 class="card-piece-title">Broadway & Dinamismo</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Velocidad, cambios de nivel y sincronía absoluta.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Portés & Elevaciones (tog-company) -->
+        <article class="gallery-card gold-border" 
+                 data-category="tog-company" 
+                 data-type="image" 
+                 data-src="Acro.jpg"
+                 data-discipline="Acro Dance"
+                 data-title="Portés & Elevaciones"
+                 data-desc="Hazañas acrobáticas integradas orgánicamente a la pieza de danza.">
+            <div class="card-media-wrapper ratio-16-9">
+                <span class="card-badge gold">Acrobacia Pro</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="Acro.jpg" alt="Portés & Elevaciones - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline ">Acro Dance</div>
+                        <h3 class="card-piece-title">Portés & Elevaciones</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Hazañas acrobáticas integradas orgánicamente a la pieza de danza.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: El Pulso del Escenario (backstage-emocion) -->
+        <article class="gallery-card" 
+                 data-category="backstage-emocion" 
+                 data-type="video" 
+                 data-src="video-fondo.mp4"
+                 data-discipline="Cinematografía"
+                 data-title="El Pulso del Escenario"
+                 data-desc="Tomas íntimas que capturan la respiración y emoción previa a salir a escena.">
+            <div class="card-media-wrapper ratio-16-9">
+                <span class="card-badge pink">Atmósfera</span>
+                <div class="card-action-icon"><i class="fas fa-play"></i></div>
+                    <video playsinline muted loop preload="metadata" poster="fotos_galeria/escenario_4.webp">
+                        <source src="video-fondo.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-playing-indicator"><span class="dot"></span> Loop</div>
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline pink">Cinematografía</div>
+                        <h3 class="card-piece-title">El Pulso del Escenario</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Tomas íntimas que capturan la respiración y emoción previa a salir a escena.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Antes de la Función (backstage-emocion) -->
+        <article class="gallery-card gold-border" 
+                 data-category="backstage-emocion" 
+                 data-type="image" 
+                 data-src="fotos_galeria/escenario5_sq.webp"
+                 data-discipline="Backstage"
+                 data-title="Antes de la Función"
+                 data-desc="La mirada de concentración y el ritual previo al primer paso escénico.">
+            <div class="card-media-wrapper ratio-1-1">
+                <span class="card-badge gold">Bambalinas</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/escenario5_sq.webp" alt="Antes de la Función - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline ">Backstage</div>
+                        <h3 class="card-piece-title">Antes de la Función</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>La mirada de concentración y el ritual previo al primer paso escénico.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Sonrisas y Confianza (backstage-emocion) -->
+        <article class="gallery-card" 
+                 data-category="backstage-emocion" 
+                 data-type="image" 
+                 data-src="fotos_galeria/circo_kids_v1_v.webp"
+                 data-discipline="Circo & Kids"
+                 data-title="Sonrisas y Confianza"
+                 data-desc="El momento en que las más pequeñas descubren su pasión por el escenario.">
+            <div class="card-media-wrapper ratio-4-5">
+                <span class="card-badge pink">Semillero</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/circo_kids_v1_v.webp" alt="Sonrisas y Confianza - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline pink">Circo & Kids</div>
+                        <h3 class="card-piece-title">Sonrisas y Confianza</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>El momento en que las más pequeñas descubren su pasión por el escenario.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Primeros Pasos (backstage-emocion) -->
+        <article class="gallery-card gold-border" 
+                 data-category="backstage-emocion" 
+                 data-type="image" 
+                 data-src="fotos_galeria/baby_v2_sq.webp"
+                 data-discipline="Baby Ballet"
+                 data-title="Primeros Pasos"
+                 data-desc="La pureza y alegría de quienes inician su camino en el arte de la danza.">
+            <div class="card-media-wrapper ratio-1-1">
+                <span class="card-badge gold">Baby Dance</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/baby_v2_sq.webp" alt="Primeros Pasos - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline ">Baby Ballet</div>
+                        <h3 class="card-piece-title">Primeros Pasos</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>La pureza y alegría de quienes inician su camino en el arte de la danza.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: Chispa y Expresión (backstage-emocion) -->
+        <article class="gallery-card" 
+                 data-category="backstage-emocion" 
+                 data-type="image" 
+                 data-src="jazzkids.jpg"
+                 data-discipline="Kids Dance"
+                 data-title="Chispa y Expresión"
+                 data-desc="Formando no solo bailarinas, sino personalidades seguras y creativas.">
+            <div class="card-media-wrapper ratio-4-5">
+                <span class="card-badge pink">Jazz Infantil</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="jazzkids.jpg" alt="Chispa y Expresión - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline pink">Kids Dance</div>
+                        <h3 class="card-piece-title">Chispa y Expresión</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>Formando no solo bailarinas, sino personalidades seguras y creativas.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: El Silencio Previo (backstage-emocion) -->
+        <article class="gallery-card gold-border" 
+                 data-category="backstage-emocion" 
+                 data-type="image" 
+                 data-src="fotos_galeria/escenario_4.webp"
+                 data-discipline="Festival"
+                 data-title="El Silencio Previo"
+                 data-desc="El instante en que la música inicia y el corazón se funde con la danza.">
+            <div class="card-media-wrapper ratio-16-9">
+                <span class="card-badge gold">Emoción Pura</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/escenario_4.webp" alt="El Silencio Previo - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline ">Festival</div>
+                        <h3 class="card-piece-title">El Silencio Previo</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>El instante en que la música inicia y el corazón se funde con la danza.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ITEM: El Aplauso Final (backstage-emocion) -->
+        <article class="gallery-card" 
+                 data-category="backstage-emocion" 
+                 data-type="image" 
+                 data-src="fotos_galeria/escenario_6.webp"
+                 data-discipline="Festival The Crown"
+                 data-title="El Aplauso Final"
+                 data-desc="La recompensa compartida de meses de disciplina, entrega y amor al arte.">
+            <div class="card-media-wrapper ratio-16-9">
+                <span class="card-badge pink">El Gran Cierre</span>
+                <div class="card-action-icon"><i class="fas fa-expand-alt"></i></div>
+                    <img src="fotos_galeria/escenario_6.webp" alt="El Aplauso Final - The Crown Dance Studio" loading="lazy" decoding="async">
+                <div class="card-overlay">
+                    <div class="card-overlay-content">
+                        <div class="card-discipline pink">Festival The Crown</div>
+                        <h3 class="card-piece-title">El Aplauso Final</h3>
+                        <div class="card-meta-info">
+                            <span><i class="fas fa-crown"></i> The Crown</span>
+                            <span>•</span>
+                            <span>La recompensa compartida de meses de disciplina, entrega y amor al arte.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
         </div>
-    </section>
 
-    <!-- LIGHTBOX MODAL FULLSCREEN -->
-    <div class="lightbox-modal" id="lightboxModal">
-        <div class="lightbox-content">
-            <button class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
-            <div class="lightbox-media-container" id="lightboxMedia"></div>
-            <div class="lightbox-info">
-                <h3 id="lightboxTitle">Título</h3>
-                <p id="lightboxDesc">Descripción</p>
+        <!-- BLOQUE CTA DE CONVERSIÓN HACIA WHATSAPP -->
+        <section class="gallery-conversion-cta">
+            <div class="cta-tag">
+                <i class="fas fa-star"></i> Vive la Experiencia The Crown
+            </div>
+            <h2 class="cta-heading">
+                <span class="es">¿Listo para Brillar en el Escenario?</span>
+                <span class="en" style="display:none;">Ready to Shine on Stage?</span>
+            </h2>
+            <p class="cta-desc">
+                <span class="es">Forma parte de la próxima edición de nuestro festival anual o agenda una clase muestra sin costo en nuestras disciplinas de Ballet, Contemporáneo, Urbano, Heels y Kids.</span>
+                <span class="en" style="display:none;">Join the upcoming edition of our annual festival or book a trial class in Ballet, Contemporary, Urban, Heels, and Kids programs.</span>
+            </p>
+            <div class="cta-actions-wrapper">
+                <a href="https://wa.me/524423479755?text=¡Hola!%20Vi%20la%20galería%20de%20The%20Crown%20Dance%20Studio%20👑%20y%20me%20encantaría%20agendar%20una%20clase%20de%20prueba." 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="btn-cta-whatsapp">
+                    <i class="fab fa-whatsapp"></i> <span class="es">Agendar Clase por WhatsApp</span><span class="en" style="display:none;">Book Trial Class on WhatsApp</span>
+                </a>
+                <a href="agenda.html" class="btn-cta-secondary">
+                    <i class="fas fa-calendar-check"></i> <span class="es">Ver Horarios & Agendar</span><span class="en" style="display:none;">View Schedule & Book</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- VISOR LIGHTBOX FULL-SCREEN -->
+    <div class="lightbox-modal" id="immersiveLightbox" role="dialog" aria-modal="true" aria-label="Visor multimedia en pantalla completa">
+        <!-- Contador -->
+        <div class="lightbox-counter" id="lightboxCounter">01 / 36</div>
+        
+        <!-- Botón de Cierre Discreto -->
+        <button class="lightbox-btn-close" id="lightboxClose" aria-label="Cerrar visor">&times;</button>
+        
+        <!-- Botones de Navegación -->
+        <button class="lightbox-nav-btn prev" id="lightboxPrev" aria-label="Elemento anterior">&#10094;</button>
+        <button class="lightbox-nav-btn next" id="lightboxNext" aria-label="Elemento siguiente">&#10095;</button>
+
+        <!-- Contenedor Multimedia Principal -->
+        <div class="lightbox-content-wrapper">
+            <div class="lightbox-media-container" id="lightboxMedia">
+                <!-- Se inyecta dinámicamente imagen o video HD -->
+            </div>
+            
+            <!-- Panel Inferior de Información y Disciplina -->
+            <div class="lightbox-caption-panel">
+                <div class="lightbox-caption-discipline" id="lightboxDiscipline">Ballet & Técnica</div>
+                <h3 class="lightbox-caption-title" id="lightboxTitle">Extensión & Grand Jeté</h3>
+                <p class="lightbox-caption-desc" id="lightboxDesc">Precisión académica y proyección escénica.</p>
             </div>
         </div>
     </div>
 
-    <div class="social-sidebar">
-        <a href="https://www.instagram.com/thecrown.dancestudio" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.facebook.com/thecrown.dancestudio" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a>
-    </div>
-
+    <!-- FOOTER INSTITUCIONAL -->
     <footer>
-        <p>© 2026 The Crown Dance Studio</p>
+        <p>© 2026 The Crown Dance Studio | Pasión, Técnica y Excelencia Escénica</p>
     </footer>
 
-    <script type="module">
-        import { initLightbox } from './js/modules/lightbox.js';
-        initLightbox();
-
-        // Spotlight cursor glow
-        window.addEventListener('mousemove', (e) => {
-            document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
-            document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+    <!-- SCRIPTS MODULARES -->
+    <script>
+        // Spotlight cursor glow institucional
+        window.addEventListener('mousemove', function(e) {
+            document.documentElement.style.setProperty('--mouse-x', e.clientX + 'px');
+            document.documentElement.style.setProperty('--mouse-y', e.clientY + 'px');
         }, { passive: true });
 
-        // Filtrado
-        window.filterGallery = function(category, btn) {
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(b => b.classList.remove('active'));
-            if (btn) btn.classList.add('active');
-
-            const items = document.querySelectorAll('.gallery-item');
-            items.forEach(item => {
-                if (category === 'all' || item.classList.contains(category)) {
-                    item.classList.remove('hidden');
-                } else {
-                    item.classList.add('hidden');
-                }
-            });
-        };
-
-        // Lectura de URL hash
-        window.addEventListener('DOMContentLoaded', () => {
-            const hash = window.location.hash.substring(1);
-            if (hash) {
-                const targetBtn = Array.from(document.querySelectorAll('.filter-btn')).find(b => b.getAttribute('onclick')?.includes(hash));
-                if (targetBtn) window.filterGallery(hash, targetBtn);
-            }
-        });
-
-        // Menú hamburguesa
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        if (hamburger && navLinks) {
-            hamburger.addEventListener('click', () => {
+        // Toggle del Menú Hamburguesa Móvil
+        function toggleMenu() {
+            var navLinks = document.getElementById('navLinks');
+            if (navLinks) {
                 navLinks.classList.toggle('active');
-            });
+            }
         }
 
-        window.toggleLanguage = function() {
-            document.body.classList.toggle('lang-en');
-        };
+        // Toggle de Idioma (ES / EN)
+        function toggleLanguage() {
+            var isEnglish = document.body.classList.toggle('lang-en');
+            var esElements = document.querySelectorAll('.es');
+            var enElements = document.querySelectorAll('.en');
+            
+            esElements.forEach(function(el) {
+                el.style.display = isEnglish ? 'none' : 'inline';
+            });
+            enElements.forEach(function(el) {
+                el.style.display = isEnglish ? 'inline' : 'none';
+            });
+        }
     </script>
+    <script src="js/gallery-immersive.js" defer></script>
 </body>
 </html>
