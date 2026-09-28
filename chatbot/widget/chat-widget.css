@@ -641,6 +641,25 @@
   font-family: var(--crown-font-body);
 }
 
+.lead-field select {
+  background-color: #1a1524;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.lead-field select option {
+  background-color: #1a1524;
+  color: #FFFFFF;
+  padding: 10px;
+  font-size: 0.88rem;
+}
+
+.lead-field select option:checked,
+.lead-field select option:hover {
+  background-color: #2b1f3d;
+  color: var(--crown-pink);
+}
+
 .lead-field input:focus,
 .lead-field select:focus {
   outline: none;

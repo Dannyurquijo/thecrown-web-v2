@@ -694,15 +694,15 @@
       </div>
       <div class="lead-field">
         <label>${t.disciplineLabel}</label>
-        <select class="lead-discipline">
-          <option value="Baby Ballet">Baby Ballet (3 a 5 años)</option>
-          <option value="Ballet Kids">Ballet Kids (6 a 12 años)</option>
-          <option value="Hip Hop">Hip Hop</option>
-          <option value="Jazz">Jazz</option>
-          <option value="Heels">Heels</option>
-          <option value="Danza Contemporánea">Danza Contemporánea</option>
-          <option value="Danza Aérea en Telas">Danza Aérea en Telas</option>
-          <option value="Acrobacia">Acrobacia</option>
+        <select class="lead-discipline" style="background-color: #1a1524; color: #ffffff;">
+          <option style="background-color: #1a1524; color: #ffffff;" value="Baby Ballet">Baby Ballet (3 a 5 años)</option>
+          <option style="background-color: #1a1524; color: #ffffff;" value="Ballet Kids">Ballet Kids (6 a 12 años)</option>
+          <option style="background-color: #1a1524; color: #ffffff;" value="Hip Hop">Hip Hop</option>
+          <option style="background-color: #1a1524; color: #ffffff;" value="Jazz">Jazz</option>
+          <option style="background-color: #1a1524; color: #ffffff;" value="Heels">Heels</option>
+          <option style="background-color: #1a1524; color: #ffffff;" value="Danza Contemporánea">Danza Contemporánea</option>
+          <option style="background-color: #1a1524; color: #ffffff;" value="Danza Aérea en Telas">Danza Aérea en Telas</option>
+          <option style="background-color: #1a1524; color: #ffffff;" value="Acrobacia">Acrobacia</option>
         </select>
       </div>
       <div class="lead-field">
