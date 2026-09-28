@@ -97,11 +97,11 @@ Dado que el sitio web de The Crown Dance Studio está alojado en Netlify, la fun
 | Variable | Valor Recomendado |
 |---|---|
 | `AI_PROVIDER_API_KEY` | `AIzaSy_tu_clave_de_gemini_aqui` |
-| `N8N_CROWN_WEBHOOK_URL` | `https://n8n.dupixelcode.com/webhook/crown-chat-v1` |
-| `N8N_CROWN_API_KEY` | `crown_sec_live_9a7b3c2d1e4f5a6b7c8d9e0f1a2b3c4d5e` |
-| `CROWN_STATE_SECRET` | `crown_state_secret_84f93b2a1c0d4e5f6a7b8c9d0e1f2a3b` |
-| `CROWN_WHATSAPP_URL` | `https://wa.me/524422366997` |
-| `CROWN_ALLOWED_ORIGINS` | `https://thecrowndancestudio.com,https://www.thecrowndancestudio.com,https://n8n.dupixelcode.com` |
+| `N8N_CROWN_WEBHOOK_URL` | `https://tu-dominio-n8n.com/webhook/crown-chat-v1` |
+| `N8N_CROWN_API_KEY` | `tu_clave_secreta_api_32_caracteres` |
+| `CROWN_STATE_SECRET` | `tu_clave_secreta_hmac_32_caracteres` |
+| `CROWN_WHATSAPP_URL` | `https://wa.me/tu_numero_aqui` |
+| `CROWN_ALLOWED_ORIGINS` | `https://thecrowndancestudio.com` |
 
 5. Haz clic en **Save**.
 6. Ve a la pestaña **Deploys** y haz clic en **Trigger deploy** > **Deploy site** para que las variables surtan efecto.
@@ -110,12 +110,12 @@ Dado que el sitio web de The Crown Dance Studio está alojado en Netlify, la fun
 
 ### Paso 6: Prueba de Conectividad en Tiempo Real
 
-Puedes comprobar que `n8n.dupixelcode.com` y Gemini responden correctamente ejecutando este comando en tu terminal (PowerShell o Bash):
+Puedes comprobar que el webhook y Gemini responden correctamente ejecutando este comando en tu terminal (PowerShell o Bash):
 
 ```bash
 curl -X POST https://n8n.dupixelcode.com/webhook/crown-chat-v1 \
   -H "Content-Type: application/json" \
-  -H "x-crown-apikey: crown_sec_live_9a7b3c2d1e4f5a6b7c8d9e0f1a2b3c4d5e" \
+  -H "x-crown-apikey: tu_clave_secreta_api_32_caracteres" \
   -d '{
     "event_id": "test-uuid-live-001",
     "session_id": "cr_test_live_session_123",

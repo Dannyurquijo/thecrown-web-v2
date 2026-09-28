@@ -8,15 +8,16 @@
 
 const crypto = require('crypto');
 
-// Environment variables
-const N8N_WEBHOOK_URL = process.env.N8N_CROWN_WEBHOOK_URL || 'https://n8n.dupixelcode.com/webhook/crown-chat-v1';
-const N8N_API_KEY = process.env.N8N_CROWN_API_KEY || 'crown_sec_live_9a7b3c2d1e4f5a6b7c8d9e0f1a2b3c4d5e';
+// Environment variables (provided securely via Netlify environment variables)
+const N8N_WEBHOOK_URL = process.env.N8N_CROWN_WEBHOOK_URL || '';
+const N8N_API_KEY = process.env.N8N_CROWN_API_KEY || '';
 const AI_PROVIDER_API_KEY = process.env.AI_PROVIDER_API_KEY || '';
-const STATE_SECRET = process.env.CROWN_STATE_SECRET || 'crown_dev_fallback_secret_32bytes_min';
-const WHATSAPP_URL = process.env.CROWN_WHATSAPP_URL || 'https://wa.me/524422366997';
-const ALLOWED_ORIGINS = (process.env.CROWN_ALLOWED_ORIGINS || 'https://thecrowndancestudio.com,https://www.thecrowndancestudio.com,https://n8n.dupixelcode.com')
+const STATE_SECRET = process.env.CROWN_STATE_SECRET || crypto.randomBytes(32).toString('hex');
+const WHATSAPP_URL = process.env.CROWN_WHATSAPP_URL || '';
+const ALLOWED_ORIGINS = (process.env.CROWN_ALLOWED_ORIGINS || '')
   .split(',')
-  .map(o => o.trim().toLowerCase());
+  .map(o => o.trim().toLowerCase())
+  .filter(Boolean);
 
 // In-memory rate limiting cache (per function container instance)
 const ipRateLimit = new Map();

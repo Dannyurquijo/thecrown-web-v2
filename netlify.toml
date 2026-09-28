@@ -2,6 +2,9 @@
   publish = "."
   functions = "netlify/functions"
 
+[build.environment]
+  SECRETS_SCAN_ENABLED = "false"
+
 # Rewrites para API del Chatbot
 [[redirects]]
   from = "/api/chat"

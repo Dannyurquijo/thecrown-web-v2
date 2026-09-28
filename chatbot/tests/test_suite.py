@@ -168,6 +168,7 @@ def run_tests():
     proxy_server.N8N_WEBHOOK_URL = f"http://127.0.0.1:{MOCK_N8N_PORT}/webhook/crown-chat-v1"
     proxy_server.N8N_API_KEY = TEST_API_KEY
     proxy_server.STATE_SECRET = TEST_STATE_SECRET.encode('utf-8')
+    proxy_server.ALLOWED_ORIGINS = ['http://127.0.0.1:8080', 'http://localhost:8080', 'https://thecrowndancestudio.com']
 
     # Start Mock n8n server
     n8n_httpd = HTTPServer(('127.0.0.1', MOCK_N8N_PORT), MockN8nHandler)

@@ -20,14 +20,11 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse
 
 PORT = int(os.environ.get('PORT', '3000'))
-N8N_WEBHOOK_URL = os.environ.get('N8N_CROWN_WEBHOOK_URL', 'https://n8n.dupixelcode.com/webhook/crown-chat-v1')
-N8N_API_KEY = os.environ.get('N8N_CROWN_API_KEY', 'crown_sec_live_9a7b3c2d1e4f5a6b7c8d9e0f1a2b3c4d5e')
-STATE_SECRET = os.environ.get('CROWN_STATE_SECRET', 'crown_dev_fallback_secret_32bytes_min').encode('utf-8')
-WHATSAPP_URL = os.environ.get('CROWN_WHATSAPP_URL', 'https://wa.me/524422366997')
-ALLOWED_ORIGINS = [o.strip().lower() for o in os.environ.get(
-    'CROWN_ALLOWED_ORIGINS',
-    'https://thecrowndancestudio.com,https://www.thecrowndancestudio.com,https://n8n.dupixelcode.com,http://localhost:8080,http://127.0.0.1:8080'
-).split(',')]
+N8N_WEBHOOK_URL = os.environ.get('N8N_CROWN_WEBHOOK_URL', '')
+N8N_API_KEY = os.environ.get('N8N_CROWN_API_KEY', '')
+STATE_SECRET = os.environ.get('CROWN_STATE_SECRET', os.urandom(32).hex()).encode('utf-8')
+WHATSAPP_URL = os.environ.get('CROWN_WHATSAPP_URL', '')
+ALLOWED_ORIGINS = [o.strip().lower() for o in os.environ.get('CROWN_ALLOWED_ORIGINS', '').split(',') if o.strip()]
 
 RATE_LIMIT_WINDOW = 60.0
 MAX_PER_IP = 25
@@ -110,7 +107,8 @@ class CrownProxyHandler(BaseHTTPRequestHandler):
         self.send_header('Strict-Transport-Security', 'max-age=31536000; includeSubDomains')
         self.send_header('Referrer-Policy', 'strict-origin-when-cross-origin')
         self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate')
-        self.send_header('Access-Control-Allow-Origin', origin if (is_allowed and origin) else ALLOWED_ORIGINS[0])
+        fallback_origin = ALLOWED_ORIGINS[0] if ALLOWED_ORIGINS else '*'
+        self.send_header('Access-Control-Allow-Origin', origin if (is_allowed and origin) else fallback_origin)
         self.send_header('Access-Control-Allow-Headers', 'Content-Type, x-requested-with')
         self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS, GET')
         self.end_headers()
