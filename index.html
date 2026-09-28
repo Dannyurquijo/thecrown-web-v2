@@ -15,6 +15,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700;900&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- The Crown Dance Studio - AI Chatbot Stylesheet -->
+    <link rel="stylesheet" href="chatbot/widget/chat-widget.css">
     
     <style>
         /* --- VARIABLES GLOBALES INSTITUCIONALES --- */
@@ -736,68 +738,6 @@
         .author-name { font-family: var(--font-heading); font-weight: 700; color: #fff; font-size: 1.1rem; }
         .author-role { font-size: 0.85rem; color: var(--text-secondary); }
 
-        /* --- FAB WIDGET FLOTANTE --- */
-        .fab-container {
-            position: fixed;
-            bottom: 25px;
-            right: 22px;
-            z-index: 1050;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 10px;
-        }
-
-        .fab-btn {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--rosa-neon), #ff3399);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-            box-shadow: 0 8px 25px var(--rosa-glow);
-            border: none;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .fab-btn:hover { transform: scale(1.1); }
-
-        .fab-menu {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(15px);
-            transition: 0.3s;
-        }
-        .fab-container.active .fab-menu {
-            opacity: 1;
-            pointer-events: all;
-            transform: translateY(0);
-        }
-
-        .fab-item {
-            background: rgba(20, 20, 25, 0.95);
-            border: 1px solid var(--apple-border);
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-family: var(--font-heading);
-            font-size: 0.9rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.6);
-            white-space: nowrap;
-        }
-        .fab-item:hover { background: var(--rosa-neon); color: #000; }
-
         /* Sidebar Redes & Footer */
         .social-sidebar {
             position: fixed;
@@ -861,6 +801,8 @@
             .mv-container { padding: 30px 20px; }
         }
     </style>
+    <!-- The Crown Dance Studio - Crown Assistant AI Chatbot Widget -->
+    <link rel="stylesheet" href="chatbot/widget/chat-widget.css">
 </head>
 <body>
 
@@ -1270,20 +1212,7 @@
         <a href="https://www.tiktok.com" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
     </div>
 
-    <!-- WIDGET FLOTANTE INTERACTIVO (FAB SPEED DIAL) -->
-    <div class="fab-container" id="fabContainer">
-        <div class="fab-menu">
-            <a href="https://wa.me/524423479755?text=¡Hola!%20Me%20gustaría%20agendar%20una%20clase%20de%20prueba%20en%20The%20Crown%20Studio%20👑" target="_blank" class="fab-item">
-                <i class="fab fa-whatsapp" style="color: #25D366;"></i> WhatsApp Directo
-            </a>
-            <a href="agenda.html" class="fab-item">
-                <i class="fas fa-calendar-check" style="color: var(--rosa-neon);"></i> Agendar Clase
-            </a>
-        </div>
-        <button class="fab-btn" id="fabToggle" title="Ayuda y Agendado Rápido">
-            <i class="fas fa-comment-dots"></i>
-        </button>
-    </div>
+    <!-- CHATBOT CON IA CROWN ASSISTANT (WIDGET INTEGRADO AL FINAL) -->
 
     <footer>
         <p>© 2026 The Crown Dance Studio | Todos los derechos reservados</p>
@@ -1333,19 +1262,6 @@
         // 4. Idioma
         function toggleLanguage() {
             document.body.classList.toggle('lang-en');
-        }
-
-        // 5. FAB Speed Dial
-        var fabContainer = document.getElementById('fabContainer');
-        var fabToggle = document.getElementById('fabToggle');
-        if (fabToggle && fabContainer) {
-            fabToggle.addEventListener('click', function() {
-                fabContainer.classList.toggle('active');
-                var icon = fabToggle.querySelector('i');
-                if (icon) {
-                    icon.className = fabContainer.classList.contains('active') ? 'fas fa-times' : 'fas fa-comment-dots';
-                }
-            });
         }
 
         // 6. Quiz Interactivo
@@ -1511,5 +1427,7 @@
             render();
         })();
     </script>
+    <!-- The Crown Dance Studio - Crown Assistant AI Chatbot Client Script -->
+    <script src="chatbot/widget/chat-widget.js" defer></script>
 </body>
 </html>

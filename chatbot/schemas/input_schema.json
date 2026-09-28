@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thecrowndancestudio.com/schemas/chat-input.json",
+  "title": "CrownChatbotInput",
+  "description": "Contrato de entrada para el chatbot de The Crown Dance Studio",
+  "type": "object",
+  "required": [
+    "event_id",
+    "session_id",
+    "message",
+    "language",
+    "page_url",
+    "consent"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Identificador único del evento para garantizar idempotencia"
+    },
+    "session_id": {
+      "type": "string",
+      "pattern": "^cr_[a-zA-Z0-9_-]{10,64}$",
+      "description": "Identificador de sesión pseudoanónimo del visitante"
+    },
+    "message": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000,
+      "description": "Mensaje enviado por el usuario"
+    },
+    "language": {
+      "type": "string",
+      "enum": ["es", "en"],
+      "description": "Idioma preferido o detectado (es o en)"
+    },
+    "conversation": {
+      "type": "array",
+      "maxItems": 10,
+      "description": "Historial de los últimos turnos de conversación para contexto inmediato",
+      "items": {
+        "type": "object",
+        "required": ["role", "content"],
+        "additionalProperties": false,
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": ["user", "assistant"]
+          },
+          "content": {
+            "type": "string",
+            "maxLength": 1000
+          }
+        }
+      }
+    },
+    "notification_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lead_notified": { "type": "boolean" },
+        "handoff_notified": { "type": "boolean" }
+      }
+    },
+    "page_url": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 300,
+      "description": "URL de la página desde donde se originó la interacción"
+    },
+    "consent": {
+      "type": "boolean",
+      "description": "Consentimiento informado del usuario para el tratamiento de datos y contacto"
+    },
+    "lead_data": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Datos de prospección capturados únicamente con consentimiento expreso",
+      "properties": {
+        "parent_name": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Nombre del adulto, tutor o titular de la solicitud"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "maxLength": 120
+        },
+        "phone": {
+          "type": "string",
+          "pattern": "^\\+?[0-9]{10,15}$",
+          "description": "Número de WhatsApp o teléfono a 10-15 dígitos"
+        },
+        "student_age": {
+          "type": "integer",
+          "minimum": 3,
+          "maximum": 99,
+          "description": "Edad aproximada del alumno"
+        },
+        "discipline_interest": {
+          "type": "string",
+          "maxLength": 80,
+          "description": "Disciplina de danza de interés"
+        },
+        "level": {
+          "type": "string",
+          "maxLength": 40,
+          "description": "Nivel previo o experiencia (Principiante, Intermedio, Avanzado, etc.)"
+        },
+        "preferred_schedule": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Día o bloque de horario deseado"
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Comentarios adicionales o dudas específicas"
+        }
+      }
+    },
+    "state_token": {
+      "type": "string",
+      "maxLength": 512,
+      "description": "Token firmado por el servidor para verificar integridad del estado conversacional"
+    },
+    "hp_website_token": {
+      "type": "string",
+      "maxLength": 10,
+      "description": "Campo honeypot antispam. Debe llegar vacío. Si contiene valor, se rechaza la solicitud."
+    }
+  }
+}

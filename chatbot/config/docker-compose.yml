@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # 1. Servidor n8n autohospedado
+  crown-n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5678:5678"
+    environment:
+      - N8N_HOST=n8n.dupixelcode.com
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=https
+      - NODE_ENV=production
+      - WEBHOOK_URL=https://n8n.dupixelcode.com/
+      - GENERIC_TIMEZONE=America/Mexico_City
+      - N8N_CROWN_API_KEY=${N8N_CROWN_API_KEY}
+      - AI_PROVIDER_API_KEY=${AI_PROVIDER_API_KEY}
+      - CROWN_WHATSAPP_URL=${CROWN_WHATSAPP_URL}
+    volumes:
+      - crown_n8n_data:/home/node/.n8n
+    networks:
+      - crown-net
+
+  # 2. Proxy Seguro Autónomo Node.js (opcional si se usa Netlify Functions)
+  crown-proxy:
+    build:
+      context: ..
+      dockerfile: chatbot/proxy/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      - PORT=3000
+      - N8N_CROWN_WEBHOOK_URL=http://crown-n8n:5678/webhook/crown-chat-v1
+      - N8N_CROWN_API_KEY=${N8N_CROWN_API_KEY}
+      - CROWN_STATE_SECRET=${CROWN_STATE_SECRET}
+      - CROWN_ALLOWED_ORIGINS=https://thecrowndancestudio.com,https://www.thecrowndancestudio.com
+      - CROWN_WHATSAPP_URL=${CROWN_WHATSAPP_URL}
+    depends_on:
+      - crown-n8n
+    networks:
+      - crown-net
+
+volumes:
+  crown_n8n_data:
+
+networks:
+  crown-net:
+    driver: bridge

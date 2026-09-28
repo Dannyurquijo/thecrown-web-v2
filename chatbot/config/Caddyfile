@@ -1,0 +1,42 @@
+# ==============================================================================
+# THE CROWN DANCE STUDIO - CADDYFILE (MODERNO CON HTTPS AUTOMÁTICO)
+# ==============================================================================
+
+thecrowndancestudio.com, www.thecrowndancestudio.com {
+    encode gzip zstd
+
+    # Cabeceras de seguridad
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    }
+
+    # Raíz del sitio web
+    root * /var/www/thecrowndancestudio
+    file_server
+
+    # Redirección de proxy seguro hacia el contenedor o servicio del chatbot
+    handle /api/chat* {
+        request_body {
+            max_size 16KB
+        }
+        reverse_proxy localhost:3000 {
+            transport http {
+                response_header_timeout 10s
+            }
+        }
+    }
+
+    # Bloqueo de acceso público al webhook interno de n8n
+    handle /webhook/crown-chat-v1* {
+        @blocked not remote_ip 127.0.0.1 ::1 172.16.0.0/12
+        abort @blocked
+        reverse_proxy localhost:5678
+    }
+
+    # Fallback SPA
+    try_files {path} /index.html
+}

@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thecrown-dancestudio.com/schemas/chat-output.json",
+  "title": "CrownChatbotOutput",
+  "description": "Contrato de salida estructurado del chatbot de The Crown Dance Studio",
+  "type": "object",
+  "required": [
+    "reply",
+    "language",
+    "intent",
+    "recommended_classes",
+    "next_action",
+    "lead",
+    "handoff",
+    "session_id",
+    "state_token"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "reply": {
+      "type": "string",
+      "maxLength": 2000,
+      "description": "Texto amable, conciso (< 100 palabras) y profesional para el usuario"
+    },
+    "language": {
+      "type": "string",
+      "enum": ["es", "en"],
+      "description": "Idioma de la respuesta"
+    },
+    "intent": {
+      "type": "string",
+      "enum": [
+        "greeting",
+        "class_recommendation",
+        "schedule_question",
+        "discipline_question",
+        "age_question",
+        "trial_class_request",
+        "festival_question",
+        "location_question",
+        "price_question",
+        "human_support",
+        "lead_capture",
+        "unrelated",
+        "emergency_or_unsafe"
+      ],
+      "description": "Clasificación de la intención del mensaje"
+    },
+    "recommended_classes": {
+      "type": "array",
+      "description": "Lista de disciplinas sugeridas basadas en la base oficial",
+      "items": {
+        "type": "object",
+        "required": ["name", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 80
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 300
+          }
+        }
+      }
+    },
+    "next_action": {
+      "type": "string",
+      "enum": [
+        "none",
+        "ask_age",
+        "ask_experience",
+        "ask_style",
+        "ask_schedule",
+        "request_trial_consent",
+        "open_lead_form",
+        "escalate_whatsapp",
+        "offer_human_support"
+      ],
+      "description": "Siguiente paso en el flujo conversacional guiado"
+    },
+    "lead": {
+      "type": "object",
+      "required": ["should_capture", "missing_fields"],
+      "additionalProperties": false,
+      "properties": {
+        "should_capture": {
+          "type": "boolean"
+        },
+        "missing_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "captured": {
+          "type": "boolean"
+        }
+      }
+    },
+    "handoff": {
+      "type": "object",
+      "required": ["required", "channel"],
+      "additionalProperties": false,
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "channel": {
+          "type": ["string", "null"],
+          "enum": ["whatsapp", "email", "phone", null]
+        },
+        "custom_whatsapp_url": {
+          "type": "string"
+        }
+      }
+    },
+    "session_id": {
+      "type": "string",
+      "description": "Identificador de sesión original"
+    },
+    "state_token": {
+      "type": "string",
+      "description": "Token firmado por el servidor para dar seguimiento de estado sin base de datos pública"
+    }
+  }
+}

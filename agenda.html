@@ -139,6 +139,8 @@
             }
         }
     </style>
+    <!-- The Crown Dance Studio - Crown Assistant AI Chatbot Widget -->
+    <link rel="stylesheet" href="chatbot/widget/chat-widget.css">
 </head>
 <body>
 
@@ -287,10 +289,12 @@
 
             const textoWhatsApp = `¡Hola The Crown Studio! 👑%0A%0AMi nombre es *${nombre}* (${edad} años).%0A%0A*Quiero agendar mi clase de prueba en:* ${disciplinaTexto}%0A*Mi WhatsApp:* ${telefono}%0A%0A¡Espero su confirmación! ✨`;
             
-            const url = `https://wa.me/524422366997?text=${textoWhatsApp}`;
+            const url = `https://wa.me/524422366887?text=${textoWhatsApp}`;
             window.open(url, '_blank');
             this.reset();
         });
     </script>
+    <!-- The Crown Dance Studio - Crown Assistant AI Chatbot Client Script -->
+    <script src="chatbot/widget/chat-widget.js" defer></script>
 </body>
 </html>
