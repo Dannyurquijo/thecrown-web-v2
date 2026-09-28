@@ -173,7 +173,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"model\": \"gemini-2.0-flash\",\n  \"messages\": {{ JSON.stringify($json.messages) }},\n  \"temperature\": 0.3,\n  \"response_format\": { \"type\": \"json_object\" },\n  \"max_tokens\": 600\n}",
+        "jsonBody": "={\n  \"model\": \"gemini-2.5-flash\",\n  \"messages\": {{ JSON.stringify($json.messages) }},\n  \"temperature\": 0.3,\n  \"response_format\": { \"type\": \"json_object\" },\n  \"max_tokens\": 600\n}",
         "options": {
           "timeout": 10000
         }
@@ -449,7 +449,12 @@
       "main": [
         [
           {
-            "node": "Switch by Intent (13 Branches)",
+            "node": "Secure Webhook Response",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Consent & Lead Provided?",
             "type": "main",
             "index": 0
           }
